@@ -8,5 +8,4 @@ public interface obstacles {
     int getPosX();
     void updatePos();
 
-
 }
