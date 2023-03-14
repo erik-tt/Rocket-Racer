@@ -1,4 +1,4 @@
-package com.rocketracer.game;
+package com.rocketracer.game.views;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;
