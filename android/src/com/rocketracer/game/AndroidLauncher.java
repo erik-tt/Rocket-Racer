@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.rocketracer.game.rocketRacer;
+import com.rocketracer.game.views.rocketRacer;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override

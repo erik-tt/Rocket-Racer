@@ -3,7 +3,7 @@ package com.rocketracer.game.client;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import com.rocketracer.game.rocketRacer;
+import com.rocketracer.game.views.rocketRacer;
 
 public class HtmlLauncher extends GwtApplication {
 
