@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "736588069739",
+    "firebase_url": "https://tdt4240-rocketracer-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "tdt4240-rocketracer",
+    "storage_bucket": "tdt4240-rocketracer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736588069739:android:935dd2e7ef6ef4fcffaa2e",
+        "android_client_info": {
+          "package_name": "com.rocketracer.game"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "736588069739-f15ddh0dccksu6ov44ae94ltiqh51g8g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_3bstSIMRVdhs48CbsIrAhqed-jaKEX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "736588069739-f15ddh0dccksu6ov44ae94ltiqh51g8g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
