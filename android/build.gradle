@@ -18,8 +18,9 @@ android {
     }
     defaultConfig {
         applicationId "com.rocketracer.game"
-        minSdkVersion 14
+        minSdkVersion 21
         targetSdkVersion 33
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
     }

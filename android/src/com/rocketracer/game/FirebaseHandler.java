@@ -1,2 +1,10 @@
-package com.rocketracer.game;public class FirebaseHandler {
+package com.rocketracer.game;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+
+public class FirebaseHandler {
+
+    public FirebaseHandler() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+    }
 }
