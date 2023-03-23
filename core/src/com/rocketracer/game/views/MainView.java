@@ -12,10 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.rocketracer.game.controllers.MainController;
 
 
 public class MainView implements Screen {
@@ -27,6 +27,7 @@ public class MainView implements Screen {
         private TextureAtlas atlas;
         protected Skin skin;
         private Table mainTable;
+        private MainController mainController;
 
     public MainView()
         {
@@ -43,6 +44,7 @@ public class MainView implements Screen {
 
             stage = new Stage(viewport, batch);
             mainTable = new Table();
+            mainController = new MainController();
         }
 
 
@@ -56,21 +58,21 @@ public class MainView implements Screen {
 
         //Create buttons
 
-        addButton("Play single-player game").addListener(new ClickListener(){
+        mainController.addButton("Play single-player game", skin, mainTable).addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 ((Game)Gdx.app.getApplicationListener()).setScreen(new GameView());
             }
         });
 
-            addButton("Play multiplayer game").addListener(new ClickListener(){
+            mainController.addButton("Play multiplayer game", skin, mainTable).addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                //TODO
                 }
             });
 
-      addButton("Exit").addListener(new ClickListener(){
+      mainController.addButton("Exit", skin, mainTable).addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.exit();
@@ -81,13 +83,7 @@ public class MainView implements Screen {
         stage.addActor(mainTable);
     }
 
-    //Add button to table
-    private TextButton addButton(String name){
-        TextButton button = new TextButton(name, skin);
-        mainTable.add(button).fillX().padBottom(10);
-        mainTable.row();
-        return button;
-    }
+
         @Override
         public void render(float delta) {
         Gdx.gl.glClearColor(.1f, .12f, .16f, 1);
