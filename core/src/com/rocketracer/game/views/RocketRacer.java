@@ -1,9 +1,10 @@
-package com.rocketracer.game;
+package com.rocketracer.game.views;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.rocketracer.game.FirebaseInterface;
 
 public class RocketRacer extends ApplicationAdapter {
 	SpriteBatch batch;
