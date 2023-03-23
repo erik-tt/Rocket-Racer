@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "java (buildArtifact)",
+      "mainClass": "com.rocketracer.game.DesktopLauncher",
+      "targetPath": "${workspaceFolder}/${workspaceFolderBasename}.jar",
+      "elements": [
+        "${compileOutput:rocket-racer-android}",
+        "${dependencies:rocket-racer-android}",
+        "${compileOutput:rocket-racer-core}",
+        "${dependencies:rocket-racer-core}",
+        "${compileOutput:rocket-racer-desktop}",
+        "${dependencies:rocket-racer-desktop}",
+        "${compileOutput:rocket-racer-html}",
+        "${dependencies:rocket-racer-html}"
+      ],
+      "problemMatcher": [],
+      "label": "java (buildArtifact): tdt4240-g21",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
