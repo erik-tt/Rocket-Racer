@@ -8,18 +8,21 @@ import com.badlogic.gdx.utils.ScreenUtils;
 public class RocketRacer extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
+
+	FuelCan fuelCan;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		fuelCan = new FuelCan();
+		fuelCan.create();
 	}
 
 	@Override
 	public void render () {
 		ScreenUtils.clear(1, 0, 0, 1);
 		batch.begin();
-		batch.draw(img, 0, 0);
+		fuelCan.render();
 		batch.end();
 	}
 	
@@ -27,5 +30,6 @@ public class RocketRacer extends ApplicationAdapter {
 	public void dispose () {
 		batch.dispose();
 		img.dispose();
+		fuelCan.dispose();
 	}
 }
