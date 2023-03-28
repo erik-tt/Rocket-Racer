@@ -1,4 +1,5 @@
 package com.rocketracer.game.Firebase;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 

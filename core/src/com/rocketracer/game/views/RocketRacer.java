@@ -13,7 +13,7 @@ public class RocketRacer extends Game {
 	FirebaseInterface FBIHandler;
 
 	public RocketRacer(FirebaseInterface FBIHandler) {
-		FBIHandler = FBIHandler;
+		this.FBIHandler = FBIHandler;
 	}
 
 	public BitmapFont font;
