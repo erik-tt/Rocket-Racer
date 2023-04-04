@@ -1,6 +1,11 @@
 #!/bin/sh
 
 # First launch the emulator, then run this script
+########
+# Make sure to first run: #
+# chmod +x run_android_debug.sh #
+# this to give permission to execute the script #
+########
 
 # Change the following paths according to your setup
 PROJECT_PATH="set the path to the project" # ex. "/Users/sindreoyen/Desktop/GitRepos/tdt4240-g21"
