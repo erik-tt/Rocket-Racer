@@ -1,13 +1,14 @@
 package com.rocketracer.game.views;
 
 
+import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class FuelCan {
+public class FuelCan implements Component {
 
     SpriteBatch spriteBatch;
     Texture fuelCan = new Texture(Gdx.files.internal("fuelcan.png"));
