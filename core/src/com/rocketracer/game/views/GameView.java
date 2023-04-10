@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rocketracer.game.ECS.Entities.RocketEntity;
+import com.rocketracer.game.ECS.Systems.MovementSystem;
 import com.rocketracer.game.ECS.Systems.RenderSystem;
 import com.rocketracer.game.controllers.GameController;
 
@@ -36,6 +37,7 @@ public class GameView implements Screen {
     // Gameplay: will be moved to GameController
     Engine engine;
     RenderSystem renderSystem;
+    MovementSystem movementSystem;
     RocketEntity player = new RocketEntity();
 
     // --- Constructor ---
@@ -59,6 +61,7 @@ public class GameView implements Screen {
         // Ashley ECS
         engine = new Engine();
         renderSystem = new RenderSystem(batch);
+        movementSystem = new MovementSystem();
         engine.addSystem(renderSystem);
         try {
             engine.addEntity(player.getEntity());

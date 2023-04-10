@@ -4,9 +4,9 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.rocketracer.game.ECS.Components.PositionComponent;
 import com.rocketracer.game.ECS.Components.TypeComponent;
 import com.rocketracer.game.ECS.Components.VelocityComponent;
+import static com.badlogic.gdx.math.MathUtils.random;
 
 public class MovementSystem extends IteratingSystem {
 
@@ -27,8 +27,10 @@ public class MovementSystem extends IteratingSystem {
 
         //TODO
         //Create a more complex movement system based on type and gameplay difficulty
+
         if (object == TypeComponent.OBSTICAL) {
-            int speedY = -3;
+            //Just a random number from 1-10 for the obstical speed in y direction.
+            int speedY = - random.nextInt(10);
             velocity.y += speedY;
         }
 
