@@ -12,7 +12,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.rocketracer.game.ECS.Components.FuelComponent;
 import com.rocketracer.game.ECS.Entities.RocketEntity;
+import com.rocketracer.game.ECS.Systems.FuelSystem;
 import com.rocketracer.game.ECS.Systems.MovementSystem;
 import com.rocketracer.game.ECS.Systems.RenderSystem;
 import com.rocketracer.game.controllers.GameController;
@@ -38,6 +40,7 @@ public class GameView implements Screen {
     Engine engine;
     RenderSystem renderSystem;
     MovementSystem movementSystem;
+    FuelSystem fuelSystem;
     RocketEntity player = new RocketEntity();
 
     // --- Constructor ---
@@ -62,6 +65,7 @@ public class GameView implements Screen {
         engine = new Engine();
         renderSystem = new RenderSystem(batch);
         movementSystem = new MovementSystem();
+        fuelSystem = new FuelSystem();
         engine.addSystem(renderSystem);
         try {
             engine.addEntity(player.getEntity());
