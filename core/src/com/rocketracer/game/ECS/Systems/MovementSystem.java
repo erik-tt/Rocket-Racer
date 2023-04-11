@@ -28,7 +28,7 @@ public class MovementSystem extends IteratingSystem {
         //TODO
         //Create a more complex movement system based on type and gameplay difficulty
 
-        if (object == TypeComponent.OBSTICAL) {
+        if (object == TypeComponent.OBSTACLE) {
             //Just a random number from 1-10 for the obstical speed in y direction.
             int speedY = - random.nextInt(10);
             velocity.y += speedY;
