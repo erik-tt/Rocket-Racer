@@ -4,10 +4,12 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -32,6 +34,8 @@ public class GameView implements Screen {
 
     private GameController gameController;
 
+    ShapeRenderer shape;
+
     // Navigation
     /** For back button */
     //private Screen prevScreen;
@@ -42,6 +46,7 @@ public class GameView implements Screen {
     MovementSystem movementSystem;
     FuelSystem fuelSystem;
     RocketEntity player = new RocketEntity();
+
 
     // --- Constructor ---
     /**
@@ -59,6 +64,7 @@ public class GameView implements Screen {
         camera.update();
         stage = new Stage(viewport, batch);
         gameController = new GameController();
+        shape = new ShapeRenderer();
         //this.prevScreen = prevScreen;
 
         // Ashley ECS
@@ -87,6 +93,12 @@ public class GameView implements Screen {
         Gdx.gl.glClearColor(0, 0, .16f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         engine.update(delta);
+        shape.begin(ShapeRenderer.ShapeType.Filled);
+        shape.setColor(Color.RED);
+
+        //TODO: connect with fuelcomponent
+        shape.rect(Gdx.graphics.getWidth()-30, 300, 30, 100 );
+        shape.end();
     }
 
     @Override
