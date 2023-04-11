@@ -1,6 +1,8 @@
 package com.rocketracer.game.ECS.Components;
 
-public class VelocityComponent {
+import com.badlogic.ashley.core.Component;
+
+public class VelocityComponent implements Component {
     // --- Attributes ---
     public float x;
     public float y;
