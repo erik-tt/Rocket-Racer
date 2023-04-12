@@ -6,15 +6,21 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.rocketracer.game.ECS.Entities.SoundEntity;
+import com.rocketracer.game.ECS.Systems.AudioSystem;
 import com.rocketracer.game.controllers.MainController;
 
 
@@ -28,9 +34,18 @@ public class MainView implements Screen {
     protected Skin skin;
     private Table mainTable;
     private MainController mainController;
+
+    private SoundEntity soundEntity;
+
+
+    AudioSystem audioSystem;
+
+
     
     public MainView()
     {
+
+        soundEntity = new SoundEntity();
         atlas = new TextureAtlas("CustomSkin.atlas");
         skin = new Skin(Gdx.files.internal("CustomSkin.json"), atlas);
         
@@ -40,10 +55,13 @@ public class MainView implements Screen {
         
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
         camera.update();
+
+        audioSystem = new AudioSystem(soundEntity);
         
         stage = new Stage(viewport, batch);
         mainTable = new Table();
         mainController = new MainController();
+
     }
     
     @Override
@@ -79,6 +97,7 @@ public class MainView implements Screen {
         
         //Add table to stage
         stage.addActor(mainTable);
+        stage.addActor(audioSystem.getSoundButton());
     }
     
     
