@@ -17,7 +17,7 @@ public class RocketEntity {
     public RocketEntity() {
         this.entity = new Entity();
         this.spriteComponent = new SpriteComponent(rocket, 1);
-        this.positionComponent = new PositionComponent(0, 0);
+        this.positionComponent = new PositionComponent(12, 0);
 
         entity.add(spriteComponent);
         entity.add(positionComponent);

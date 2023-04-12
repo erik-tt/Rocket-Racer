@@ -18,7 +18,7 @@ public class PositionComponent implements Component {
      * Updates the x position with the given value
      * @param x is the position for the touch
      */
-    public void updateXWith(float x, float width) {
+    public void updateX(float x) {
         // TODO: Should not directly change x value to the x where the user touches, but move x towards the x where the user touches
         this.x += x;
         printPosition();
