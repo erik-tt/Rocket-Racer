@@ -20,7 +20,7 @@ public class PositionComponent implements Component {
      */
     public void updateXWith(float x, float width) {
         // TODO: Should not directly change x value to the x where the user touches, but move x towards the x where the user touches
-        this.x = x;
+        this.x += x;
         printPosition();
     }
 

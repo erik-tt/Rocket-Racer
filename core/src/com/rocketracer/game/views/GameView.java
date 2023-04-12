@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rocketracer.game.ECS.Entities.RocketEntity;
 import com.rocketracer.game.ECS.Systems.ControlSystem;
 import com.rocketracer.game.ECS.Systems.RenderSystem;
+import com.rocketracer.game.SharedData.Utilites;
 import com.rocketracer.game.controllers.GameController;
 
 public class GameView implements Screen {
@@ -29,6 +30,7 @@ public class GameView implements Screen {
     protected Skin skin;
 
     private GameController gameController;
+    private Utilites util;
 
     // Navigation
     /** For back button */
@@ -57,6 +59,8 @@ public class GameView implements Screen {
         stage = new Stage(viewport, batch);
         gameController = new GameController();
         //this.prevScreen = prevScreen;
+        util = new Utilites(camera);
+
 
         // Ashley ECS
         engine = new Engine();
