@@ -1,92 +1,50 @@
-# TDT4240-G21
+# Rocket Racer
+This is project is part of the course TDT4240 Software Architecture at NTNU. This android application is group 21 project and is created based on a predefined architecture
+created during the requirements and architecture phase. 
 
+## How to run and build
+To build the application use the command`./gradlew build` for mac or linux or `.\gradlew build` for windows power shell in the command line. 
+Using the android studio editor, Make Project will also build the project. 
+The project can be run using an emulated android device or a physical device.
+In android studio an emulated device can be created with the device manager and it runs with the android module.
+When the android emulator is configured select android in the run configurations and run the application.
 
+The application can be run using the desktop module, but is not recommended as it scales poorly. It can 
+however be ok to test small changes fast in a development environment.
 
-## Getting started
+If you are having trouble building or running the application a more detailed guide can be 
+found at the [android developer site](https://developer.android.com/studio/run).
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## About the application
+The application is a game where the player controls a rocket and the goal is to stay on course towards
+outer space as long as possible. The rocket has a fuel level which decreases when hitting objects.
+As the player progresses upwards the obstacles change and become harder to maneuver around.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+There are two game modes: single player and multiplayer. Single player is only you
+where you can enjoy the game offline. In multiplayer mode the user is offered to initiate a game
+and joining users enter the game pin provided to the host. They can then compete and the goal is
+to get the highest possible score and enter the high score list.
 
-## Add your files
+## Structure
+The code is structured using three modules: desktop, core and android. There are also other packages like
+gradle which contain the configuration files and assets which contain images and other similar resources.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+### Core
+Core is where the business logic lies together with the controllers and views. It structure is 
+highly affected by using the Entity Component System and the Model View Controller architectural
+patterns. There are packages for controllers and views for the MVC pattern and there is an ECS package
+used to structure the ECS pattern setup. The ECS package contains Components, Entities and Systems.
+The Entity package contains the code for the game objects, the Component package for the logic used
+by the objects (or entities) and the System package defines the code that work on all the entities which
+contain certain components. There is also code for the factory pattern in code, located in the factory-package.
+The SharedData package contains classes that are used throughout the system, including some that use the
+singleton pattern.
 
-```
-cd existing_repo
-git remote add origin https://gitlab.stud.idi.ntnu.no/sindroye/tdt4240-g21.git
-git branch -M main
-git push -uf origin main
-```
+### Android
+The android module is used to run the application on android and the important classes are the AndroidLauncher
+which initiate the game on the android device and the Firebase classes which are used towards storing data
+remote in the cloud.
 
-## Integrate with your tools
+### Desktop
+The desktop module is used to run the application on desktop and the important class is the DesktopLauncher.
 
-- [ ] [Set up project integrations](https://gitlab.stud.idi.ntnu.no/sindroye/tdt4240-g21/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
