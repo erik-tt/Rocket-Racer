@@ -61,7 +61,7 @@ public class RenderSystem extends SortedIteratingSystem {
      * @param batch the spritebatch to use for rendering
      */
 	public RenderSystem(SpriteBatch batch) {
-        // gets all entities with a TransofmComponent and TextureComponent
+        // gets all entities with a sprite and position component
         super(Family.all(SpriteComponent.class, PositionComponent.class).get(), new YComparator());
 
         //creates out componentMappers
@@ -82,7 +82,7 @@ public class RenderSystem extends SortedIteratingSystem {
         super.update(deltaTime);
         System.out.println("Render system running, delta: " + deltaTime);
 
-        // sort the renderQueue based on z index
+        // sort the renderQueue based on y index
         renderQueue.sort(comparator);
         
         // update camera and sprite batch
