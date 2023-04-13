@@ -16,7 +16,7 @@ public class PlaneEntity {
 
     public PlaneEntity(){
         this.entity = new Entity();
-        this.spriteComponent = new SpriteComponent(plane,1);
+        this.spriteComponent = new SpriteComponent(plane);
         this.positionComponent = new PositionComponent(0,0);
         this.velocityComponent = new VelocityComponent(0,0);
 

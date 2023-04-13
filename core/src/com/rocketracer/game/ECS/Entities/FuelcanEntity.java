@@ -16,7 +16,7 @@ public class FuelcanEntity {
     // --- Constructor ---
     public FuelcanEntity() {
         this.entity = new Entity();
-        this.spriteComponent = new SpriteComponent(fuelcan, 1);
+        this.spriteComponent = new SpriteComponent(fuelcan);
         this.positionComponent = new PositionComponent(0, 0);
 
         entity.add(spriteComponent);

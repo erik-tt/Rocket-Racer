@@ -17,7 +17,7 @@ public class SatelliteEntity {
 
     public SatelliteEntity(){
         this.entity = new Entity();
-        this.spriteComponent = new SpriteComponent(satellite,1);
+        this.spriteComponent = new SpriteComponent(satellite);
         this.positionComponent = new PositionComponent(0,0);
         this.velocityComponent = new VelocityComponent(0,0);
 
