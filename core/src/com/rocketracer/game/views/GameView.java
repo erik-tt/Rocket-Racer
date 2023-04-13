@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.rocketracer.game.ECS.Entities.FuelcanEntity;
 import com.rocketracer.game.ECS.Entities.RocketEntity;
 import com.rocketracer.game.ECS.Systems.ControlSystem;
 import com.rocketracer.game.ECS.Systems.MovementSystem;
@@ -45,6 +46,7 @@ public class GameView implements Screen {
 
     RocketEntity player = new RocketEntity();
 
+
     // --- Constructor ---
     /**
      * Constructor.
@@ -72,6 +74,7 @@ public class GameView implements Screen {
         engine.addSystem(renderSystem);
         engine.addSystem(controlSystem);
         try {
+
             engine.addEntity(player.getEntity());
             System.out.println("Success in adding player entity to engine.");
         } catch (IllegalArgumentException ie) {
