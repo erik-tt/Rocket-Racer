@@ -14,12 +14,15 @@ import com.rocketracer.game.ECS.Components.TypeComponent;
 public class ControlSystem extends IteratingSystem {
     private ComponentMapper<PositionComponent> positionMapper;
     private ComponentMapper<SpriteComponent> spriteMapper;
+    private ComponentMapper<TypeComponent> typeMapper;
     private OrthographicCamera camera;
 
     public ControlSystem(OrthographicCamera camera) {
-        super(Family.all(PositionComponent.class, TypeComponent.ROCKET.getDeclaringClass()).get());
+        super(Family.all(PositionComponent.class, TypeComponent.class).get());
         positionMapper = ComponentMapper.getFor(PositionComponent.class);
         spriteMapper = ComponentMapper.getFor(SpriteComponent.class);
+        typeMapper = ComponentMapper.getFor((TypeComponent.class));
+
         this.camera = camera;
     }
 
@@ -27,10 +30,11 @@ public class ControlSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         PositionComponent position = positionMapper.get(entity);
         SpriteComponent sprite = spriteMapper.get(entity);
+        TypeComponent type = typeMapper.get(entity);
 
 
 
-        if (Gdx.input.isTouched()) {
+        if (Gdx.input.isTouched() && type == TypeComponent.ROCKET) {
 
             //Get the touch input from user.
             Vector3 touchInput = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);

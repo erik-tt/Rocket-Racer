@@ -15,16 +15,16 @@ import com.rocketracer.game.ECS.Systems.ObstacleSpawnSystem;
 import com.rocketracer.game.ECS.Systems.RenderSystem;
 
 public class GameController {
-    Engine engine;
-    RenderSystem renderSystem;
+    private Engine engine;
+    private RenderSystem renderSystem;
 
-    ControlSystem controlSystem;
+    private ControlSystem controlSystem;
 
-    MovementSystem movementSystem;
+    private MovementSystem movementSystem;
 
-    RocketEntity player = new RocketEntity();
-    FuelSystem fuelSystem;
-    ObstacleSpawnSystem obstacleSpawnSystem;
+    private RocketEntity player = new RocketEntity();
+    private FuelSystem fuelSystem;
+    private ObstacleSpawnSystem obstacleSpawnSystem;
 
 
 
@@ -33,13 +33,14 @@ public class GameController {
         renderSystem = new RenderSystem(batch);
         controlSystem = new ControlSystem(renderSystem.getCamera());
         movementSystem = new MovementSystem();
-        obstacleSpawnSystem = new ObstacleSpawnSystem();
+        obstacleSpawnSystem = new ObstacleSpawnSystem(engine);
         fuelSystem = new FuelSystem();
 
         engine.addSystem(fuelSystem);
         engine.addSystem(controlSystem);
         engine.addSystem(obstacleSpawnSystem);
         engine.addSystem(renderSystem);
+        engine.addSystem(movementSystem);
         try {
             engine.addEntity(player.getEntity());
 

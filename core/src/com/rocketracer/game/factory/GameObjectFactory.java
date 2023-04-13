@@ -3,6 +3,8 @@ package com.rocketracer.game.factory;
 
 import com.rocketracer.game.ECS.Entities.IGameObject;
 
+import javax.swing.text.html.parser.Entity;
+
 public abstract class GameObjectFactory {
 
 
@@ -22,4 +24,5 @@ public abstract class GameObjectFactory {
     }
 
     protected abstract IGameObject createGameObject();
+
 }

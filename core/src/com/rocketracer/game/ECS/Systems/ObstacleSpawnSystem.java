@@ -1,8 +1,9 @@
 package com.rocketracer.game.ECS.Systems;
 
+import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.systems.IntervalSystem;
 import com.badlogic.gdx.math.MathUtils;
-import com.rocketracer.game.ECS.Entities.BirdEntity;
 import com.rocketracer.game.SharedData.GameConfig;
 import com.rocketracer.game.factory.BirdFactory;
 import com.rocketracer.game.factory.GameObjectFactory;
@@ -10,10 +11,12 @@ import com.rocketracer.game.factory.GameObjectFactory;
 public class ObstacleSpawnSystem extends IntervalSystem {
 
     private GameObjectFactory objectFactory;
+    private Engine engine;
 
 
-    public ObstacleSpawnSystem() {
+    public ObstacleSpawnSystem(Engine engine) {
         super(GameConfig.OBSTACLE_SPAWN_TIME);
+        this.engine = engine;
     }
 
     @Override
@@ -22,9 +25,10 @@ public class ObstacleSpawnSystem extends IntervalSystem {
         float min = 0;
         float max = GameConfig.FRUSTUM_WIDTH - 20;
         float obstacleX = MathUtils.random(min,max);
-        float obstacleY = 20;
-        objectFactory = new BirdFactory(30, 40);
-        objectFactory.create();
+        float obstacleY = GameConfig.FRUSTUM_HEIGHT - 40;
+        objectFactory = new BirdFactory(obstacleX, obstacleY);
+        Entity bird = objectFactory.create().getEntity();
+        engine.addEntity(bird);
 
         System.out.println(objectFactory);
 

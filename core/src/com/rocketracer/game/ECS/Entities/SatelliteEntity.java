@@ -19,7 +19,7 @@ public class SatelliteEntity implements IGameObject {
         this.entity = new Entity();
         this.spriteComponent = new SpriteComponent(satellite);
         this.positionComponent = new PositionComponent(x,y);
-        this.velocityComponent = new VelocityComponent(0,0);
+        this.velocityComponent = new VelocityComponent();
 
         entity.add(spriteComponent);
         entity.add(positionComponent);

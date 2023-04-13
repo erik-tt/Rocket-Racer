@@ -6,10 +6,22 @@ public class VelocityComponent implements Component {
     // --- Attributes ---
     public float x;
     public float y;
+    public boolean speedSet = false;
+
 
     // --- Constructors ---
-    public VelocityComponent(float x, float y) {
+    public VelocityComponent() {
+
+    }
+
+    public void setSpeed(float x, float y) {
         this.x = x;
         this.y = y;
+        speedSet = false;
+    }
+
+    //Since speed is only set once.
+    public boolean isSpeedSet() {
+        return speedSet;
     }
 }
