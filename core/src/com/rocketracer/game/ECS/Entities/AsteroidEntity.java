@@ -17,10 +17,10 @@ public class AsteroidEntity implements IGameObject {
     private VelocityComponent velocityComponent;
     private Texture asteroid = new Texture(Gdx.files.internal("asteroid.png"));
 
-    public AsteroidEntity(){
+    public AsteroidEntity(float x, float y){
         this.entity = new Entity();
         this.spriteComponent = new SpriteComponent(asteroid);
-        this.positionComponent = new PositionComponent(0,0);
+        this.positionComponent = new PositionComponent(x,y);
         this.velocityComponent = new VelocityComponent(0,0);
 
         entity.add(spriteComponent);

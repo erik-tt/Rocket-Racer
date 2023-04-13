@@ -15,10 +15,10 @@ public class SatelliteEntity implements IGameObject {
     private VelocityComponent velocityComponent;
     private Texture satellite = new Texture(Gdx.files.internal("satellite.png"));
 
-    public SatelliteEntity(){
+    public SatelliteEntity(float x, float y){
         this.entity = new Entity();
         this.spriteComponent = new SpriteComponent(satellite);
-        this.positionComponent = new PositionComponent(0,0);
+        this.positionComponent = new PositionComponent(x,y);
         this.velocityComponent = new VelocityComponent(0,0);
 
         entity.add(spriteComponent);

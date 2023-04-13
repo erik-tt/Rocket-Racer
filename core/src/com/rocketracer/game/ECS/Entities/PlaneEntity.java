@@ -14,10 +14,10 @@ public class PlaneEntity implements IGameObject {
     private VelocityComponent velocityComponent;
     private Texture plane = new Texture(Gdx.files.internal("plane.png"));
 
-    public PlaneEntity(){
+    public PlaneEntity(float x, float y){
         this.entity = new Entity();
         this.spriteComponent = new SpriteComponent(plane);
-        this.positionComponent = new PositionComponent(0,0);
+        this.positionComponent = new PositionComponent(x,y);
         this.velocityComponent = new VelocityComponent(0,0);
 
         entity.add(spriteComponent);

@@ -14,15 +14,18 @@ public class BirdEntity implements IGameObject {
     private VelocityComponent velocityComponent;
     private Texture bird = new Texture(Gdx.files.internal("bird.png"));
 
-    public BirdEntity(){
+    public BirdEntity(float x, float y){
         this.entity = new Entity();
         this.spriteComponent = new SpriteComponent(bird);
-        this.positionComponent = new PositionComponent(0,0);
+        spriteComponent.sprite.setSize(200,200);
+        this.positionComponent = new PositionComponent(x,y);
         this.velocityComponent = new VelocityComponent(0,0);
 
         entity.add(spriteComponent);
         entity.add(positionComponent);
         entity.add(velocityComponent);
+
+
     }
 
     public Entity getEntity(){ return entity;}

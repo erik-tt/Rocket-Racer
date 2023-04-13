@@ -14,13 +14,14 @@ public class FuelcanEntity implements IGameObject {
     private Texture fuelcan = new Texture(Gdx.files.internal("fuelcan.png"));
 
     // --- Constructor ---
-    public FuelcanEntity() {
+    public FuelcanEntity(float x, float y) {
         this.entity = new Entity();
         this.spriteComponent = new SpriteComponent(fuelcan);
-        this.positionComponent = new PositionComponent(0, 0);
+        this.positionComponent = new PositionComponent(x, y);
 
         entity.add(spriteComponent);
         entity.add(positionComponent);
+
     }
 
     // --- Methods ---
