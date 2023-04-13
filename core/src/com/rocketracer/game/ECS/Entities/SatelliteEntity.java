@@ -7,7 +7,7 @@ import com.rocketracer.game.ECS.Components.PositionComponent;
 import com.rocketracer.game.ECS.Components.SpriteComponent;
 import com.rocketracer.game.ECS.Components.VelocityComponent;
 
-public class SatelliteEntity {
+public class SatelliteEntity implements IGameObject {
 
     private Entity entity;
     private SpriteComponent spriteComponent;
@@ -27,4 +27,9 @@ public class SatelliteEntity {
     }
 
     public Entity getEntity(){ return entity;}
+
+    @Override
+    public void build() {
+        System.out.println("Build Satellite");
+    }
 }
