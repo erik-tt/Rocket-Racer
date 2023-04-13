@@ -38,15 +38,7 @@ public class GameView implements Screen {
     //private Screen prevScreen;
 
     // Gameplay: will be moved to GameController
-    Engine engine;
-    RenderSystem renderSystem;
 
-    ControlSystem controlSystem;
-
-    MovementSystem movementSystem;
-
-    RocketEntity player = new RocketEntity();
-    FuelSystem fuelSystem;
 
     // --- Constructor ---
     /**
@@ -63,28 +55,9 @@ public class GameView implements Screen {
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
         camera.update();
         stage = new Stage(viewport, batch);
-        gameController = new GameController();
+        gameController = new GameController(batch);
         //this.prevScreen = prevScreen;
 
-
-        // Ashley ECS
-        engine = new Engine();
-        renderSystem = new RenderSystem(batch);
-        controlSystem = new ControlSystem(renderSystem.getCamera());
-        movementSystem = new MovementSystem();
-        fuelSystem = new FuelSystem();
-        engine.addSystem(renderSystem);
-        engine.addSystem(fuelSystem);
-        engine.addSystem(controlSystem);
-
-
-        try {
-
-            engine.addEntity(player.getEntity());
-            System.out.println("Success in adding player entity to engine.");
-        } catch (IllegalArgumentException ie) {
-            System.out.println(ie.getMessage());
-        }
     }
 
     @Override
@@ -98,7 +71,7 @@ public class GameView implements Screen {
         //Clear the screen
         Gdx.gl.glClearColor(0, 0, .16f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        engine.update(delta);
+        gameController.getEngine().update(delta);
     }
 
     @Override

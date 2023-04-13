@@ -39,7 +39,7 @@ public class ControlSystem extends IteratingSystem {
             Vector3 spriteWidth = new Vector3(sprite.sprite.getWidth(), 0, 0);
             camera.unproject(spriteWidth);
 
-            //System.out.println(spriteWidth.x);
+            System.out.println(spriteWidth.x);
 
             //Need to offset the position because of the sprite width
             if (position.x + spriteWidth.x/2 < touchInput.x) {

@@ -24,7 +24,7 @@ public class RocketEntity {
 
         entity.add(spriteComponent);
         entity.add(positionComponent);
-        System.out.println(entity.add(fuelComponent));
+
     }
 
     // --- Methods ---

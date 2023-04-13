@@ -12,7 +12,7 @@ public class PositionComponent implements Component {
     public PositionComponent(float x, float y) {
         this.x = x;
         this.y = y;
-        //printPosition();
+        printPosition();
     }
     /**
      * Updates the x position with the given value
@@ -21,7 +21,7 @@ public class PositionComponent implements Component {
     public void updateX(float x) {
         // TODO: Should not directly change x value to the x where the user touches, but move x towards the x where the user touches
         this.x += x;
-        //printPosition();
+        printPosition();
     }
 
     public void printPosition() {
