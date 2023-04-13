@@ -7,7 +7,7 @@ import com.rocketracer.game.ECS.Components.PositionComponent;
 import com.rocketracer.game.ECS.Components.SpriteComponent;
 import com.rocketracer.game.ECS.Components.VelocityComponent;
 
-public class BirdEntity {
+public class BirdEntity implements IGameObject {
     private Entity entity;
     private SpriteComponent spriteComponent;
     private PositionComponent positionComponent;
@@ -27,5 +27,9 @@ public class BirdEntity {
 
     public Entity getEntity(){ return entity;}
 
+    @Override
+    public void build() {
+        System.out.println("Build bird");
+    }
 }
 

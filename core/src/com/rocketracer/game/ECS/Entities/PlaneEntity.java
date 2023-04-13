@@ -7,7 +7,7 @@ import com.rocketracer.game.ECS.Components.PositionComponent;
 import com.rocketracer.game.ECS.Components.SpriteComponent;
 import com.rocketracer.game.ECS.Components.VelocityComponent;
 
-public class PlaneEntity {
+public class PlaneEntity implements IGameObject {
     private Entity entity;
     private SpriteComponent spriteComponent;
     private PositionComponent positionComponent;
@@ -26,4 +26,9 @@ public class PlaneEntity {
     }
 
     public Entity getEntity(){ return entity;}
+
+    @Override
+    public void build() {
+        System.out.println("Build Plane");
+    }
 }

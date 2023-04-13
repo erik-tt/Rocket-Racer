@@ -9,7 +9,7 @@ import com.rocketracer.game.ECS.Components.VelocityComponent;
 
 
 
-public class AsteroidEntity {
+public class AsteroidEntity implements IGameObject {
 
     private Entity entity;
     private SpriteComponent spriteComponent;
@@ -30,4 +30,8 @@ public class AsteroidEntity {
 
     public Entity getEntity(){ return entity;}
 
+    @Override
+    public void build() {
+
+    }
 }

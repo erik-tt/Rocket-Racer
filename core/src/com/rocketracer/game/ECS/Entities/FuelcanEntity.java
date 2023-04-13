@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.rocketracer.game.ECS.Components.PositionComponent;
 import com.rocketracer.game.ECS.Components.SpriteComponent;
 
-public class FuelcanEntity {
+public class FuelcanEntity implements IGameObject {
     // --- Attributes ---
     private Entity entity;
     private SpriteComponent spriteComponent;
@@ -26,6 +26,11 @@ public class FuelcanEntity {
     // --- Methods ---
     public Entity getEntity() {
         return entity;
+    }
+
+    @Override
+    public void build() {
+        System.out.println("Build fuelcan");
     }
 }
 
