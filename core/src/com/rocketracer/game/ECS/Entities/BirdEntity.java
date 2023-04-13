@@ -16,7 +16,7 @@ public class BirdEntity implements IGameObject {
 
     public BirdEntity(){
         this.entity = new Entity();
-        this.spriteComponent = new SpriteComponent(bird,1);
+        this.spriteComponent = new SpriteComponent(bird);
         this.positionComponent = new PositionComponent(0,0);
         this.velocityComponent = new VelocityComponent(0,0);
 

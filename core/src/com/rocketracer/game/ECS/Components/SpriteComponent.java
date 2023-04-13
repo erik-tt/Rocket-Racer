@@ -11,7 +11,7 @@ public class SpriteComponent implements Component {
     // TODO: Support animations etc?
 
     // --- Constructor ---
-    public SpriteComponent(Texture texture, float setScale) {
+    public SpriteComponent(Texture texture) {
         this.texture = texture;
         this.sprite = new Sprite(texture);
         this.sprite.setSize(texture.getWidth(), texture.getHeight());

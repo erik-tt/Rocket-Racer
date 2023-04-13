@@ -19,7 +19,7 @@ public class AsteroidEntity implements IGameObject {
 
     public AsteroidEntity(){
         this.entity = new Entity();
-        this.spriteComponent = new SpriteComponent(asteroid,1);
+        this.spriteComponent = new SpriteComponent(asteroid);
         this.positionComponent = new PositionComponent(0,0);
         this.velocityComponent = new VelocityComponent(0,0);
 

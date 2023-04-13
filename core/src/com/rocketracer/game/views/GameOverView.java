@@ -1,62 +1,58 @@
 package com.rocketracer.game.views;
 
-import com.badlogic.ashley.core.Engine;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.rocketracer.game.ECS.Entities.FuelcanEntity;
-import com.rocketracer.game.ECS.Entities.RocketEntity;
-import com.rocketracer.game.ECS.Systems.ControlSystem;
-import com.rocketracer.game.ECS.Systems.FuelSystem;
-import com.rocketracer.game.ECS.Systems.MovementSystem;
-import com.rocketracer.game.ECS.Systems.RenderSystem;
-import com.rocketracer.game.controllers.GameController;
+import com.rocketracer.game.ECS.Entities.SoundEntity;
+import com.rocketracer.game.ECS.Systems.AudioSystem;
+import com.rocketracer.game.controllers.MainController;
 
-public class GameView implements Screen {
+public class GameOverView implements Screen {
 
-    // --- Attributes ---
-    // Misc
+
     private SpriteBatch batch;
     protected Stage stage;
     private Viewport viewport;
     private Camera camera;
     private TextureAtlas atlas;
     protected Skin skin;
-
-    private GameController gameController;
-
-    // Navigation
-    /** For back button */
-    //private Screen prevScreen;
-
-    // Gameplay: will be moved to GameController
+    private Table gameOverTable;
+    Label.LabelStyle font;
 
 
-    // --- Constructor ---
-    /**
-     * Constructor.
-     * @param prevScreen The screen to return to when the back button is pressed.
-     */
-    public GameView(/*Screen prevScreen*/) {
+    public GameOverView()
+    {
+
         atlas = new TextureAtlas("CustomSkin.atlas");
         skin = new Skin(Gdx.files.internal("CustomSkin.json"), atlas);
-        batch = new SpriteBatch();
 
+        batch = new SpriteBatch();
         camera = new OrthographicCamera();
         viewport = new FitViewport(1080/5, 2340/5, camera);
+
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
         camera.update();
+
+
         stage = new Stage(viewport, batch);
-        gameController = new GameController(batch);
-        //this.prevScreen = prevScreen;
+        gameOverTable = new Table();
+        font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
+
 
     }
 
@@ -64,14 +60,34 @@ public class GameView implements Screen {
     public void show() {
         //Stage should control input:
         Gdx.input.setInputProcessor(stage);
+
+        //Set table to fill stage
+        gameOverTable.setFillParent(true);
+        Label gameOverLabel = new Label("GAME OVER", font);
+        Label playAgainLabel = new Label("Click to Play Again", font);
+
+        gameOverTable.add(gameOverLabel).expandX();
+        gameOverTable.row();
+        gameOverTable.add(playAgainLabel).expandX().padTop(10f);
+
+
+        //Add table to stage
+        stage.addActor(gameOverTable);
+
+
+
     }
 
     @Override
     public void render(float delta) {
-        //Clear the screen
-        Gdx.gl.glClearColor(0, 0, .16f, 1);
+        if(Gdx.input.justTouched()){
+            ((Game)Gdx.app.getApplicationListener()).setScreen(new GameView());
+        }
+        Gdx.gl.glClearColor(.1f, .12f, .16f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gameController.getEngine().update(delta);
+        stage.act();
+        stage.draw();
+
     }
 
     @Override
@@ -98,9 +114,9 @@ public class GameView implements Screen {
 
     @Override
     public void dispose() {
-        stage.dispose();
         skin.dispose();
         atlas.dispose();
         batch.dispose();
+
     }
 }

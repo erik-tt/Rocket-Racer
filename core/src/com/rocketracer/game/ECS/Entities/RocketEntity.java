@@ -11,16 +11,20 @@ public class RocketEntity {
     private Entity entity;
     private SpriteComponent spriteComponent;
     private PositionComponent positionComponent;
+    private FuelComponent fuelComponent;
     private Texture rocket = new Texture(Gdx.files.internal("Rocket1.png"));
 
     // --- Constructor ---
     public RocketEntity() {
         this.entity = new Entity();
-        this.spriteComponent = new SpriteComponent(rocket, 1);
+        this.spriteComponent = new SpriteComponent(rocket);
         this.positionComponent = new PositionComponent(12, 0);
+        this.fuelComponent = new FuelComponent(100);
+
 
         entity.add(spriteComponent);
         entity.add(positionComponent);
+
     }
 
     // --- Methods ---

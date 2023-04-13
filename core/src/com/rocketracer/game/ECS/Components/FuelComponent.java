@@ -7,6 +7,11 @@ public class FuelComponent implements Component {
 
     // --- Constructor ---
     public FuelComponent(float fuelLevel) {
+
         this.fuelLevel = fuelLevel;
+
+
     }
+
+
 }
