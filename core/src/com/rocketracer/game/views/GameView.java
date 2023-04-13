@@ -12,9 +12,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.rocketracer.game.ECS.Components.FuelComponent;
+import com.rocketracer.game.ECS.Entities.FuelcanEntity;
 import com.rocketracer.game.ECS.Entities.RocketEntity;
-import com.rocketracer.game.ECS.Systems.FuelSystem;
+import com.rocketracer.game.ECS.Systems.ControlSystem;
 import com.rocketracer.game.ECS.Systems.MovementSystem;
 import com.rocketracer.game.ECS.Systems.RenderSystem;
 import com.rocketracer.game.controllers.GameController;
@@ -39,9 +39,13 @@ public class GameView implements Screen {
     // Gameplay: will be moved to GameController
     Engine engine;
     RenderSystem renderSystem;
+
+    ControlSystem controlSystem;
+
     MovementSystem movementSystem;
-    FuelSystem fuelSystem;
+
     RocketEntity player = new RocketEntity();
+
 
     // --- Constructor ---
     /**
@@ -61,13 +65,16 @@ public class GameView implements Screen {
         gameController = new GameController();
         //this.prevScreen = prevScreen;
 
+
         // Ashley ECS
         engine = new Engine();
         renderSystem = new RenderSystem(batch);
+        controlSystem = new ControlSystem(renderSystem.getCamera());
         movementSystem = new MovementSystem();
-        fuelSystem = new FuelSystem();
         engine.addSystem(renderSystem);
+        engine.addSystem(controlSystem);
         try {
+
             engine.addEntity(player.getEntity());
             System.out.println("Success in adding player entity to engine.");
         } catch (IllegalArgumentException ie) {

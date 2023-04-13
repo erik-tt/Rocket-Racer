@@ -1,23 +1,23 @@
 package com.rocketracer.game.ECS.Entities;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.rocketracer.game.ECS.Components.*;
+import com.rocketracer.game.ECS.Components.PositionComponent;
+import com.rocketracer.game.ECS.Components.SpriteComponent;
 
-public class RocketEntity {
+public class FuelcanEntity {
     // --- Attributes ---
     private Entity entity;
     private SpriteComponent spriteComponent;
     private PositionComponent positionComponent;
-    private Texture rocket = new Texture(Gdx.files.internal("Rocket1.png"));
+    private Texture fuelcan = new Texture(Gdx.files.internal("fuelcan.png"));
 
     // --- Constructor ---
-    public RocketEntity() {
+    public FuelcanEntity() {
         this.entity = new Entity();
-        this.spriteComponent = new SpriteComponent(rocket, 1);
-        this.positionComponent = new PositionComponent(12, 0);
+        this.spriteComponent = new SpriteComponent(fuelcan, 1);
+        this.positionComponent = new PositionComponent(0, 0);
 
         entity.add(spriteComponent);
         entity.add(positionComponent);
@@ -28,3 +28,5 @@ public class RocketEntity {
         return entity;
     }
 }
+
+
