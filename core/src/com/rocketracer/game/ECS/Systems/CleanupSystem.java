@@ -30,7 +30,7 @@ public class CleanupSystem extends IteratingSystem {
          CleanupComponent cleanupObject = cleanupMapper.get(entity);
          PositionComponent position = positionMapper.get(entity);
 
-         if(position.y < 10) {
+         if(position.y < 0) {
              engine.removeEntity(entity);
          }
 

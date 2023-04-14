@@ -23,9 +23,9 @@ public class ObstacleSpawnSystem extends IntervalSystem {
     protected void updateInterval() {
 
         float min = 0;
-        float max = GameConfig.FRUSTUM_WIDTH - 20;
+        float max = GameConfig.FRUSTUM_WIDTH ;
         float obstacleX = MathUtils.random(min,max);
-        float obstacleY = GameConfig.FRUSTUM_HEIGHT - 40;
+        float obstacleY = GameConfig.FRUSTUM_HEIGHT;
         objectFactory = new BirdFactory(obstacleX, obstacleY);
         Entity bird = objectFactory.create().getEntity();
         engine.addEntity(bird);

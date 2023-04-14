@@ -17,7 +17,7 @@ public class VelocityComponent implements Component {
     public void setSpeed(float x, float y) {
         this.x = x;
         this.y = y;
-        speedSet = false;
+        speedSet = true;
     }
 
     //Since speed is only set once.
