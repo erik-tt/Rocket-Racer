@@ -13,6 +13,7 @@ public class HighScoreList {
     /** Private storing of highscore. */
     // Single player high scores
     private Map<String, Integer> spHighScores = new HashMap<>();
+    private Map<Integer, Object> mpHighScores = new HashMap<>();
 
     // --- Construct - Private (Singleton) ---
     private HighScoreList() {
@@ -35,8 +36,10 @@ public class HighScoreList {
                 System.out.println("Error: HighScoreList.reloadHighScores() - " + e.getMessage());
             }
         }
+
+        LocalData.sharedInstance.getFBIHandler().loadHighScoreList();
     }
-    public void printHighScoreList() {
+    public void printSPHighScoreList() {
         System.out.println("HighScoreList:");
         for (Map.Entry<String, Integer> entry : spHighScores.entrySet()) {
             System.out.println(entry.getKey() + " : " + entry.getValue());
@@ -51,7 +54,7 @@ public class HighScoreList {
     public Map<String, Integer> getSPHighScores() { return new HashMap<>(spHighScores); }
 
     // Set
-    public void addScore(String name, Integer score) {
+    public void addSPScore(String name, Integer score) {
         // Check if score exists and is higher than current score
         if (spHighScores.containsKey(name)) {
             if (spHighScores.get(name) < score) {
@@ -61,6 +64,20 @@ public class HighScoreList {
         } else {
             spHighScores.put(name, score);
             LocalData.sharedInstance.setHighScore(score, name);
+        }
+    }
+
+
+    // -- Multiplayer --
+    public void setMPHighScores(Map<Integer, Object> highScores) {
+        this.mpHighScores = highScores;
+        printMPHighScoreList();
+    }
+    public Map<Integer, Object> getMPHighScores() { return this.mpHighScores; }
+    public void printMPHighScoreList() {
+        System.out.println("High-score List:");
+        for (Map.Entry<Integer, Object> entry : mpHighScores.entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue());
         }
     }
 }
