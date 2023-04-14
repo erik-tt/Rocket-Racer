@@ -98,8 +98,7 @@ public class RenderSystem extends SortedIteratingSystem {
         for (Entity entity : renderQueue) {
             PositionComponent positionComponent = pMapper.get(entity);
             SpriteComponent spriteComponent = sMapper.get(entity);
-            System.out.println(spriteComponent.sprite);
-       positionComponent.printPosition();
+
 
             float width = spriteComponent.sprite.getWidth();
             float height = spriteComponent.sprite.getHeight();
