@@ -19,12 +19,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.rocketracer.game.GameListener;
 import com.rocketracer.game.ECS.Entities.SoundEntity;
 import com.rocketracer.game.ECS.Systems.AudioSystem;
+import com.rocketracer.game.SharedData.LocalData;
 import com.rocketracer.game.controllers.MainController;
 
 
-public class MainView implements Screen {
+public class MainView implements Screen, GameListener {
     
     private SpriteBatch batch;
     protected Stage stage;
@@ -61,7 +63,8 @@ public class MainView implements Screen {
         stage = new Stage(viewport, batch);
         mainTable = new Table();
         mainController = new MainController();
-
+        if (LocalData.sharedInstance.getFBIHandler() != null)
+            LocalData.sharedInstance.getFBIHandler().setListener(this);
     }
     
     @Override
@@ -84,7 +87,8 @@ public class MainView implements Screen {
         mainController.addButton("Play multiplayer game", skin, mainTable).addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //TODO
+                System.out.println("Creating multiplayer game");
+                System.out.println("PIN: " + LocalData.sharedInstance.getFBIHandler().createGame());
             }
         });
         
@@ -100,7 +104,7 @@ public class MainView implements Screen {
         stage.addActor(audioSystem.getSoundButton());
     }
     
-    
+    // Screen methods
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(.1f, .12f, .16f, 1);
@@ -138,8 +142,16 @@ public class MainView implements Screen {
         atlas.dispose();
         batch.dispose();
     }
-    
-    
+
+    // GameListener methods
+    @Override
+    public void onGameLoaded(String docID, Integer pin) {
+        System.out.println("Game loaded: " + docID + " - Pin: " + pin);
+    }
+    @Override
+    public void onGameError() {
+        System.out.println("Game error");
+    }
     
 }
 
