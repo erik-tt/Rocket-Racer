@@ -87,13 +87,18 @@ public class MainView implements Screen {
                 //TODO
             }
         });
-
         mainController.addButton("How to play", skin, mainTable).addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 ((Game)Gdx.app.getApplicationListener()).setScreen(new HowToView());
             }
 
+        });
+        mainController.addButton("Highscores", skin, mainTable).addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new HighscoreView());
+            }
         });
         
         mainController.addButton("Exit", skin, mainTable).addListener(new ClickListener(){
