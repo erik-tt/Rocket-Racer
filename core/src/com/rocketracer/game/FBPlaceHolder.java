@@ -11,22 +11,25 @@ public class FBPlaceHolder implements FirebaseInterface{
     }
 
     @Override
-    public void joinGame(Integer gamePin) {
+    public void joinGame(Integer gamePin, String name) {
 
     }
+    @Override
+    public void setGameScore(int score) { }
 
     @Override
-    public Map<String, Integer> getHighscoreList() {
-        return null;
-    }
+    public void loadHighScoreList() {}
 
     @Override
-    public void updateHighscoreList(Map<String, Integer> newScore) {
+    public void updateHighscoreList(String name, int score) {
 
     }
 
     @Override
     public void writeData(HashMap<String, Object> map, String documentPath) {
 
+    }
+    @Override
+    public void setListener(GameListener gameListener) {
     }
 }
