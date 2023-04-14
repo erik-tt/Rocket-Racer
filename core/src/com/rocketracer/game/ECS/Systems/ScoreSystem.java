@@ -20,18 +20,23 @@ import com.rocketracer.game.views.GameView;
 
 
 
+
+
         public ScoreSystem() {
             super(Family.all(ScoreComponent.class).get());
             sMapper = ComponentMapper.getFor(ScoreComponent.class);
+
         }
 
         @Override
         protected void processEntity(Entity entity, float deltaTime) {
-
             ScoreComponent score = sMapper.get(entity);
-            score.score += Gdx.graphics.getDeltaTime() *10;
-            System.out.println(score.score);
 
+            //This needs to be checked later that works
+
+            if(!score.gameOver){
+                score.score += Math.round(Gdx.graphics.getDeltaTime() *30);
+            }
         }
 
     }

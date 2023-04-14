@@ -30,10 +30,10 @@ public class GameView implements Screen {
     private Camera camera;
     private TextureAtlas atlas;
     protected Skin skin;
-    Label.LabelStyle font;
+    BitmapFont font;
 
     private GameController gameController;
-    float score;
+    int score;
 
     // Navigation
     /** For back button */
@@ -58,8 +58,8 @@ public class GameView implements Screen {
         camera.update();
         stage = new Stage(viewport, batch);
         gameController = new GameController(batch);
-        font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
-
+        font = new BitmapFont(Gdx.files.internal("default.fnt"),Gdx.files.internal("default.png"),false);
+        font.getData().setScale(0.20f );
 
         //this.prevScreen = prevScreen;
 
@@ -69,13 +69,6 @@ public class GameView implements Screen {
     public void show() {
         //Stage should control input:
         Gdx.input.setInputProcessor(stage);
-        ImmutableArray<Entity> scoreArray = gameController.getEngine().getEntitiesFor(Family.one(ScoreComponent.class).get());
-        ScoreComponent scoreComponent = scoreArray.get(0).getComponent(ScoreComponent.class);
-        score = scoreComponent.getScore();
-        Label scoreLabel = new Label(Float.toString(score), font);
-        scoreLabel.setPosition(130, 400);
-        stage.addActor(scoreLabel);
-
     }
 
     @Override
@@ -83,11 +76,17 @@ public class GameView implements Screen {
         //Clear the screen
         Gdx.gl.glClearColor(0, 0, .16f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act();
-        stage.draw();
+
 
         gameController.getEngine().update(delta);
+        ImmutableArray<Entity> scoreArray = gameController.getEngine().getEntitiesFor(Family.one(ScoreComponent.class).get());
+        ScoreComponent scoreComponent = scoreArray.get(0).getComponent(ScoreComponent.class);
+        score = scoreComponent.getScore();
+        System.out.println("her " + score);
 
+        batch.begin();
+        font.draw(batch, Integer.toString(score), 25, 60);
+        batch.end();
     }
 
     @Override

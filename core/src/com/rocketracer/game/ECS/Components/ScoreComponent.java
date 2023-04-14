@@ -5,16 +5,16 @@ import com.badlogic.ashley.core.Component;
 public class ScoreComponent implements Component{
 
         // --- Attributes ---
-        public float score;
+        public int score;
+        public boolean gameOver;
 
         // --- Constructor ---
-        public ScoreComponent(float score) {
-            this.score = score;
+        public ScoreComponent(int score) {
+
+                this.score = score;
+                this.gameOver = false;
         }
 
-        public float getScore(){
-                return score;
-        }
 
 
 }
