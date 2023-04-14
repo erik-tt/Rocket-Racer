@@ -46,23 +46,25 @@ public class MovementSystem extends IteratingSystem {
 
                 if (sign == 1) {
                     speedX = random.nextInt(10);
-                }
-
-                else {
-                    speedX = - random.nextInt(10);
+                } else {
+                    speedX = -random.nextInt(10);
                     sprite.sprite.flip(true, false);
                 }
 
                 int speedY = random.nextInt(30);
                 velocity.setSpeed(speedX, speedY);
             }
-
-
-
-            position.x += velocity.x * deltaTime;
-            position.y -= velocity.y * deltaTime;
-
         }
+
+        //Should stand still in y direction, but still move downwards because the rocket "moves up"
+        if(type == TypeComponent.POWERUP) {
+            velocity.setSpeed(0, 5);
+        }
+
+        position.x += velocity.x * deltaTime;
+        //Negative to move downwards
+        position.y -= velocity.y * deltaTime;
+
 
     }
 }

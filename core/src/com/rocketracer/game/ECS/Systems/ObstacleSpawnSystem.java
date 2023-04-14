@@ -6,12 +6,16 @@ import com.badlogic.ashley.systems.IntervalSystem;
 import com.badlogic.gdx.math.MathUtils;
 import com.rocketracer.game.SharedData.GameConfig;
 import com.rocketracer.game.factory.BirdFactory;
+import com.rocketracer.game.factory.FuelcanFactory;
 import com.rocketracer.game.factory.GameObjectFactory;
 
 public class ObstacleSpawnSystem extends IntervalSystem {
 
     private GameObjectFactory objectFactory;
     private Engine engine;
+
+    private int counter = 0;
+    private int fuelSpawnRate = 23;
 
 
     public ObstacleSpawnSystem(Engine engine) {
@@ -26,11 +30,20 @@ public class ObstacleSpawnSystem extends IntervalSystem {
         float max = GameConfig.FRUSTUM_WIDTH ;
         float obstacleX = MathUtils.random(min,max);
         float obstacleY = GameConfig.FRUSTUM_HEIGHT;
+
+
         objectFactory = new BirdFactory(obstacleX, obstacleY);
         Entity bird = objectFactory.create().getEntity();
         engine.addEntity(bird);
 
-        System.out.println(objectFactory);
+        //Spawn fuelcan
+        if (counter % fuelSpawnRate == 0) {
+            objectFactory = new FuelcanFactory(obstacleX, obstacleY);
+            Entity fuelcan = objectFactory.create().getEntity();
+            engine.addEntity(fuelcan);
+
+        }
+        counter ++;
 
     }
 }
