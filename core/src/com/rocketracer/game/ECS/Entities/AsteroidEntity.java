@@ -26,10 +26,12 @@ public class AsteroidEntity implements IGameObject {
         this.velocityComponent = new VelocityComponent();
         this.cleanupComponent = new CleanupComponent();
 
+
         entity.add(spriteComponent);
         entity.add(positionComponent);
         entity.add(velocityComponent);
         entity.add(cleanupComponent);
+
     }
 
     public Entity getEntity(){ return entity;}
