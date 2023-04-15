@@ -3,11 +3,15 @@ package com.rocketracer.game.ECS.Entities;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.rocketracer.game.ECS.Components.BoundsComponent;
 import com.rocketracer.game.ECS.Components.CleanupComponent;
+import com.rocketracer.game.ECS.Components.CollisionComponent;
 import com.rocketracer.game.ECS.Components.PositionComponent;
 import com.rocketracer.game.ECS.Components.SpriteComponent;
 import com.rocketracer.game.ECS.Components.TypeComponent;
 import com.rocketracer.game.ECS.Components.VelocityComponent;
+import com.rocketracer.game.ECS.Systems.CollisionSystem;
+import com.rocketracer.game.SharedData.GameConfig;
 
 public class BirdEntity implements IGameObject {
     private final TypeComponent typeComponent;
@@ -16,6 +20,8 @@ public class BirdEntity implements IGameObject {
     private PositionComponent positionComponent;
     private VelocityComponent velocityComponent;
     private CleanupComponent cleanupComponent;
+    private CollisionComponent collisionComponent;
+    private BoundsComponent boundsComponent;
     private Texture bird = new Texture(Gdx.files.internal("bird.png"));
 
     public BirdEntity(float x, float y){
@@ -28,12 +34,21 @@ public class BirdEntity implements IGameObject {
         this.velocityComponent = new VelocityComponent();
         this.typeComponent = TypeComponent.OBSTACLE;
         this.cleanupComponent = new CleanupComponent();
+        this.collisionComponent = new CollisionComponent();
+        this.boundsComponent = new BoundsComponent();
+        boundsComponent.bounds.x = positionComponent.x;
+        boundsComponent.bounds.y = positionComponent.y;
+        boundsComponent.bounds.radius = spriteComponent.texture.getWidth()/(GameConfig.PPM*2);
+
+        System.out.println("Bird" + boundsComponent.bounds.y);
 
         entity.add(spriteComponent);
         entity.add(positionComponent);
         entity.add(velocityComponent);
         entity.add(typeComponent);
         entity.add(cleanupComponent);
+        entity.add(collisionComponent);
+        entity.add(boundsComponent);
 
 
     }

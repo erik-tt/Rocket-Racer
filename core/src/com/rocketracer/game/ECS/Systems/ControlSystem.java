@@ -36,6 +36,7 @@ public class ControlSystem extends IteratingSystem {
 
         if (Gdx.input.isTouched() && type == TypeComponent.ROCKET) {
 
+
             //Get the touch input from user.
             Vector3 touchInput = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touchInput);

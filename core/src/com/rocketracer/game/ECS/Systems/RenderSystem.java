@@ -82,7 +82,7 @@ public class RenderSystem extends SortedIteratingSystem {
         ImmutableArray<Entity> entities = getEngine().getEntitiesFor(FAMILY);
         renderQueue.addAll(entities.toArray());
 
-        System.out.println("Render system running, delta: " + deltaTime);
+        //System.out.println("Render system running, delta: " + deltaTime);
 
         // sort the renderQueue based on y index
         //renderQueue.sort(comparator);
@@ -94,7 +94,7 @@ public class RenderSystem extends SortedIteratingSystem {
         batch.begin();
 
         // loop through each entity in our render queue
-        System.out.println("Render queue size: " + renderQueue.size);
+        //System.out.println("Render queue size: " + renderQueue.size);
         for (Entity entity : renderQueue) {
             PositionComponent positionComponent = pMapper.get(entity);
             SpriteComponent spriteComponent = sMapper.get(entity);
