@@ -83,7 +83,7 @@ public class RenderSystem extends SortedIteratingSystem {
         System.out.println("Render system running, delta: " + deltaTime);
 
         // sort the renderQueue based on y index
-        renderQueue.sort(comparator);
+        //renderQueue.sort(comparator);
         
         // update camera and sprite batch
         cam.update();
