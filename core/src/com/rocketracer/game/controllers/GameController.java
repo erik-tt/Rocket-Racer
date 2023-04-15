@@ -6,39 +6,60 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.rocketracer.game.ECS.Entities.BirdEntity;
 import com.rocketracer.game.ECS.Entities.RocketEntity;
+import com.rocketracer.game.ECS.Systems.CleanupSystem;
 import com.rocketracer.game.ECS.Systems.ControlSystem;
 import com.rocketracer.game.ECS.Systems.FuelSystem;
 import com.rocketracer.game.ECS.Systems.MovementSystem;
+import com.rocketracer.game.ECS.Systems.ObstacleSpawnSystem;
 import com.rocketracer.game.ECS.Systems.RenderSystem;
 
 public class GameController {
-    Engine engine;
-    RenderSystem renderSystem;
+    private Engine engine;
+    private RenderSystem renderSystem;
 
-    ControlSystem controlSystem;
+    private ControlSystem controlSystem;
 
-    MovementSystem movementSystem;
+    private MovementSystem movementSystem;
 
-    RocketEntity player = new RocketEntity();
-    FuelSystem fuelSystem;
+    private RocketEntity player = new RocketEntity();
+    private FuelSystem fuelSystem;
+    private ObstacleSpawnSystem obstacleSpawnSystem;
+    private CleanupSystem cleanupSystem;
+
+
 
     public GameController(SpriteBatch batch) {
+
+        //Create the game engine:
         engine = new Engine();
+
+        //Create the systems
         renderSystem = new RenderSystem(batch);
         controlSystem = new ControlSystem(renderSystem.getCamera());
         movementSystem = new MovementSystem();
+        obstacleSpawnSystem = new ObstacleSpawnSystem(engine);
+        cleanupSystem = new CleanupSystem(engine);
         fuelSystem = new FuelSystem();
-        engine.addSystem(renderSystem);
+
+
+        //Add the systems to the engine
         engine.addSystem(fuelSystem);
         engine.addSystem(controlSystem);
-        try {
+        engine.addSystem(obstacleSpawnSystem);
+        engine.addSystem(renderSystem);
+        engine.addSystem(movementSystem);
+        engine.addSystem(cleanupSystem);
 
+        //Add the player entity to the engine
+        try {
             engine.addEntity(player.getEntity());
-            System.out.println("Success in adding player entity to engine.");
+
         } catch (IllegalArgumentException ie) {
             System.out.println(ie.getMessage());
         }
+
     }
 
     public Engine getEngine(){
