@@ -3,7 +3,7 @@ package com.rocketracer.game.ECS.Entities;
 import com.badlogic.ashley.core.Entity;
 
 /**
- * This is used for the factor pattern
+ * This is used for the factory pattern
  */
 public interface IGameObject {
 
