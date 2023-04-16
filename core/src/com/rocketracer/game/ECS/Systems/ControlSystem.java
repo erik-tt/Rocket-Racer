@@ -7,6 +7,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
+import com.rocketracer.game.ECS.Components.FuelComponent;
 import com.rocketracer.game.ECS.Components.PositionComponent;
 import com.rocketracer.game.ECS.Components.SpriteComponent;
 import com.rocketracer.game.ECS.Components.TypeComponent;
@@ -18,7 +19,9 @@ public class ControlSystem extends IteratingSystem {
     private OrthographicCamera camera;
 
     public ControlSystem(OrthographicCamera camera) {
-        super(Family.all(PositionComponent.class, TypeComponent.class).get());
+
+        super(Family.all(PositionComponent.class, FuelComponent.class).get());
+
         positionMapper = ComponentMapper.getFor(PositionComponent.class);
         spriteMapper = ComponentMapper.getFor(SpriteComponent.class);
         typeMapper = ComponentMapper.getFor((TypeComponent.class));

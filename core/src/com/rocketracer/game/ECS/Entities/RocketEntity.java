@@ -30,7 +30,9 @@ public class RocketEntity {
 
         entity.add(spriteComponent);
         entity.add(positionComponent);
+        entity.add(fuelComponent);
         entity.add(typeComponent);
+
 
     }
 

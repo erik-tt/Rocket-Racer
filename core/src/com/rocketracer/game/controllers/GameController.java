@@ -1,12 +1,8 @@
 package com.rocketracer.game.controllers;
 
 import com.badlogic.ashley.core.Engine;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.rocketracer.game.ECS.Entities.BirdEntity;
+import com.rocketracer.game.ECS.Entities.BackgroundEntity;
 import com.rocketracer.game.ECS.Entities.RocketEntity;
 import com.rocketracer.game.ECS.Systems.CleanupSystem;
 import com.rocketracer.game.ECS.Systems.ControlSystem;
@@ -14,6 +10,7 @@ import com.rocketracer.game.ECS.Systems.FuelSystem;
 import com.rocketracer.game.ECS.Systems.MovementSystem;
 import com.rocketracer.game.ECS.Systems.ObstacleSpawnSystem;
 import com.rocketracer.game.ECS.Systems.RenderSystem;
+import com.rocketracer.game.ECS.Systems.BackgroundSystem;
 
 public class GameController {
     private Engine engine;
@@ -28,6 +25,8 @@ public class GameController {
     private ObstacleSpawnSystem obstacleSpawnSystem;
     private CleanupSystem cleanupSystem;
 
+    private BackgroundSystem backgroundSystem;
+    private BackgroundEntity background = new BackgroundEntity();
 
 
     public GameController(SpriteBatch batch) {
@@ -43,12 +42,22 @@ public class GameController {
         cleanupSystem = new CleanupSystem(engine);
         fuelSystem = new FuelSystem();
 
-
-        //Add the systems to the engine
+        backgroundSystem = new BackgroundSystem();
+        engine.addSystem(renderSystem);
         engine.addSystem(fuelSystem);
         engine.addSystem(controlSystem);
+        engine.addSystem(backgroundSystem);
+        try {
+            engine.addEntity(background.getEntity());
+
+        } catch (IllegalArgumentException ie) {
+            System.out.println(ie.getMessage());
+        }
+
+
+
+        //Add the systems to the engine
         engine.addSystem(obstacleSpawnSystem);
-        engine.addSystem(renderSystem);
         engine.addSystem(movementSystem);
         engine.addSystem(cleanupSystem);
 
@@ -59,6 +68,7 @@ public class GameController {
         } catch (IllegalArgumentException ie) {
             System.out.println(ie.getMessage());
         }
+
 
     }
 

@@ -31,7 +31,7 @@ public class ObstacleSpawnSystem extends IntervalSystem {
         float obstacleX = MathUtils.random(min,max);
         float obstacleY = GameConfig.FRUSTUM_HEIGHT;
 
-        // if a certain difficultly level do birds:
+        //if a certain difficultly level do birds:
         objectFactory = new BirdFactory(obstacleX, obstacleY);
         Entity bird = objectFactory.create().getEntity();
         engine.addEntity(bird);
@@ -41,9 +41,7 @@ public class ObstacleSpawnSystem extends IntervalSystem {
             objectFactory = new FuelcanFactory(obstacleX, obstacleY);
             Entity fuelcan = objectFactory.create().getEntity();
             engine.addEntity(fuelcan);
-
         }
         counter ++;
-
     }
 }
