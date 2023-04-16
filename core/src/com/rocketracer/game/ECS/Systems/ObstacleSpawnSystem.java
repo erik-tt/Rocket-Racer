@@ -5,9 +5,13 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.systems.IntervalSystem;
 import com.badlogic.gdx.math.MathUtils;
 import com.rocketracer.game.SharedData.GameConfig;
+import com.rocketracer.game.factory.AsteroidFactory;
 import com.rocketracer.game.factory.BirdFactory;
 import com.rocketracer.game.factory.FuelcanFactory;
 import com.rocketracer.game.factory.GameObjectFactory;
+import com.rocketracer.game.factory.PlaneFactory;
+import com.rocketracer.game.factory.SatelliteFactory;
+import com.sun.org.apache.bcel.internal.generic.SWITCH;
 
 public class ObstacleSpawnSystem extends IntervalSystem {
 
@@ -31,10 +35,32 @@ public class ObstacleSpawnSystem extends IntervalSystem {
         float obstacleX = MathUtils.random(min,max);
         float obstacleY = GameConfig.FRUSTUM_HEIGHT;
 
-        //if a certain difficultly level do birds:
-        objectFactory = new BirdFactory(obstacleX, obstacleY);
-        Entity bird = objectFactory.create().getEntity();
-        engine.addEntity(bird);
+        switch (GameConfig.DIFFICULTY) {
+
+            case 1:
+                objectFactory = new BirdFactory(obstacleX, obstacleY);
+                Entity bird = objectFactory.create().getEntity();
+                engine.addEntity(bird);
+                break;
+
+            case 2:
+                objectFactory = new PlaneFactory(obstacleX, obstacleY);
+                Entity plane = objectFactory.create().getEntity();
+                engine.addEntity(plane);
+                break;
+
+            case 3:
+                objectFactory = new SatelliteFactory(obstacleX, obstacleY);
+                Entity satellite = objectFactory.create().getEntity();
+                engine.addEntity(satellite);
+                break;
+
+            case 4:
+                objectFactory = new AsteroidFactory(obstacleX, obstacleY);
+                Entity asteroid = objectFactory.create().getEntity();
+                engine.addEntity(asteroid);
+                break;
+        }
 
         //Spawn fuelcan
         if (counter % fuelSpawnRate == 0) {

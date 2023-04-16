@@ -21,7 +21,7 @@ public class BackgroundEntity implements IGameObject {
         this.spriteComponent = new SpriteComponent(background);
         this.positionComponent = new PositionComponent(0,0);
         this.velocityComponent = new VelocityComponent();
-        this.backgroundComponent = new BackgroundComponent(0,background.getHeight(),5);
+        this.backgroundComponent = new BackgroundComponent(0,background.getHeight(),2);
 
         entity.add(spriteComponent);
         entity.add(positionComponent);

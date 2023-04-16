@@ -13,6 +13,7 @@ public class GameConfig {
     public static final float PIXELS_TO_METRES = 1.0f / PPM; // get the ratio for converting pixels to metres
 
     public static final float OBSTACLE_SPAWN_TIME = 1f;
+    public static int DIFFICULTY = 1;
     private GameConfig() {
 
     }

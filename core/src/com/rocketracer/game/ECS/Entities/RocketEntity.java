@@ -14,6 +14,7 @@ public class RocketEntity {
     private SpriteComponent spriteComponent;
     private PositionComponent positionComponent;
     private FuelComponent fuelComponent;
+    private ScoreComponent scoreComponent;
     private Texture rocket = new Texture(Gdx.files.internal("Rocket1.png"));
 
     private TypeComponent typeComponent;
@@ -25,6 +26,7 @@ public class RocketEntity {
         this.positionComponent = new PositionComponent(12, GameConfig.FRUSTUM_HEIGHT/6);
         this.fuelComponent = new FuelComponent(100);
         this.typeComponent = TypeComponent.ROCKET;
+        this.scoreComponent = new ScoreComponent(0);
 
 
 
@@ -32,7 +34,7 @@ public class RocketEntity {
         entity.add(positionComponent);
         entity.add(fuelComponent);
         entity.add(typeComponent);
-
+        entity.add(scoreComponent);
 
     }
 
