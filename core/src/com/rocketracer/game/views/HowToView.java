@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -34,13 +35,16 @@ public class HowToView implements Screen {
     protected Skin skin;
 
     //private HowToController HowToController;
-
+    private Image image;
     ImageButton backButton;
+
 
     public HowToView(){
 
         Texture texture = new Texture(Gdx.files.internal("backArrow.png"));
         TextureRegionDrawable backArrowDrawable = new TextureRegionDrawable(new TextureRegion(texture));
+        Texture howToPlay = new Texture("HowToPlay.png");
+        image = new Image(howToPlay);
 
         backButton = new ImageButton(backArrowDrawable);
 
@@ -49,7 +53,7 @@ public class HowToView implements Screen {
         batch = new SpriteBatch();
 
         camera = new OrthographicCamera();
-        viewport = new FitViewport(1080/5, 2340/5, camera);
+        viewport = new FitViewport(1440, 2960, camera);
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
         camera.update();
         stage = new Stage(viewport, batch);
@@ -60,14 +64,15 @@ public class HowToView implements Screen {
     public void show() {
         Gdx.input.setInputProcessor(stage);
 
-        backButton.setPosition(0, 100);
-        backButton.setSize(30, 550);
+        backButton.setPosition(30, 2750);
+        backButton.setSize(200, 100);
         backButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new MainView());
 
             }
         });
+        stage.addActor(image);
         stage.addActor(backButton);
     };
 
