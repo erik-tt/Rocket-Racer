@@ -3,8 +3,10 @@ package com.rocketracer.game.ECS.Entities;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.rocketracer.game.ECS.Components.*;
+import com.rocketracer.game.SharedData.GameConfig;
 
 public class RocketEntity {
     // --- Attributes ---
@@ -12,18 +14,27 @@ public class RocketEntity {
     private SpriteComponent spriteComponent;
     private PositionComponent positionComponent;
     private FuelComponent fuelComponent;
+    private ScoreComponent scoreComponent;
     private Texture rocket = new Texture(Gdx.files.internal("Rocket1.png"));
+
+    private TypeComponent typeComponent;
 
     // --- Constructor ---
     public RocketEntity() {
         this.entity = new Entity();
         this.spriteComponent = new SpriteComponent(rocket);
-        this.positionComponent = new PositionComponent(12, 0);
+        this.positionComponent = new PositionComponent(12, GameConfig.FRUSTUM_HEIGHT/6);
         this.fuelComponent = new FuelComponent(100);
+        this.typeComponent = TypeComponent.ROCKET;
+        this.scoreComponent = new ScoreComponent(0);
 
 
         entity.add(spriteComponent);
         entity.add(positionComponent);
+        entity.add(fuelComponent);
+        entity.add(typeComponent);
+        entity.add(scoreComponent);
+
 
     }
 
@@ -32,3 +43,4 @@ public class RocketEntity {
         return entity;
     }
 }
+
