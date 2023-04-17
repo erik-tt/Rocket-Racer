@@ -1,7 +1,6 @@
 package com.rocketracer.game;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class FBPlaceHolder implements FirebaseInterface{
 
@@ -30,6 +29,11 @@ public class FBPlaceHolder implements FirebaseInterface{
 
     }
     @Override
-    public void setListener(GameListener gameListener) {
+    public void setListener(GameJoinListener gameJoinListener) {
     }
+
+    @Override
+    public void setGameListener(GameEventListener listener) {}
+    @Override
+    public void removeGameListener() {}
 }

@@ -1,7 +1,6 @@
 package com.rocketracer.game;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public interface FirebaseInterface {
 
@@ -48,6 +47,9 @@ public interface FirebaseInterface {
      * Sets the listener for the firebase handler.
      * @param listener
      */
-    public void setListener(GameListener listener);
+    public void setListener(GameJoinListener listener);
+
+    public void setGameListener(GameEventListener listener);
+    public void removeGameListener();
 
 }

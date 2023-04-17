@@ -3,19 +3,24 @@ package com.rocketracer.game.Firebase;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.rocketracer.game.FirebaseInterface;
-import com.rocketracer.game.GameListener;
+import com.rocketracer.game.GameEventListener;
+import com.rocketracer.game.GameJoinListener;
 import com.rocketracer.game.SharedData.HighScoreList;
 import com.rocketracer.game.SharedData.LocalData;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -24,10 +29,12 @@ public class FirebaseHandler implements FirebaseInterface {
     // Attributes
     FirebaseUtilities fbUtility = FirebaseUtilities.sharedInstance;
     Random random = new Random();
-    private GameListener gameListener;
+    private GameJoinListener gameJoinListener;
 
     private String logTag = "DocSnippets";
     private DocumentReference currentGameRef;
+    private GameEventListener gameListener;
+    private ListenerRegistration registration;
 
     // Methods
     @Override
@@ -47,17 +54,15 @@ public class FirebaseHandler implements FirebaseInterface {
                     public void onSuccess(DocumentReference documentReference) {
                         currentGameRef = documentReference;
                         // Notify listener
-                        if (gameListener != null) gameListener.onGameLoaded(documentReference.getId(), pin);
+                        if (gameJoinListener != null) gameJoinListener.onGameLoaded(documentReference.getId(), pin);
                         Log.d(logTag, "DocumentSnapshot added with ID: " + documentReference.getId());
                         updatePlayerData(documentReference.getPath(), -1);
-                        updateHighscoreList(LocalData.sharedInstance.playerName, 0);
-                        loadHighScoreList();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        if (gameListener != null) gameListener.onGameError();
+                        if (gameJoinListener != null) gameJoinListener.onGameError();
                         Log.w(logTag, "Error adding document", e);
                     }
                 });
@@ -75,15 +80,15 @@ public class FirebaseHandler implements FirebaseInterface {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         if (task.getResult().size() == 0) {
-                            if (gameListener != null) gameListener.onGameError();
+                            if (gameJoinListener != null) gameJoinListener.onGameError();
                         } else {
                             String id = task.getResult().getDocuments().get(0).getId();
                             currentGameRef = task.getResult().getDocuments().get(0).getReference();
                             updatePlayerData(currentGameRef.getPath(), -1);
 
-                            if (gameListener != null) gameListener.onGameLoaded(id, gamePin);
+                            if (gameJoinListener != null) gameJoinListener.onGameLoaded(id, gamePin);
                         }
-                    } else if (gameListener != null) gameListener.onGameError();
+                    } else if (gameJoinListener != null) gameJoinListener.onGameError();
                 });
     }
 
@@ -93,7 +98,9 @@ public class FirebaseHandler implements FirebaseInterface {
         Map<String, Integer> playerData = new HashMap<>();
         playerData.put(LocalData.sharedInstance.playerName, -1);
         data.put(FIRKeys.playersKey.toString(), playerData);
-        writeData(data, documentPath);
+
+        fbUtility.getDb().document(documentPath)
+                .update("players." + LocalData.sharedInstance.playerName, score);
     }
     @Override
     public void setGameScore(int score) {
@@ -104,7 +111,7 @@ public class FirebaseHandler implements FirebaseInterface {
     @Override
     public void loadHighScoreList() {
         // Fetch highscore list
-        Map<Integer, Object> highscoreList = new HashMap<>();
+        Map<Integer, Map.Entry<String, Integer>> highscoreList = new HashMap<>();
         fbUtility.getDb().collection(FIRKeys.highScoresKey.toString())
             .orderBy(FIRKeys.scoreKey.toString(), Query.Direction.DESCENDING).limit(10)
             .get()
@@ -115,10 +122,12 @@ public class FirebaseHandler implements FirebaseInterface {
                         Map<String, Integer> scoreMap = new HashMap<>();
 
                         scoreMap.put(document.getString(FIRKeys.nameKey.toString()), document.getLong(FIRKeys.scoreKey.toString()).intValue());
-                        highscoreList.put(place, scoreMap);
+                        Map.Entry<String, Integer> entry = scoreMap.entrySet().iterator().next();
+                        highscoreList.put(place, entry);
                         place += 1;
                     }
                     HighScoreList.sharedInstance.setMPHighScores(highscoreList);
+                    HighScoreList.sharedInstance.sendToListener();
                 }
             });
     }
@@ -142,8 +151,49 @@ public class FirebaseHandler implements FirebaseInterface {
                 .update(map);
     }
     @Override
-    public void setListener(GameListener listener) {
+    public void setListener(GameJoinListener listener) {
+        this.gameJoinListener = listener;
+    }
+
+    @Override
+    public void setGameListener(GameEventListener listener) {
+        // Removing any previous listener if it has not already been removed
+        removeGameListener();
+
+        // Setting listener
         this.gameListener = listener;
+
+        final DocumentReference docRef = fbUtility.getDb()
+                .collection("games")
+                .document(listener.getDocID());
+        this.registration = docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (gameListener == null) {
+                    removeGameListener();
+                    return;
+                }
+                if (e != null) {
+                    Log.w("", "Listen failed.", e);
+                    return;
+                }
+
+                if (snapshot != null && snapshot.exists()) {
+                    gameListener.newSnapshotData(snapshot.getData());
+                } else {
+                    Log.d("", "Current data: null");
+                }
+            }
+        });
+    }
+
+    @Override
+    public void removeGameListener() {
+        if (this.registration != null)
+            this.registration.remove();
+        this.gameListener = null;
+        this.registration = null;
     }
 }
 
