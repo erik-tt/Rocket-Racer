@@ -29,12 +29,12 @@ public class RocketEntity {
         this.scoreComponent = new ScoreComponent(0);
 
 
-
         entity.add(spriteComponent);
         entity.add(positionComponent);
         entity.add(fuelComponent);
         entity.add(typeComponent);
         entity.add(scoreComponent);
+
 
     }
 
@@ -43,3 +43,4 @@ public class RocketEntity {
         return entity;
     }
 }
+

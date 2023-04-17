@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rocketracer.game.ECS.Components.ScoreComponent;
+import com.rocketracer.game.SharedData.GameConfig;
 import com.rocketracer.game.controllers.GameController;
 
 public class GameView implements Screen {
@@ -81,11 +82,11 @@ public class GameView implements Screen {
         gameController.getEngine().update(delta);
         ImmutableArray<Entity> scoreArray = gameController.getEngine().getEntitiesFor(Family.one(ScoreComponent.class).get());
         ScoreComponent scoreComponent = scoreArray.get(0).getComponent(ScoreComponent.class);
-        score = scoreComponent.getScore();
-        System.out.println("her " + score);
+        score = scoreComponent.score;
+
 
         batch.begin();
-        font.draw(batch, Integer.toString(score), 25, 60);
+        font.draw(batch, Integer.toString(score), GameConfig.FRUSTUM_WIDTH-7, GameConfig.FRUSTUM_HEIGHT-5);
         batch.end();
     }
 

@@ -28,9 +28,8 @@ public class GameController {
     private CleanupSystem cleanupSystem;
 
     private BackgroundSystem backgroundSystem;
-    private BackgroundEntity background = new BackgroundEntity();
     private ScoreSystem scoreSystem;
-
+    private BackgroundEntity background = new BackgroundEntity();
 
 
     public GameController(SpriteBatch batch) {
@@ -45,6 +44,7 @@ public class GameController {
         obstacleSpawnSystem = new ObstacleSpawnSystem(engine);
         cleanupSystem = new CleanupSystem(engine);
         fuelSystem = new FuelSystem();
+        scoreSystem = new ScoreSystem();
 
 
         backgroundSystem = new BackgroundSystem();
@@ -52,11 +52,13 @@ public class GameController {
         engine.addSystem(fuelSystem);
         engine.addSystem(controlSystem);
         engine.addSystem(backgroundSystem);
+
         scoreSystem = new ScoreSystem();
         engine.addSystem(renderSystem);
         engine.addSystem(fuelSystem);
         engine.addSystem(controlSystem);
         engine.addSystem(scoreSystem);
+
 
         try {
             engine.addEntity(background.getEntity());
