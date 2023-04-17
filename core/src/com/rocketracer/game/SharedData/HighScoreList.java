@@ -1,4 +1,6 @@
 package com.rocketracer.game.SharedData;
+import com.rocketracer.game.HighScoreListener;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,17 +15,18 @@ public class HighScoreList {
     /** Private storing of highscore. */
     // Single player high scores
     private Map<String, Integer> spHighScores = new HashMap<>();
-    private Map<Integer, Object> mpHighScores = new HashMap<>();
+    private Map<Integer, Map.Entry<String, Integer>> mpHighScores = new HashMap<>();
+
+    private HighScoreListener mpHSListener;
 
     // --- Construct - Private (Singleton) ---
     private HighScoreList() {
         // Fetch all highscores from LocalData
-        // Single player
         reloadHighScores();
     }
 
     // --- Methods ---
-    private void reloadHighScores() {
+    public void reloadHighScores() {
         // Fetch all highscores from LocalData
         // Single player
         // Clear map
@@ -69,14 +72,22 @@ public class HighScoreList {
 
 
     // -- Multiplayer --
-    public void setMPHighScores(Map<Integer, Object> highScores) {
+    public void setMPHighScores(Map<Integer, Map.Entry<String, Integer>> highScores) {
         this.mpHighScores = highScores;
-        printMPHighScoreList();
     }
-    public Map<Integer, Object> getMPHighScores() { return this.mpHighScores; }
+    public void listenMPHighScores(HighScoreListener highScoreListener) {
+        this.mpHSListener = highScoreListener;
+        reloadHighScores();
+    }
+    public void sendToListener() {
+        if (this.mpHSListener != null)
+            this.mpHSListener.onHighScoreFetched(this.mpHighScores);
+        this.mpHSListener = null;
+    }
+
     public void printMPHighScoreList() {
         System.out.println("High-score List:");
-        for (Map.Entry<Integer, Object> entry : mpHighScores.entrySet()) {
+        for (Map.Entry<Integer, Map.Entry<String, Integer>> entry : mpHighScores.entrySet()) {
             System.out.println(entry.getKey() + " : " + entry.getValue());
         }
     }
