@@ -1,23 +1,24 @@
 package com.rocketracer.game.views;
 
-import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.rocketracer.game.ECS.Entities.FuelcanEntity;
-import com.rocketracer.game.ECS.Entities.RocketEntity;
-import com.rocketracer.game.ECS.Systems.ControlSystem;
-import com.rocketracer.game.ECS.Systems.FuelSystem;
-import com.rocketracer.game.ECS.Systems.MovementSystem;
-import com.rocketracer.game.ECS.Systems.RenderSystem;
+import com.rocketracer.game.ECS.Components.ScoreComponent;
+import com.rocketracer.game.SharedData.GameConfig;
 import com.rocketracer.game.controllers.GameController;
 
 public class GameView implements Screen {
@@ -30,8 +31,10 @@ public class GameView implements Screen {
     private Camera camera;
     private TextureAtlas atlas;
     protected Skin skin;
+    BitmapFont font;
 
     private GameController gameController;
+    int score;
 
     // Navigation
     /** For back button */
@@ -56,6 +59,9 @@ public class GameView implements Screen {
         camera.update();
         stage = new Stage(viewport, batch);
         gameController = new GameController(batch);
+        font = new BitmapFont(Gdx.files.internal("default.fnt"),Gdx.files.internal("default.png"),false);
+        font.getData().setScale(0.20f );
+
         //this.prevScreen = prevScreen;
 
     }
@@ -71,8 +77,18 @@ public class GameView implements Screen {
         //Clear the screen
         Gdx.gl.glClearColor(0, 0, .16f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+
         gameController.getEngine().update(delta);
 
+        ImmutableArray<Entity> scoreArray = gameController.getEngine().getEntitiesFor(Family.one(ScoreComponent.class).get());
+        ScoreComponent scoreComponent = scoreArray.get(0).getComponent(ScoreComponent.class);
+        score = scoreComponent.score;
+
+
+        batch.begin();
+        font.draw(batch, Integer.toString(score), GameConfig.FRUSTUM_WIDTH-7, GameConfig.FRUSTUM_HEIGHT-5);
+        batch.end();
     }
 
     @Override

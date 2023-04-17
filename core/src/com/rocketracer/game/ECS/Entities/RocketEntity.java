@@ -14,6 +14,7 @@ public class RocketEntity {
     private SpriteComponent spriteComponent;
     private PositionComponent positionComponent;
     private FuelComponent fuelComponent;
+    private ScoreComponent scoreComponent;
     private Texture rocket = new Texture(Gdx.files.internal("Rocket1.png"));
     private CollisionComponent collisionComponent;
     private BoundsComponent boundsComponent;
@@ -33,12 +34,20 @@ public class RocketEntity {
         boundsComponent.bounds.radius = spriteComponent.sprite.getWidth()/GameConfig.PPM;
 */
 
+        this.scoreComponent = new ScoreComponent(0);
+
+
         entity.add(spriteComponent);
         entity.add(positionComponent);
-        entity.add(typeComponent);
         entity.add(fuelComponent);
+        entity.add(typeComponent);
+
+
         entity.add(collisionComponent);
         entity.add(boundsComponent);
+
+        entity.add(scoreComponent);
+
     }
 
     // --- Methods ---
@@ -46,3 +55,4 @@ public class RocketEntity {
         return entity;
     }
 }
+
