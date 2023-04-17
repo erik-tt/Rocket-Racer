@@ -2,12 +2,11 @@ package com.rocketracer.game.views;
 
 import com.badlogic.gdx.Game;
 import com.rocketracer.game.FirebaseInterface;
+import com.rocketracer.game.SharedData.LocalData;
 
 public class RocketRacer extends Game {
-	FirebaseInterface FBIHandler;
-
 	public RocketRacer(FirebaseInterface FBIHandler) {
-		this.FBIHandler = FBIHandler;
+		LocalData.sharedInstance.setFBIHandler(FBIHandler);
 	}
 
 	@Override
