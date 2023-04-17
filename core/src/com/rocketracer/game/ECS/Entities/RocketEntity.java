@@ -15,7 +15,8 @@ public class RocketEntity {
     private PositionComponent positionComponent;
     private FuelComponent fuelComponent;
     private Texture rocket = new Texture(Gdx.files.internal("Rocket1.png"));
-
+    private CollisionComponent collisionComponent;
+    private BoundsComponent boundsComponent;
     private TypeComponent typeComponent;
 
     // --- Constructor ---
@@ -25,13 +26,19 @@ public class RocketEntity {
         this.positionComponent = new PositionComponent(12, GameConfig.FRUSTUM_HEIGHT/6);
         this.fuelComponent = new FuelComponent(100);
         this.typeComponent = TypeComponent.ROCKET;
-
-
+        this.collisionComponent = new CollisionComponent();
+        this.boundsComponent = new BoundsComponent();
+       /* boundsComponent.bounds.x = positionComponent.x;
+        boundsComponent.bounds.y = positionComponent.y + spriteComponent.sprite.getHeight()/GameConfig.PPM;
+        boundsComponent.bounds.radius = spriteComponent.sprite.getWidth()/GameConfig.PPM;
+*/
 
         entity.add(spriteComponent);
         entity.add(positionComponent);
         entity.add(typeComponent);
-
+        entity.add(fuelComponent);
+        entity.add(collisionComponent);
+        entity.add(boundsComponent);
     }
 
     // --- Methods ---

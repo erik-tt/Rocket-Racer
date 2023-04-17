@@ -46,6 +46,7 @@ public class GameController {
             public void hitObstacle() {
                 System.out.println("Bird hit");
 
+
             }};
         collisionSystem = new CollisionSystem(listener);
 

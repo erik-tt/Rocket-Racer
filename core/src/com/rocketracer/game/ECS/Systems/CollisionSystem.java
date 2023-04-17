@@ -9,7 +9,9 @@ import com.badlogic.gdx.math.Intersector;
 import com.rocketracer.game.ECS.Components.BoundsComponent;
 import com.rocketracer.game.ECS.Components.CollisionComponent;
 import com.rocketracer.game.ECS.Components.FuelComponent;
+import com.rocketracer.game.ECS.Components.PositionComponent;
 import com.rocketracer.game.ECS.Components.TypeComponent;
+import com.rocketracer.game.SharedData.GameConfig;
 
 /**
  * Deals with the collisions in the game.
@@ -46,10 +48,22 @@ public class CollisionSystem extends EntitySystem {
         for(Entity playerEntity: players) {
             for(Entity obstacleEntity: obstacles) {
 
+
                 CollisionComponent collisionComponent = ComponentMapper.getFor(CollisionComponent.class).get(obstacleEntity);
+                BoundsComponent playerBounds = ComponentMapper.getFor(BoundsComponent.class).get(playerEntity);
+                BoundsComponent obstacleBounds = ComponentMapper.getFor(BoundsComponent.class).get(obstacleEntity);
+                PositionComponent playerPosition = ComponentMapper.getFor(PositionComponent.class).get(playerEntity);
+                PositionComponent obstaclePosition = ComponentMapper.getFor(PositionComponent.class).get(obstacleEntity);
+                playerBounds.bounds.x = playerPosition.x;
+                playerBounds.bounds.y = playerPosition.y-25/2 ;
+                playerBounds.bounds.radius = 25;
+                obstacleBounds.bounds.x = obstaclePosition.x;
+                obstacleBounds.bounds.y = obstaclePosition.y;
+                obstacleBounds.bounds.radius = 7;
                 if (collisionComponent.hit) {
                     continue;
                 }
+
 
                 if (checkCollision(playerEntity, obstacleEntity)) {
                     collisionComponent.hit = true;
