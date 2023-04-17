@@ -1,6 +1,7 @@
 package com.rocketracer.game.SharedData;
 import com.badlogic.gdx.Preferences;
 import com.rocketracer.game.FirebaseInterface;
+import com.rocketracer.game.views.MainView;
 
 import java.util.Map;
 
@@ -21,6 +22,9 @@ public class LocalData {
     // TODO: Player name, should update based on players input
     /** Players name. */
     public String playerName = "Player";
+
+    // View refs
+    private MainView mainView;
 
     // --- Construct - Private (Singleton) ---
     private LocalData() {
@@ -70,6 +74,15 @@ public class LocalData {
             prefs.putInteger(name, score);
             prefs.flush();
         }
+    }
+
+    public void setMainView(MainView mainView) {
+        if (this.mainView == null) this.mainView = mainView;
+    }
+    public MainView getMainView() {
+        if (this.mainView == null)
+            this.mainView = new MainView();
+        return this.mainView;
     }
 
     // Set firebase handler
