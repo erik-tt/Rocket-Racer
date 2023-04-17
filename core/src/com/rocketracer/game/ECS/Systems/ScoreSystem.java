@@ -37,17 +37,14 @@ import com.rocketracer.game.views.GameView;
             if (score.getScore() < 1000) {
                 GameConfig.DIFFICULTY = 1;
             }
-            if (score.getScore() > 1000 && score.getScore() < 2000) {
+            if (score.getScore() > 2000 && score.getScore() < 3000) {
                 GameConfig.DIFFICULTY = 2;
             }
-            if (score.getScore() > 2000 && score.getScore() < 3000) {
+            if (score.getScore() > 3000 && score.getScore() < 4000) {
                 GameConfig.DIFFICULTY = 3;
             }
-            if (score.getScore() > 3000 && score.getScore() < 4000) {
+            if (score.getScore() > 5000) {
                 GameConfig.DIFFICULTY = 4;
-            }
-            if (score.getScore() > 4000) {
-                GameConfig.DIFFICULTY = 5;
             }
 
             //This needs to be checked later that works

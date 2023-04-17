@@ -20,6 +20,7 @@ public class ObstacleSpawnSystem extends IntervalSystem {
 
     private int counter = 0;
     private int fuelSpawnRate = 23;
+    private int obstacleSpawnRate = 1;
 
 
     public ObstacleSpawnSystem(Engine engine) {
@@ -44,18 +45,25 @@ public class ObstacleSpawnSystem extends IntervalSystem {
                 break;
 
             case 2:
-                objectFactory = new PlaneFactory(obstacleX, obstacleY);
-                Entity plane = objectFactory.create().getEntity();
-                engine.addEntity(plane);
+                obstacleSpawnRate = 2;
+                if (counter % 2 == 0) {
+                    objectFactory = new PlaneFactory(obstacleX, obstacleY);
+                    Entity plane = objectFactory.create().getEntity();
+                    engine.addEntity(plane);
+                }
                 break;
 
             case 3:
-                objectFactory = new SatelliteFactory(obstacleX, obstacleY);
-                Entity satellite = objectFactory.create().getEntity();
-                engine.addEntity(satellite);
+                obstacleSpawnRate = 2;
+                if (counter % 2 == 0) {
+                    objectFactory = new SatelliteFactory(obstacleX, obstacleY);
+                    Entity satellite = objectFactory.create().getEntity();
+                    engine.addEntity(satellite);
+                }
                 break;
 
             case 4:
+                obstacleSpawnRate = 1;
                 objectFactory = new AsteroidFactory(obstacleX, obstacleY);
                 Entity asteroid = objectFactory.create().getEntity();
                 engine.addEntity(asteroid);
