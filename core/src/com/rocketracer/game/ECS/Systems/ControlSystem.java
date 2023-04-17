@@ -52,12 +52,12 @@ public class ControlSystem extends IteratingSystem {
 
             //Need to offset the position because of the sprite width
             if (position.x + spriteWidth.x/2 < touchInput.x) {
-                position.updateX(10 * deltaTime);
+                position.updateX(15 * deltaTime);
             }
 
             //Need to offset the position because of the sprite width
             if (position.x + spriteWidth.x/2 > touchInput.x) {
-                position.updateX(-10 * deltaTime);
+                position.updateX(-15 * deltaTime);
             }
         }
     }

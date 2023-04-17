@@ -12,6 +12,7 @@ import com.badlogic.gdx.Gdx;
 import com.rocketracer.game.ECS.Components.FuelComponent;
 import com.rocketracer.game.ECS.Components.ScoreComponent;
 import com.rocketracer.game.ECS.Components.TypeComponent;
+import com.rocketracer.game.SharedData.GameConfig;
 import com.rocketracer.game.views.GameOverView;
 import com.rocketracer.game.views.GameView;
 
@@ -32,8 +33,21 @@ import com.rocketracer.game.views.GameView;
         protected void processEntity(Entity entity, float deltaTime) {
             ScoreComponent score = sMapper.get(entity);
 
-            //This needs to be checked later that works
+            //Used to change the difficulty so it progresses.
+            if (score.getScore() < 1000) {
+                GameConfig.DIFFICULTY = 1;
+            }
+            if (score.getScore() > 2000 && score.getScore() < 3000) {
+                GameConfig.DIFFICULTY = 2;
+            }
+            if (score.getScore() > 3000 && score.getScore() < 4000) {
+                GameConfig.DIFFICULTY = 3;
+            }
+            if (score.getScore() > 5000) {
+                GameConfig.DIFFICULTY = 4;
+            }
 
+            //This needs to be checked later that works
             if(!score.gameOver){
                 score.score += Math.round(Gdx.graphics.getDeltaTime() *30);
             }

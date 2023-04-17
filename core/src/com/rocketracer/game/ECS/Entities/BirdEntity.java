@@ -21,9 +21,12 @@ public class BirdEntity implements IGameObject {
     private VelocityComponent velocityComponent;
     private CleanupComponent cleanupComponent;
     private SpecificTypeComponent obstacleTypeComponent;
+
     private CollisionComponent collisionComponent;
     private BoundsComponent boundsComponent;
-    private Texture bird = new Texture(Gdx.files.internal("bird.png"));
+
+    private Texture bird = new Texture(Gdx.files.internal("flyingBird.png"));
+
 
     public BirdEntity(float x, float y){
 

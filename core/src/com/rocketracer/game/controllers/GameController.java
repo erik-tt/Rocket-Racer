@@ -16,6 +16,7 @@ import com.rocketracer.game.ECS.Systems.RenderSystem;
 import com.rocketracer.game.ECS.Systems.BackgroundSystem;
 import com.rocketracer.game.ECS.Systems.ScoreSystem;
 
+
 public class GameController {
     private Engine engine;
     private RenderSystem renderSystem;
@@ -49,12 +50,20 @@ public class GameController {
         fuelSystem = new FuelSystem();
         scoreSystem = new ScoreSystem();
 
+
         backgroundSystem = new BackgroundSystem();
         engine.addSystem(renderSystem);
         engine.addSystem(fuelSystem);
         engine.addSystem(controlSystem);
         engine.addSystem(backgroundSystem);
+
+        scoreSystem = new ScoreSystem();
+        engine.addSystem(renderSystem);
+        engine.addSystem(fuelSystem);
+        engine.addSystem(controlSystem);
         engine.addSystem(scoreSystem);
+
+
         try {
             engine.addEntity(background.getEntity());
 
