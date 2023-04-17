@@ -3,7 +3,9 @@ package com.rocketracer.game.ECS.Entities;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.Gdx;
+import com.rocketracer.game.ECS.Components.BoundsCircleComponent;
 import com.rocketracer.game.ECS.Components.CleanupComponent;
+import com.rocketracer.game.ECS.Components.CollisionComponent;
 import com.rocketracer.game.ECS.Components.PositionComponent;
 import com.rocketracer.game.ECS.Components.SpecificTypeComponent;
 import com.rocketracer.game.ECS.Components.SpriteComponent;
@@ -21,6 +23,8 @@ public class AsteroidEntity implements IGameObject {
     private CleanupComponent cleanupComponent;
     private TypeComponent typeComponent;
     private SpecificTypeComponent obstacleTypeComponent;
+    private CollisionComponent collisionComponent;
+    private BoundsCircleComponent boundsCircleComponent;
     private Texture asteroid = new Texture(Gdx.files.internal("asteroid.png"));
 
     public AsteroidEntity(float x, float y){
@@ -31,6 +35,8 @@ public class AsteroidEntity implements IGameObject {
         this.cleanupComponent = new CleanupComponent();
         this.typeComponent = TypeComponent.OBSTACLE;
         this.obstacleTypeComponent = SpecificTypeComponent.ASTEROID;
+        this.collisionComponent = new CollisionComponent();
+        this.boundsCircleComponent = new BoundsCircleComponent(Math.round(spriteComponent.sprite.getWidth()/4));
 
 
         entity.add(spriteComponent);
@@ -39,6 +45,8 @@ public class AsteroidEntity implements IGameObject {
         entity.add(cleanupComponent);
         entity.add(typeComponent);
         entity.add(obstacleTypeComponent);
+        entity.add(collisionComponent);
+        entity.add(boundsCircleComponent);
 
     }
 

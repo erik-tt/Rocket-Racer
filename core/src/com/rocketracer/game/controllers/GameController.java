@@ -3,8 +3,11 @@ package com.rocketracer.game.controllers;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.rocketracer.game.ECS.Entities.BackgroundEntity;
+
 import com.rocketracer.game.ECS.Entities.RocketEntity;
 import com.rocketracer.game.ECS.Systems.CleanupSystem;
+import com.rocketracer.game.ECS.Systems.CollisionListener;
+import com.rocketracer.game.ECS.Systems.CollisionSystem;
 import com.rocketracer.game.ECS.Systems.ControlSystem;
 import com.rocketracer.game.ECS.Systems.FuelSystem;
 import com.rocketracer.game.ECS.Systems.MovementSystem;
@@ -26,6 +29,7 @@ public class GameController {
     private FuelSystem fuelSystem;
     private ObstacleSpawnSystem obstacleSpawnSystem;
     private CleanupSystem cleanupSystem;
+    private CollisionSystem collisionSystem;
 
     private BackgroundSystem backgroundSystem;
     private ScoreSystem scoreSystem;
@@ -68,11 +72,21 @@ public class GameController {
         }
 
 
+        CollisionListener listener = new CollisionListener() {
+            @Override
+            public void hitObstacle() {
+                System.out.println("Bird hit");
+
+
+            }};
+        collisionSystem = new CollisionSystem(listener);
+
 
         //Add the systems to the engine
         engine.addSystem(obstacleSpawnSystem);
         engine.addSystem(movementSystem);
         engine.addSystem(cleanupSystem);
+        engine.addSystem(collisionSystem);
 
         //Add the player entity to the engine
         try {

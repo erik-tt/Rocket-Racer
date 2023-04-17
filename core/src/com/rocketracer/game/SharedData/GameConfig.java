@@ -14,6 +14,7 @@ public class GameConfig {
 
     public static final float OBSTACLE_SPAWN_TIME = 0.7f;
     public static int DIFFICULTY = 1;
+
     private GameConfig() {
 
     }
