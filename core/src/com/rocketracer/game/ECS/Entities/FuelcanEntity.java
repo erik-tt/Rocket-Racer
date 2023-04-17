@@ -19,7 +19,7 @@ public class FuelcanEntity implements IGameObject {
     private VelocityComponent velocityComponent;
     private TypeComponent typeComponent;
     private SpecificTypeComponent obstacleTypeComponent;
-    private Texture fuelcan = new Texture(Gdx.files.internal("fuelcan.png"));
+    private Texture fuelcan = new Texture(Gdx.files.internal("fuelcan2.png"));
 
     // --- Constructor ---
     public FuelcanEntity(float x, float y) {

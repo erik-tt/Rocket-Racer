@@ -28,6 +28,7 @@ public class RocketEntity {
         this.typeComponent = TypeComponent.ROCKET;
         this.scoreComponent = new ScoreComponent(0);
 
+
         entity.add(spriteComponent);
         entity.add(positionComponent);
         entity.add(fuelComponent);

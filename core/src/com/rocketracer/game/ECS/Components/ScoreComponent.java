@@ -15,6 +15,9 @@ public class ScoreComponent implements Component{
                 this.gameOver = false;
         }
 
+        public int getScore() {
+                return score;
+        }
 
 
 }
