@@ -3,10 +3,10 @@ import com.badlogic.ashley.core.Component;
 
 public class FuelComponent implements Component {
     // --- Attributes ---
-    public float fuelLevel;
+    public int fuelLevel;
 
     // --- Constructor ---
-    public FuelComponent(float fuelLevel) {
+    public FuelComponent(int fuelLevel) {
 
         this.fuelLevel = fuelLevel;
 

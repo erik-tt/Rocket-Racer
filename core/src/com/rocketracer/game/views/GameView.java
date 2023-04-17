@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rocketracer.game.ECS.Components.BoundsCircleComponent;
 import com.rocketracer.game.ECS.Components.BoundsRectangleComponent;
+import com.rocketracer.game.ECS.Components.FuelComponent;
 import com.rocketracer.game.ECS.Components.ScoreComponent;
 import com.rocketracer.game.SharedData.GameConfig;
 import com.rocketracer.game.controllers.GameController;
@@ -34,12 +35,15 @@ public class GameView implements Screen {
     private TextureAtlas atlas;
     protected Skin skin;
     BitmapFont font;
+    BitmapFont fontFuelLevel;
 
     private GameController gameController;
-    int score;
+    private int score;
 
+    private int fuelLevel;
 
     ShapeRenderer shape;
+
 
     // Navigation
     /** For back button */
@@ -68,8 +72,14 @@ public class GameView implements Screen {
         shape = new ShapeRenderer();
 
         gameController = new GameController(batch);
-        font = new BitmapFont(Gdx.files.internal("default.fnt"),Gdx.files.internal("default.png"),false);
+        font = skin.getFont("font");
         font.getData().setScale(0.20f );
+        fontFuelLevel = new BitmapFont();
+        fontFuelLevel.getData().setScale(0.20f );
+
+
+
+
 
 
         //this.prevScreen = prevScreen;
@@ -87,13 +97,6 @@ public class GameView implements Screen {
         //Clear the screen
         Gdx.gl.glClearColor(0, 0, .16f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        shape.begin(ShapeRenderer.ShapeType.Filled);
-        shape.setColor(Color.RED);
-
-        //TODO: connect with fuelcomponent
-        shape.rect(Gdx.graphics.getWidth()-30, 300, 30, 100 );
-        shape.end();
-
 
         gameController.getEngine().update(delta);
 
@@ -102,8 +105,22 @@ public class GameView implements Screen {
         score = scoreComponent.score;
 
 
+        ImmutableArray<Entity> fuelArray = gameController.getEngine().getEntitiesFor(Family.one(FuelComponent.class).get());
+        FuelComponent fuelComponent = fuelArray.get(0).getComponent(FuelComponent.class);
+        fuelLevel = fuelComponent.fuelLevel;
+
         batch.begin();
         font.draw(batch, Integer.toString(score), GameConfig.FRUSTUM_WIDTH-7, GameConfig.FRUSTUM_HEIGHT-5);
+        batch.end();
+        shape.setProjectionMatrix(camera.projection);
+        shape.begin(ShapeRenderer.ShapeType.Filled);
+        shape.setColor(Color.DARK_GRAY);
+        shape.rect(GameConfig.FRUSTUM_WIDTH-50, -190, 120, 25);
+        shape.end();
+
+
+        batch.begin();
+        fontFuelLevel.draw(batch, "Fuellevel: " + Integer.toString(fuelLevel), GameConfig.FRUSTUM_WIDTH-18, 9);
         batch.end();
 
     }
