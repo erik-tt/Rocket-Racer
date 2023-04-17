@@ -11,6 +11,7 @@ import com.rocketracer.game.ECS.Systems.MovementSystem;
 import com.rocketracer.game.ECS.Systems.ObstacleSpawnSystem;
 import com.rocketracer.game.ECS.Systems.RenderSystem;
 import com.rocketracer.game.ECS.Systems.BackgroundSystem;
+import com.rocketracer.game.ECS.Systems.ScoreSystem;
 
 public class GameController {
     private Engine engine;
@@ -26,6 +27,7 @@ public class GameController {
     private CleanupSystem cleanupSystem;
 
     private BackgroundSystem backgroundSystem;
+    private ScoreSystem scoreSystem;
     private BackgroundEntity background = new BackgroundEntity();
 
 
@@ -41,12 +43,14 @@ public class GameController {
         obstacleSpawnSystem = new ObstacleSpawnSystem(engine);
         cleanupSystem = new CleanupSystem(engine);
         fuelSystem = new FuelSystem();
+        scoreSystem = new ScoreSystem();
 
         backgroundSystem = new BackgroundSystem();
         engine.addSystem(renderSystem);
         engine.addSystem(fuelSystem);
         engine.addSystem(controlSystem);
         engine.addSystem(backgroundSystem);
+        engine.addSystem(scoreSystem);
         try {
             engine.addEntity(background.getEntity());
 
