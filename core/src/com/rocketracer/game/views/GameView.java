@@ -12,11 +12,13 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.rocketracer.game.ECS.Components.BoundsCircleComponent;
+import com.rocketracer.game.ECS.Components.BoundsRectangleComponent;
 import com.rocketracer.game.ECS.Components.ScoreComponent;
 import com.rocketracer.game.SharedData.GameConfig;
 import com.rocketracer.game.controllers.GameController;
@@ -35,6 +37,7 @@ public class GameView implements Screen {
 
     private GameController gameController;
     int score;
+
 
     // Navigation
     /** For back button */
@@ -89,6 +92,7 @@ public class GameView implements Screen {
         batch.begin();
         font.draw(batch, Integer.toString(score), GameConfig.FRUSTUM_WIDTH-7, GameConfig.FRUSTUM_HEIGHT-5);
         batch.end();
+
     }
 
     @Override
