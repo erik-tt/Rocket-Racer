@@ -23,16 +23,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.rocketracer.game.ECS.Entities.SoundEntity;
-import com.rocketracer.game.ECS.Systems.AudioSystem;
 import com.rocketracer.game.GameEventListener;
 import com.rocketracer.game.SharedData.LocalData;
-import com.rocketracer.game.controllers.MainController;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import jdk.vm.ci.meta.Local;
 
 public class GameOverView implements Screen, GameEventListener {
     private SpriteBatch batch;
@@ -44,7 +39,6 @@ public class GameOverView implements Screen, GameEventListener {
     private Table gameOverTable, scoreTable;
     private Integer score;
     Label.LabelStyle font;
-    ImageButton backButton;
 
     private String docID;
     private Map<String, Long> mpScores = new HashMap<>();
@@ -58,11 +52,9 @@ public class GameOverView implements Screen, GameEventListener {
         this.score = score;
         atlas = new TextureAtlas("CustomSkin.atlas");
         skin = new Skin(Gdx.files.internal("CustomSkin.json"), atlas);
-
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         viewport = new FitViewport(1080/5, 2340/5, camera);
-
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
         camera.update();
 
@@ -75,6 +67,8 @@ public class GameOverView implements Screen, GameEventListener {
     public void show() {
         //Stage should control input:
         Gdx.input.setInputProcessor(stage);
+
+        // Setting multiplayer handling and score table
         if (docID != null) {
             this.scoreTable = new Table(skin);
             scoreTable.setFillParent(true);
@@ -85,36 +79,38 @@ public class GameOverView implements Screen, GameEventListener {
 
         //Set table to fill stage
         gameOverTable.setFillParent(true);
+
+        // Label
         Label gameOverLabel = new Label("GAME OVER - Score: " + this.score.toString(), font);
+
+        // Main page nav
+        TextButton mainPageButton = new TextButton("Go to mainpage", skin);
+        mainPageButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                ((Game) Gdx.app.getApplicationListener())
+                        .setScreen(LocalData.sharedInstance.getMainView());
+            }
+        });
+
+        // Play again nav
         TextButton playAgainButton = new TextButton("Play new singleplayer-game", skin);
         playAgainButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ((Game)Gdx.app.getApplicationListener()).setScreen(new GameView(false, null));
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new GameView(false, null));
             }
         });
 
-        Texture texture = new Texture(Gdx.files.internal("backArrow.png"));
-        TextureRegionDrawable backArrowDrawable = new TextureRegionDrawable(new TextureRegion(texture));
-        backButton = new ImageButton(backArrowDrawable);
-
-        backButton.setPosition(0, 100);
-        backButton.setSize(30, 550);
-        backButton.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new MainView());
-                // Removing game listener if the game was MP
-                if (docID != null) LocalData.sharedInstance.getFBIHandler().removeGameListener();
-            }
-        });
-
+        // Table handling
         gameOverTable.add(gameOverLabel).expandX();
         gameOverTable.row();
         gameOverTable.add(playAgainButton).expandX().padTop(10f);
+        gameOverTable.row();
+        gameOverTable.add(mainPageButton).expandX().padTop(10f);
 
         //Add table to stage
         stage.addActor(gameOverTable);
-        stage.addActor(backButton);
     }
 
     @Override
@@ -133,11 +129,16 @@ public class GameOverView implements Screen, GameEventListener {
     }
 
     @Override
-    public void pause() {}
+    public void pause() {
+    }
+
     @Override
-    public void resume() {}
+    public void resume() {
+    }
+
     @Override
-    public void hide() {}
+    public void hide() {
+    }
 
     @Override
     public void dispose() {
@@ -147,7 +148,9 @@ public class GameOverView implements Screen, GameEventListener {
     }
 
     @Override
-    public String getDocID() { return this.docID; }
+    public String getDocID() {
+        return docID;
+    }
 
     @Override
     public void newSnapshotData(Map<String, Object> data) {
@@ -166,7 +169,7 @@ public class GameOverView implements Screen, GameEventListener {
 
         if (scoreTable != null) {
             scoreTable.clear();
-            for (int i = 0; i < 7; i++) {
+            for (int i = 0; i < 10; i++) {
                 scoreTable.row();
                 scoreTable.add("  ");
             }
@@ -179,3 +182,4 @@ public class GameOverView implements Screen, GameEventListener {
         }
     }
 }
+

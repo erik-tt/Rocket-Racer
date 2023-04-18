@@ -42,20 +42,24 @@ public class MainView implements Screen, GameJoinListener {
     private Image image;
     private TextField textField;
 
+    private String playerTag;
+
     AudioSystem audioSystem;
 
     private boolean hasInit = false;
 
     // -- Construct --
-    public MainView()
+    public MainView(String playerTag)
     {
+        this.playerTag = playerTag;
         LocalData.sharedInstance.setMainView(this);
         soundEntity = new SoundEntity();
         Texture background = new Texture("frontpage.png");
         image = new Image(background);
         atlas = new TextureAtlas("CustomSkin.atlas");
         skin = new Skin(Gdx.files.internal("CustomSkin.json"), atlas);
-        textField = new TextField("", skin);
+        textField = new TextField(playerTag, skin);
+        System.out.println(playerTag);
         textField.setAlignment(1);
 
         batch = new SpriteBatch();
@@ -131,12 +135,7 @@ public class MainView implements Screen, GameJoinListener {
                 }
     
             });
-            /*mainController.addButton("Exit", skin, mainTable).addListener(new ClickListener(){
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    Gdx.app.exit();
-                }
-            });*/
+
             hasInit = true;
         }
         

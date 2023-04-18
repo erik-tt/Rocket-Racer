@@ -23,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rocketracer.game.HighScoreListener;
+import com.rocketracer.game.SharedData.GameConfig;
 import com.rocketracer.game.SharedData.HighScoreList;
 import com.rocketracer.game.SharedData.LocalData;
 
@@ -80,7 +81,7 @@ public class HighscoreView implements Screen, HighScoreListener {
 
         highscoreTable.add(highscoreLabel).expandX();
 
-        backButton.setPosition(0, 100);
+        backButton.setPosition(0, GameConfig.FRUSTUM_HEIGHT+130);
         backButton.setSize(30, 550);
         backButton.addListener(new ClickListener(){
             @Override

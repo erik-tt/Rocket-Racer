@@ -1,89 +1,117 @@
 package com.rocketracer.game.views;
 
-
-import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.rocketracer.game.ECS.Systems.ControlSystem;
-import com.rocketracer.game.ECS.Systems.MovementSystem;
-import com.rocketracer.game.ECS.Systems.RenderSystem;
-import com.rocketracer.game.SharedData.LocalData;
-import com.rocketracer.game.controllers.GameController;
+import com.rocketracer.game.ECS.Entities.SoundEntity;
+import com.rocketracer.game.ECS.Systems.AudioSystem;
+import com.rocketracer.game.controllers.MainController;
 
-public class HowToView implements Screen {
+public class StartView implements Screen {
+
+
     private SpriteBatch batch;
     protected Stage stage;
     private Viewport viewport;
     private Camera camera;
     private TextureAtlas atlas;
     protected Skin skin;
+    private Table startTable;
+    Label.LabelStyle font;
+    private TextField textField;
+
     private Image image;
 
-    ImageButton backButton;
 
-
-    public HowToView(){
-
-        Texture texture = new Texture(Gdx.files.internal("backArrow.png"));
-        TextureRegionDrawable backArrowDrawable = new TextureRegionDrawable(new TextureRegion(texture));
-        Texture howToPlay = new Texture("HowToPlay.png");
-        image = new Image(howToPlay);
-
-        backButton = new ImageButton(backArrowDrawable);
+    public StartView()
+    {
 
         atlas = new TextureAtlas("CustomSkin.atlas");
         skin = new Skin(Gdx.files.internal("CustomSkin.json"), atlas);
+        Texture background = new Texture("frontpage.png");
+        image = new Image(background);
         batch = new SpriteBatch();
-
         camera = new OrthographicCamera();
-        viewport = new FitViewport(1440, 2960, camera);
+        viewport = new FitViewport(1080/5, 2340/5, camera);
+
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
         camera.update();
+        textField = new TextField("", skin);
+        textField.setAlignment(1);
+
+
         stage = new Stage(viewport, batch);
+        startTable = new Table();
+        font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
+
+
     }
 
     @Override
     public void show() {
+        //Stage should control input:
         Gdx.input.setInputProcessor(stage);
 
-        backButton.setPosition(30, 2750);
-        backButton.setSize(200, 100);
-        backButton.addListener(new ClickListener() {
+        //Set table to fill stage
+        startTable.setFillParent(true);
+
+            startTable.row();
+            startTable.add(new Label("Write your player-name", skin));
+            startTable.row();
+            startTable.add(textField);
+            startTable.row();
+        TextButton button = new TextButton("Go to main-page", skin);
+        button.addListener(new ClickListener(){
+            @Override
             public void clicked(InputEvent event, float x, float y) {
-                ((Game)Gdx.app.getApplicationListener())
-                        .setScreen(LocalData.sharedInstance.getMainView());
+                if(!textField.getText().isEmpty()){
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new MainView(textField.getText()));}
+                else if(startTable.getRows() < 4){
+                    startTable.row();
+                    startTable.add(new Label("You must fill in player-name ", skin)).fillX();
+                }
 
-            }
-        });
-        stage.addActor(image);
-        stage.addActor(backButton);
-    };
+            }});
 
+
+        startTable.add(button);
+        startTable.row();
+
+
+
+        //Add table to stage
+            stage.addActor(image);
+        stage.addActor(startTable);
+
+
+
+    }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, .16f, 1);
+        Gdx.gl.glClearColor(.1f, .12f, .16f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act();
         stage.draw();
-
 
     }
 
@@ -92,7 +120,6 @@ public class HowToView implements Screen {
         viewport.update(width, height);
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
         camera.update();
-
     }
 
     @Override
@@ -112,9 +139,9 @@ public class HowToView implements Screen {
 
     @Override
     public void dispose() {
-        stage.dispose();
         skin.dispose();
         atlas.dispose();
         batch.dispose();
+
     }
 }

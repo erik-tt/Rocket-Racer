@@ -81,7 +81,7 @@ public class LocalData {
     }
     public MainView getMainView() {
         if (this.mainView == null)
-            this.mainView = new MainView();
+            this.mainView = new MainView(playerName);
         return this.mainView;
     }
 
