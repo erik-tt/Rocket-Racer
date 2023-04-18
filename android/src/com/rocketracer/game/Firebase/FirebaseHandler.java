@@ -62,7 +62,7 @@ public class FirebaseHandler implements FirebaseInterface {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        if (gameJoinListener != null) gameJoinListener.onGameError();
+                        if (gameJoinListener != null) gameJoinListener.onGameError("Error creating game. Pleas check your connection and try again.");
                         Log.w(logTag, "Error adding document", e);
                     }
                 });
@@ -74,21 +74,47 @@ public class FirebaseHandler implements FirebaseInterface {
     public void joinGame(Integer gamePin, String name) {
         currentGameRef = null;
 
-        fbUtility.getDb().collection(FIRKeys.gamesKey.toString())
+        fbUtility.getDb()
+                .collection(FIRKeys.gamesKey.toString())
                 .whereEqualTo(FIRKeys.pinKey.toString(), gamePin)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         if (task.getResult().size() == 0) {
-                            if (gameJoinListener != null) gameJoinListener.onGameError();
+                            if (gameJoinListener != null) gameJoinListener.onGameError("Could not find game");
                         } else {
                             String id = task.getResult().getDocuments().get(0).getId();
+
+                            Map<String, Object> data = task.getResult().getDocuments().get(0).getData();
+                            try {
+                                Long state = (Long) data.get("state");
+                                if (state == 1) {
+                                    if (gameJoinListener != null) gameJoinListener.onGameError("Game has started.");
+                                    System.out.println("Game already started...");
+                                    return;
+                                }
+                            } catch (Exception e) {
+                                if (gameJoinListener != null) gameJoinListener.onGameError("Error joining game.");
+                                return;
+                            }
+
+                            try {
+                                Map<String, Object> playersMap = (Map<String, Object>) data.get("players");
+                                // Iterate through the playersMap and get player names
+                                if (playersMap.containsKey(LocalData.sharedInstance.playerName)) {
+                                    if (gameJoinListener != null) gameJoinListener.onGameError("Username taken.");
+                                    return;
+                                }
+                            } catch (Exception e) {
+                                System.out.println(e.getMessage());
+                            }
+
                             currentGameRef = task.getResult().getDocuments().get(0).getReference();
                             updatePlayerData(currentGameRef.getPath(), -1);
 
                             if (gameJoinListener != null) gameJoinListener.onGameLoaded(id, gamePin);
                         }
-                    } else if (gameJoinListener != null) gameJoinListener.onGameError();
+                    } else if (gameJoinListener != null) gameJoinListener.onGameError("Error in matchmaking. Please check your connection and try again.");
                 });
     }
 
@@ -158,6 +184,7 @@ public class FirebaseHandler implements FirebaseInterface {
     @Override
     public void setGameListener(GameEventListener listener) {
         // Removing any previous listener if it has not already been removed
+        if (listener.getDocID() == null) return;
         removeGameListener();
 
         // Setting listener

@@ -95,7 +95,7 @@ public class MainView implements Screen, GameJoinListener {
             mainController.addButton("Play single-player game", skin, mainTable).addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    ((Game)Gdx.app.getApplicationListener()).setScreen(new GameView());
+                    ((Game)Gdx.app.getApplicationListener()).setScreen(new GameView(false, null));
                 }
             });
 
@@ -103,6 +103,7 @@ public class MainView implements Screen, GameJoinListener {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     if (textField.getText().length() == 0) return;
+                    Gdx.input.setOnscreenKeyboardVisible(false);
                     LocalData.sharedInstance.playerName = textField.getText();
                     System.out.println("Creating multiplayer game");
                     System.out.println("PIN: " + LocalData.sharedInstance.getFBIHandler().createGame());
@@ -112,6 +113,7 @@ public class MainView implements Screen, GameJoinListener {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     if (textField.getText().length() == 0) return;
+                    Gdx.input.setOnscreenKeyboardVisible(false);
                     LocalData.sharedInstance.playerName = textField.getText();
                     mainController.showJoinGameDialog(skin, stage);
                 }
@@ -197,9 +199,9 @@ public class MainView implements Screen, GameJoinListener {
     }
 
     @Override
-    public void onGameError() {
+    public void onGameError(String message) {
         System.out.println("Game error");
-        mainController.showDialog(skin, stage, "Error: Online Game", "Error joining online game. Please try again.");
+        mainController.showDialog(skin, stage, "Error: Online Game", message);
     }
     
 }
