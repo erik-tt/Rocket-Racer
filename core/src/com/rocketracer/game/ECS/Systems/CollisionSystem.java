@@ -81,8 +81,13 @@ public class CollisionSystem extends EntitySystem {
                         fuelComponent.fuelLevel -= 20;
 
                     }
-                    if(obstacleType == SpecificTypeComponent.FUELCAN){
-                        fuelComponent.fuelLevel += 10;
+                    if(obstacleType == SpecificTypeComponent.FUELCAN && fuelComponent.fuelLevel < fuelComponent.maxFuelLevel){
+                        if(fuelComponent.fuelLevel == 95){
+                            fuelComponent.fuelLevel = fuelComponent.maxFuelLevel;
+                        }
+                        else {
+                            fuelComponent.fuelLevel += 10;
+                        }
 
                     }
                     listener.hitObstacle();
