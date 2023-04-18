@@ -103,7 +103,8 @@ public class GameOverView implements Screen, GameEventListener {
         backButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new MainView());
-
+                // Removing game listener if the game was MP
+                if (docID != null) LocalData.sharedInstance.getFBIHandler().removeGameListener();
             }
         });
 
