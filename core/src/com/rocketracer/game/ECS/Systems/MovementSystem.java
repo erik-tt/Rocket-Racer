@@ -49,9 +49,9 @@ public class MovementSystem extends IteratingSystem {
                 int sign = random.nextInt(2);
                 //Chose the X sign
                 if (sign == 1) {
-                    speedX = random.nextInt(10);
+                    speedX = random(0, 10);
                 } else {
-                    speedX = -random.nextInt(10);
+                    speedX = -random(0,10);
                     sprite.sprite.flip(true, false);
                 }
             }
@@ -59,16 +59,16 @@ public class MovementSystem extends IteratingSystem {
             //Determine special case speed:
             switch (type) {
                 case BIRD:
-                    speedY = random.nextInt(30);
+                    speedY = random(10,30);
                     break;
                 case PLANE:
-                    speedY = random(0, 10);
+                    speedY = random(5, 30);
                     break;
                 case SATELLITE:
-                    speedY = random(0, 40);
+                    speedY = random(20, 40);
                     break;
                 case ASTEROID:
-                    speedY = random(10, 50);
+                    speedY = random(30, 70);
                     break;
                 case FUELCAN:
                     speedY = 5;
