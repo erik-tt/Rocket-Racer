@@ -32,12 +32,13 @@ public class GameOverView implements Screen {
     private TextureAtlas atlas;
     protected Skin skin;
     private Table gameOverTable;
+    private Integer score;
     Label.LabelStyle font;
 
 
-    public GameOverView()
+    public GameOverView(Integer score)
     {
-
+        this.score = score;
         atlas = new TextureAtlas("CustomSkin.atlas");
         skin = new Skin(Gdx.files.internal("CustomSkin.json"), atlas);
 
@@ -52,8 +53,6 @@ public class GameOverView implements Screen {
         stage = new Stage(viewport, batch);
         gameOverTable = new Table();
         font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
-
-
     }
 
     @Override
@@ -63,7 +62,7 @@ public class GameOverView implements Screen {
 
         //Set table to fill stage
         gameOverTable.setFillParent(true);
-        Label gameOverLabel = new Label("GAME OVER", font);
+        Label gameOverLabel = new Label("GAME OVER - Score: " + this.score.toString(), font);
         Label playAgainLabel = new Label("Click to Play Again", font);
 
         gameOverTable.add(gameOverLabel).expandX();
@@ -73,9 +72,6 @@ public class GameOverView implements Screen {
 
         //Add table to stage
         stage.addActor(gameOverTable);
-
-
-
     }
 
     @Override

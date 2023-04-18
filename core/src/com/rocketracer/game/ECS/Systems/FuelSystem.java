@@ -29,13 +29,12 @@ public class FuelSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-
         FuelComponent fuel = fMapper.get(entity);
         ScoreComponent score = sMapper.get(entity);
 
 
         if(fuel.fuelLevel<= 0) {
-            ((Game)Gdx.app.getApplicationListener()).setScreen(new GameOverView());
+            ((Game)Gdx.app.getApplicationListener()).setScreen(new GameOverView(score.score));
             score.gameOver = true;
         }
 
