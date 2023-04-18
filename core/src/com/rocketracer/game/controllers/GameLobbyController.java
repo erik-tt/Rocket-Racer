@@ -50,6 +50,7 @@ public class GameLobbyController implements GameEventListener {
         if (this.docID == null) return;
         HashMap<String, Object> gameState = new HashMap<>();
         gameState.put("state", 1);
+        gameState.put("pin", -1); // Ensuring pin won't be reallocated
         LocalData.sharedInstance.getFBIHandler()
                 .writeData(gameState, "games/" + this.docID);
     }
