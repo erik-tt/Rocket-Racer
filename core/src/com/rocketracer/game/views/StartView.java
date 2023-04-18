@@ -84,7 +84,9 @@ public class StartView implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if(!textField.getText().isEmpty()){
-                ((Game)Gdx.app.getApplicationListener()).setScreen(new MainView(textField.getText()));}
+                    ((Game)Gdx.app.getApplicationListener()).setScreen(new MainView(textField.getText()));
+                    Gdx.input.setOnscreenKeyboardVisible(false);
+                }
                 else if(startTable.getRows() < 4){
                     startTable.row();
                     startTable.add(new Label("You must fill in player-name ", skin)).fillX();
