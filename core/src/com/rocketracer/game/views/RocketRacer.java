@@ -11,7 +11,7 @@ public class RocketRacer extends Game {
 
 	@Override
 	public void create () {
-		setScreen(new MainView());
+		setScreen(new StartView());
 	}
 
 	@Override
