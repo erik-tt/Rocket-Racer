@@ -54,11 +54,7 @@ public class GameView implements Screen {
 
 
     // --- Constructor ---
-    /**
-     * Constructor.
-     * @param prevScreen The screen to return to when the back button is pressed.
-     */
-    public GameView(/*Screen prevScreen*/) {
+    public GameView() {
         atlas = new TextureAtlas("CustomSkin.atlas");
         skin = new Skin(Gdx.files.internal("CustomSkin.json"), atlas);
         batch = new SpriteBatch();
@@ -73,16 +69,9 @@ public class GameView implements Screen {
 
         gameController = new GameController(batch);
         font = skin.getFont("font");
-        font.getData().setScale(0.20f );
+        font.getData().setScale(0.20f);
         fontFuelLevel = new BitmapFont();
-        fontFuelLevel.getData().setScale(0.20f );
-
-
-
-
-
-
-        //this.prevScreen = prevScreen;
+        fontFuelLevel.getData().setScale(0.20f);
 
     }
 
