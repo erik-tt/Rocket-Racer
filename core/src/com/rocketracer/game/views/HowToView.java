@@ -24,6 +24,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rocketracer.game.ECS.Systems.ControlSystem;
 import com.rocketracer.game.ECS.Systems.MovementSystem;
 import com.rocketracer.game.ECS.Systems.RenderSystem;
+import com.rocketracer.game.SharedData.LocalData;
 import com.rocketracer.game.controllers.GameController;
 
 public class HowToView implements Screen {
@@ -33,9 +34,8 @@ public class HowToView implements Screen {
     private Camera camera;
     private TextureAtlas atlas;
     protected Skin skin;
-
-    //private HowToController HowToController;
     private Image image;
+
     ImageButton backButton;
 
 
@@ -57,7 +57,6 @@ public class HowToView implements Screen {
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
         camera.update();
         stage = new Stage(viewport, batch);
-        //howToController = new HowToController();
     }
 
     @Override
@@ -68,7 +67,8 @@ public class HowToView implements Screen {
         backButton.setSize(200, 100);
         backButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new MainView());
+                ((Game)Gdx.app.getApplicationListener())
+                        .setScreen(LocalData.sharedInstance.getMainView());
 
             }
         });
