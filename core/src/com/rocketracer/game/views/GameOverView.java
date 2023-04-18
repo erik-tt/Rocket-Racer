@@ -171,7 +171,9 @@ public class GameOverView implements Screen, GameEventListener {
             }
             for (Map.Entry<String, Long> entry : mpScores.entrySet()) {
                 scoreTable.row();
-                scoreTable.add(entry.getKey() + ": " + entry.getValue().toString());
+                Long score = entry.getValue();
+                String scoreStr = (score != -1) ? score.toString() : "Waiting...";
+                scoreTable.add(entry.getKey() + ": " + scoreStr);
             }
         }
     }
