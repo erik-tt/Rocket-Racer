@@ -3,8 +3,11 @@ package com.rocketracer.game.ECS.Entities;
 
 import com.badlogic.ashley.core.Entity;
 import com.rocketracer.game.ECS.Components.BackgroundComponent;
+import com.rocketracer.game.ECS.Components.BoundsCircleComponent;
+import com.rocketracer.game.ECS.Components.BoundsRectangleComponent;
 import com.rocketracer.game.ECS.Components.CleanupComponent;
 import com.rocketracer.game.ECS.Components.CollisionComponent;
+import com.rocketracer.game.ECS.Components.FuelComponent;
 import com.rocketracer.game.ECS.Components.PositionComponent;
 import com.rocketracer.game.ECS.Components.SpecificTypeComponent;
 import com.rocketracer.game.ECS.Components.TypeComponent;
@@ -26,6 +29,10 @@ public class TestEntity {
     private CollisionComponent collisionComponent;
     private CleanupComponent cleanupComponent;
     private SpecificTypeComponent obstacleTypeComponent;
+    private BoundsCircleComponent boundsCircleComponent;
+    private BoundsRectangleComponent boundsRectangleComponent;
+
+    private FuelComponent fuelComponent;
 
     public TestEntity() {
         this.entity = new Entity();
@@ -60,15 +67,29 @@ public class TestEntity {
         this.collisionComponent = collisionComponent;
         entity.add(collisionComponent);
     }
+    public void setFuelComponent(FuelComponent fuelComponent) {
+        this.fuelComponent = fuelComponent;
+        entity.add(fuelComponent);
+    }
     public void setBackgroundComponent(BackgroundComponent backgroundComponent) {
         this.backgroundComponent = backgroundComponent;
         entity.add(backgroundComponent);
+    }
+    public void setBoundsCircleComponent(BoundsCircleComponent boundsCircleComponent) {
+        this.boundsCircleComponent = boundsCircleComponent;
+        entity.add(boundsCircleComponent);
+    }
+    public void setBoundsRectangleComponent(BoundsRectangleComponent boundsRectangleComponent) {
+        this.boundsRectangleComponent = boundsRectangleComponent;
+        entity.add(boundsRectangleComponent);
     }
 
     //Getters
     public TypeComponent getTypeComponent() {
         return typeComponent;
     }
+    public BoundsRectangleComponent getBoundsRectangleComponent() { return boundsRectangleComponent; }
+    public BoundsCircleComponent getBoundsCircleComponent() {return boundsCircleComponent; }
 
     public PositionComponent getPositionComponent() {
         return positionComponent;
@@ -90,6 +111,7 @@ public class TestEntity {
     public SpecificTypeComponent getSpecificTypeComponent() {
         return obstacleTypeComponent;
     }
+    public FuelComponent getFuelComponent() { return fuelComponent; }
 
     public Entity getEntity() {
         return entity;
