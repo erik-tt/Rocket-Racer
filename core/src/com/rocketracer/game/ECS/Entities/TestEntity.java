@@ -1,0 +1,59 @@
+package com.rocketracer.game.ECS.Entities;
+
+
+import com.badlogic.ashley.core.Entity;
+import com.rocketracer.game.ECS.Components.CleanupComponent;
+import com.rocketracer.game.ECS.Components.PositionComponent;
+import com.rocketracer.game.ECS.Components.SpecificTypeComponent;
+import com.rocketracer.game.ECS.Components.SpriteComponent;
+import com.rocketracer.game.ECS.Components.TypeComponent;
+import com.rocketracer.game.ECS.Components.VelocityComponent;
+
+public class TestEntity {
+    /***
+     * A class only used for testing purposes since it does not use LibGDX, we do not have to
+     * use the headless backend for testing business logic. By doing this we can more
+     * thoroughly test the systems that use entities.
+     */
+
+    private TypeComponent typeComponent;
+    private Entity entity;
+    private SpriteComponent spriteComponent;
+    private PositionComponent positionComponent;
+    private VelocityComponent velocityComponent;
+    private CleanupComponent cleanupComponent;
+    private SpecificTypeComponent obstacleTypeComponent;
+
+    public TestEntity() {
+        this.entity = new Entity();
+    }
+
+    public void setTypeComponent(TypeComponent typeComponent) {
+        this.typeComponent = typeComponent;
+        entity.add(typeComponent);
+    }
+
+    public void setSpriteComponent(SpriteComponent spriteComponent) {
+        this.spriteComponent = spriteComponent;
+    }
+
+    public void setPositionComponent(PositionComponent positionComponent) {
+        this.positionComponent = positionComponent;
+        entity.add(positionComponent);
+    }
+
+    public void setVelocityComponent(VelocityComponent velocityComponent) {
+        this.velocityComponent = velocityComponent;
+        entity.add(velocityComponent);
+    }
+
+    public void setObstacleTypeComponent(SpecificTypeComponent obstacleTypeComponent) {
+        this.obstacleTypeComponent = obstacleTypeComponent;
+        entity.add(obstacleTypeComponent);
+    }
+
+    public void setCleanupComponent(CleanupComponent cleanupComponent) {
+        this.cleanupComponent = cleanupComponent;
+        entity.add(cleanupComponent);
+    }
+}
