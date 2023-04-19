@@ -24,8 +24,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.rocketracer.game.ECS.Components.BoundsCircleComponent;
-import com.rocketracer.game.ECS.Components.BoundsRectangleComponent;
 import com.rocketracer.game.ECS.Components.FuelComponent;
 import com.rocketracer.game.ECS.Components.ScoreComponent;
 import com.rocketracer.game.SharedData.GameConfig;
@@ -63,7 +61,7 @@ public class GameView implements Screen {
 
 
     // --- Constructor ---
-    public GameView() {
+    public GameView(Boolean mpGame, String docID) {
         atlas = new TextureAtlas("CustomSkin.atlas");
         skin = new Skin(Gdx.files.internal("CustomSkin.json"), atlas);
         batch = new SpriteBatch();
@@ -79,12 +77,11 @@ public class GameView implements Screen {
 
         shape = new ShapeRenderer();
 
-        gameController = new GameController(batch);
+        gameController = new GameController(batch, mpGame, docID);
         font = skin.getFont("font");
         font.getData().setScale(0.20f);
         fontFuelLevel = new BitmapFont();
         fontFuelLevel.getData().setScale(0.20f);
-
     }
 
     @Override
@@ -135,9 +132,9 @@ public class GameView implements Screen {
         batch.begin();
         fontFuelLevel.draw(batch, "Fuellevel: " + Integer.toString(fuelLevel), GameConfig.FRUSTUM_WIDTH-18, 9);
         batch.end();
+
         stage.act(delta);
         stage.draw();
-
     }
 
     @Override
