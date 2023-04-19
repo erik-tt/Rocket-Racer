@@ -18,7 +18,6 @@ public class TestEntity {
 
     private TypeComponent typeComponent;
     private Entity entity;
-    private SpriteComponent spriteComponent;
     private PositionComponent positionComponent;
     private VelocityComponent velocityComponent;
     private CleanupComponent cleanupComponent;
@@ -31,10 +30,6 @@ public class TestEntity {
     public void setTypeComponent(TypeComponent typeComponent) {
         this.typeComponent = typeComponent;
         entity.add(typeComponent);
-    }
-
-    public void setSpriteComponent(SpriteComponent spriteComponent) {
-        this.spriteComponent = spriteComponent;
     }
 
     public void setPositionComponent(PositionComponent positionComponent) {
@@ -55,5 +50,9 @@ public class TestEntity {
     public void setCleanupComponent(CleanupComponent cleanupComponent) {
         this.cleanupComponent = cleanupComponent;
         entity.add(cleanupComponent);
+    }
+
+    public Entity getEntity() {
+        return entity;
     }
 }

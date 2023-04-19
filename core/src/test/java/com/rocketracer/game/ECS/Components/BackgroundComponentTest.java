@@ -15,8 +15,10 @@ public class BackgroundComponentTest {
 
     @Test
     public void testBackgroundPos() {
-        assertEquals(10.0, backgroundComponent.y1);
-        assertEquals(20.0, backgroundComponent.y2);
+        float y1 = 10;
+        float y2 = 20;
+        assertEquals(y1, backgroundComponent.y1);
+        assertEquals(y2, backgroundComponent.y2);
     }
 
     @Test

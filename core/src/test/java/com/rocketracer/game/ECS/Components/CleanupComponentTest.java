@@ -10,4 +10,6 @@ public class CleanupComponentTest {
     public void initCleanupTest() {
         assertNotNull(new CleanupComponent());
     }
+
 }
+

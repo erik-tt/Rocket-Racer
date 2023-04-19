@@ -33,7 +33,7 @@ public class CollisionSystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         CollisionComponent cComponent = collisionComponent.get(entity);
-        Entity collisionEntity = cComponent.collidedComponent;
+        Entity collisionEntity = cComponent.collidedEntity;
 
         if (collisionEntity != null) {
             TypeComponent type = collisionEntity.getComponent(TypeComponent.class);
@@ -54,7 +54,7 @@ public class CollisionSystem extends IteratingSystem {
                 System.out.println("Type does not exist");
             }
             //Reset after the collision is handled.
-            cComponent.collidedComponent = null;
+            cComponent.collidedEntity = null;
 
         }
 
