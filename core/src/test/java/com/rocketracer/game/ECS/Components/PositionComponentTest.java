@@ -7,14 +7,12 @@ import org.junit.Test;
 
 public class PositionComponentTest {
     private PositionComponent positionComponent;
-    private float testX;
-    private float testY;
+    private float testX = 30;
+    private float testY = 20;
 
     @Before
     public void setup() {
         positionComponent = new PositionComponent(30,20);
-        float testX = 30;
-        float testY = 20;
     }
 
     @Test

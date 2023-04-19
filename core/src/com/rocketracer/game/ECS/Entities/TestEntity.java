@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Entity;
 import com.rocketracer.game.ECS.Components.CleanupComponent;
 import com.rocketracer.game.ECS.Components.PositionComponent;
 import com.rocketracer.game.ECS.Components.SpecificTypeComponent;
-import com.rocketracer.game.ECS.Components.SpriteComponent;
 import com.rocketracer.game.ECS.Components.TypeComponent;
 import com.rocketracer.game.ECS.Components.VelocityComponent;
 
@@ -27,6 +26,7 @@ public class TestEntity {
         this.entity = new Entity();
     }
 
+    //Setters
     public void setTypeComponent(TypeComponent typeComponent) {
         this.typeComponent = typeComponent;
         entity.add(typeComponent);
@@ -42,7 +42,7 @@ public class TestEntity {
         entity.add(velocityComponent);
     }
 
-    public void setObstacleTypeComponent(SpecificTypeComponent obstacleTypeComponent) {
+    public void setSpecificTypeComponent(SpecificTypeComponent obstacleTypeComponent) {
         this.obstacleTypeComponent = obstacleTypeComponent;
         entity.add(obstacleTypeComponent);
     }
@@ -50,6 +50,27 @@ public class TestEntity {
     public void setCleanupComponent(CleanupComponent cleanupComponent) {
         this.cleanupComponent = cleanupComponent;
         entity.add(cleanupComponent);
+    }
+
+    //Getters
+    public TypeComponent getTypeComponent() {
+        return typeComponent;
+    }
+
+    public PositionComponent getPositionComponent() {
+        return positionComponent;
+    }
+
+    public VelocityComponent getVelocityComponent() {
+        return velocityComponent;
+    }
+
+    public CleanupComponent getCleanupComponent() {
+        return cleanupComponent;
+    }
+
+    public SpecificTypeComponent getSpecificTypeComponent() {
+        return obstacleTypeComponent;
     }
 
     public Entity getEntity() {
