@@ -39,6 +39,7 @@ public class ControlSystem extends IteratingSystem {
 
         if (Gdx.input.isTouched() && type == TypeComponent.ROCKET) {
 
+
             //Get the touch input from user.
             Vector3 touchInput = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touchInput);
@@ -51,12 +52,12 @@ public class ControlSystem extends IteratingSystem {
 
             //Need to offset the position because of the sprite width
             if (position.x + spriteWidth.x/2 < touchInput.x) {
-                position.updateX(10 * deltaTime);
+                position.updateX(15 * deltaTime);
             }
 
             //Need to offset the position because of the sprite width
             if (position.x + spriteWidth.x/2 > touchInput.x) {
-                position.updateX(-10 * deltaTime);
+                position.updateX(-15 * deltaTime);
             }
         }
     }

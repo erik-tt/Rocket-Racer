@@ -1,92 +1,90 @@
 package com.rocketracer.game.views;
 
+
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.rocketracer.game.ECS.Systems.ControlSystem;
+import com.rocketracer.game.ECS.Systems.MovementSystem;
+import com.rocketracer.game.ECS.Systems.RenderSystem;
 import com.rocketracer.game.SharedData.LocalData;
+import com.rocketracer.game.controllers.GameController;
 
-public class GameOverView implements Screen {
+public class HowToView implements Screen {
     private SpriteBatch batch;
     protected Stage stage;
     private Viewport viewport;
     private Camera camera;
     private TextureAtlas atlas;
     protected Skin skin;
-    private Table gameOverTable;
-    private Integer score;
-    Label.LabelStyle font;
+    private Image image;
+
+    ImageButton backButton;
 
 
-    public GameOverView(Integer score) {
-        this.score = score;
+    public HowToView(){
+
+        Texture texture = new Texture(Gdx.files.internal("backArrow.png"));
+        TextureRegionDrawable backArrowDrawable = new TextureRegionDrawable(new TextureRegion(texture));
+        Texture howToPlay = new Texture("HowToPlay.png");
+        image = new Image(howToPlay);
+
+        backButton = new ImageButton(backArrowDrawable);
+
         atlas = new TextureAtlas("CustomSkin.atlas");
         skin = new Skin(Gdx.files.internal("CustomSkin.json"), atlas);
         batch = new SpriteBatch();
+
         camera = new OrthographicCamera();
-        viewport = new FitViewport(1080/5, 2340/5, camera);
+        viewport = new FitViewport(1440, 2960, camera);
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
         camera.update();
         stage = new Stage(viewport, batch);
-        gameOverTable = new Table();
-        font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
     }
 
     @Override
     public void show() {
-        //Stage should control input:
         Gdx.input.setInputProcessor(stage);
-        //Set table to fill stage
-        gameOverTable.setFillParent(true);
-        Label gameOverLabel = new Label("GAME OVER - Score: " + this.score.toString(), font);
-        TextButton playAgainButton = new TextButton("Click to Play Again", skin);
-        TextButton mainPageButton = new TextButton("Go to mainpage", skin);
-        playAgainButton.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                ((Game)Gdx.app.getApplicationListener()).setScreen(new GameView());
-            }
-        });
 
-        mainPageButton.addListener(new ClickListener(){
-            @Override
+        backButton.setPosition(30, 2750);
+        backButton.setSize(200, 100);
+        backButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 ((Game)Gdx.app.getApplicationListener())
                         .setScreen(LocalData.sharedInstance.getMainView());
+
             }
         });
+        stage.addActor(image);
+        stage.addActor(backButton);
+    };
 
-        gameOverTable.add(gameOverLabel).expandX();
-        gameOverTable.row();
-        gameOverTable.add(playAgainButton).expandX().padTop(10f);
-        gameOverTable.row();
-        gameOverTable.add(mainPageButton).expandX().padTop(10f);
-
-        //Add table to stage
-        stage.addActor(gameOverTable);
-    }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(.1f, .12f, .16f, 1);
+        Gdx.gl.glClearColor(0, 0, .16f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act();
         stage.draw();
+
+
     }
 
     @Override
@@ -94,6 +92,7 @@ public class GameOverView implements Screen {
         viewport.update(width, height);
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
         camera.update();
+
     }
 
     @Override
@@ -113,9 +112,9 @@ public class GameOverView implements Screen {
 
     @Override
     public void dispose() {
+        stage.dispose();
         skin.dispose();
         atlas.dispose();
         batch.dispose();
-
     }
 }

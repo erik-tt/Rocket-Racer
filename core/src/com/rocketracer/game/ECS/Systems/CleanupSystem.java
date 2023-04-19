@@ -14,14 +14,16 @@ public class CleanupSystem extends IteratingSystem {
 
     private ComponentMapper<CleanupComponent> cleanupMapper;
     private ComponentMapper<PositionComponent> positionMapper;
+    private ComponentMapper<CollisionComponent> collisionMapper;
 
     private Engine engine;
 
     public CleanupSystem(Engine engine) {
-        super(Family.all(CleanupComponent.class, PositionComponent.class).get());
+        super(Family.all(CleanupComponent.class, PositionComponent.class, CollisionComponent.class).get());
 
         cleanupMapper = ComponentMapper.getFor(CleanupComponent.class);
         positionMapper = ComponentMapper.getFor(PositionComponent.class);
+        collisionMapper = ComponentMapper.getFor(CollisionComponent.class);
         this.engine = engine;
     }
 
@@ -29,8 +31,9 @@ public class CleanupSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
          CleanupComponent cleanupObject = cleanupMapper.get(entity);
          PositionComponent position = positionMapper.get(entity);
+         CollisionComponent collision = collisionMapper.get(entity);
 
-         if(position.y < 0) {
+         if(position.y < 0 || collision.hit ) {
              engine.removeEntity(entity);
          }
 
