@@ -56,11 +56,7 @@ public class GameController {
         engine.addSystem(fuelSystem);
         engine.addSystem(controlSystem);
         engine.addSystem(backgroundSystem);
-
         scoreSystem = new ScoreSystem();
-        engine.addSystem(renderSystem);
-        engine.addSystem(fuelSystem);
-        engine.addSystem(controlSystem);
         engine.addSystem(scoreSystem);
 
 

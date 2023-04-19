@@ -21,7 +21,7 @@ public class FuelComponentTest {
     }
     @Test
     public void testFuelLevel() {
-        float fuelLevel = 100;
+        int fuelLevel = 100;
         assertEquals(fuelLevel, fuelComponent.fuelLevel);
     }
 }

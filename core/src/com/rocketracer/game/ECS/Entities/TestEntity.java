@@ -2,11 +2,14 @@ package com.rocketracer.game.ECS.Entities;
 
 
 import com.badlogic.ashley.core.Entity;
+import com.rocketracer.game.ECS.Components.BackgroundComponent;
 import com.rocketracer.game.ECS.Components.CleanupComponent;
+import com.rocketracer.game.ECS.Components.CollisionComponent;
 import com.rocketracer.game.ECS.Components.PositionComponent;
 import com.rocketracer.game.ECS.Components.SpecificTypeComponent;
 import com.rocketracer.game.ECS.Components.TypeComponent;
 import com.rocketracer.game.ECS.Components.VelocityComponent;
+import com.rocketracer.game.ECS.Systems.BackgroundSystem;
 
 public class TestEntity {
     /***
@@ -17,8 +20,10 @@ public class TestEntity {
 
     private TypeComponent typeComponent;
     private Entity entity;
+    private BackgroundComponent backgroundComponent;
     private PositionComponent positionComponent;
     private VelocityComponent velocityComponent;
+    private CollisionComponent collisionComponent;
     private CleanupComponent cleanupComponent;
     private SpecificTypeComponent obstacleTypeComponent;
 
@@ -51,6 +56,14 @@ public class TestEntity {
         this.cleanupComponent = cleanupComponent;
         entity.add(cleanupComponent);
     }
+    public void setCollisionComponent(CollisionComponent collisionComponent) {
+        this.collisionComponent = collisionComponent;
+        entity.add(collisionComponent);
+    }
+    public void setBackgroundComponent(BackgroundComponent backgroundComponent) {
+        this.backgroundComponent = backgroundComponent;
+        entity.add(backgroundComponent);
+    }
 
     //Getters
     public TypeComponent getTypeComponent() {
@@ -65,9 +78,14 @@ public class TestEntity {
         return velocityComponent;
     }
 
+    public CollisionComponent getCollisionComponent() {
+        return collisionComponent;
+    }
+
     public CleanupComponent getCleanupComponent() {
         return cleanupComponent;
     }
+    public BackgroundComponent getBackgroundComponent() { return backgroundComponent; }
 
     public SpecificTypeComponent getSpecificTypeComponent() {
         return obstacleTypeComponent;
