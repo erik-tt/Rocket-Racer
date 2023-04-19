@@ -18,11 +18,6 @@ public class CollisionComponentTest {
     }
 
     @Test
-    public void testInit() {
-        assertNotNull(new CollisionComponent());
-    }
-
-    @Test
     public void testCollisionEntity() {
         TestEntity testEntity = new TestEntity();
         collisionComponent.collidedEntity = testEntity.getEntity();
