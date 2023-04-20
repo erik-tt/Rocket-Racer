@@ -1,6 +1,5 @@
 package com.rocketracer.game.ECS.Components;
 import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.Gdx;
 
 public class PositionComponent implements Component {
     // --- Attributes ---

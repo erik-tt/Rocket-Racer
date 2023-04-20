@@ -1,7 +1,5 @@
 package com.rocketracer.game.views;
 
-
-import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -21,11 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.rocketracer.game.ECS.Systems.ControlSystem;
-import com.rocketracer.game.ECS.Systems.MovementSystem;
-import com.rocketracer.game.ECS.Systems.RenderSystem;
 import com.rocketracer.game.SharedData.LocalData;
-import com.rocketracer.game.controllers.GameController;
 
 public class HowToView implements Screen {
     private SpriteBatch batch;

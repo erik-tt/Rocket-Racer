@@ -7,9 +7,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.rocketracer.game.ECS.Components.PositionComponent;
 import com.rocketracer.game.ECS.Components.SpecificTypeComponent;
 import com.rocketracer.game.ECS.Components.SpriteComponent;
-import com.rocketracer.game.ECS.Components.TypeComponent;
 import com.rocketracer.game.ECS.Components.VelocityComponent;
-import com.rocketracer.game.SharedData.GameConfig;
 
 import static com.badlogic.gdx.math.MathUtils.random;
 

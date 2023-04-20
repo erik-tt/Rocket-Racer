@@ -11,7 +11,6 @@ import com.rocketracer.game.factory.FuelcanFactory;
 import com.rocketracer.game.factory.GameObjectFactory;
 import com.rocketracer.game.factory.PlaneFactory;
 import com.rocketracer.game.factory.SatelliteFactory;
-import com.sun.org.apache.bcel.internal.generic.SWITCH;
 
 public class ObstacleSpawnSystem extends IntervalSystem {
 

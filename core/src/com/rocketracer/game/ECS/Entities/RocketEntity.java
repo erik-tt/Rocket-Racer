@@ -1,9 +1,7 @@
 package com.rocketracer.game.ECS.Entities;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.rocketracer.game.ECS.Components.*;
 import com.rocketracer.game.SharedData.GameConfig;
@@ -28,7 +26,7 @@ public class RocketEntity {
         this.fuelComponent = new FuelComponent(100);
         this.typeComponent = TypeComponent.ROCKET;
         this.collisionComponent = new CollisionComponent();
-        this.boundsRectangleComponent = new BoundsRectangleComponent(rocket.getWidth()/7, rocket.getHeight()*2/3);
+        this.boundsRectangleComponent = new BoundsRectangleComponent(Math.round(spriteComponent.sprite.getWidth()/7), Math.round(spriteComponent.texture.getHeight()*2/3));
 
         this.scoreComponent = new ScoreComponent(0);
 

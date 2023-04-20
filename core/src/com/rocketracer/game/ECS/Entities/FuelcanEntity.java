@@ -35,7 +35,7 @@ public class FuelcanEntity implements IGameObject {
         this.typeComponent = TypeComponent.POWERUP;
         this.obstacleTypeComponent = SpecificTypeComponent.FUELCAN;
         this.collisionComponent = new CollisionComponent();
-        this.boundsRectangleComponent = new BoundsRectangleComponent(fuelcan.getWidth(), fuelcan.getHeight());
+        this.boundsRectangleComponent = new BoundsRectangleComponent(Math.round(spriteComponent.sprite.getWidth()), Math.round(spriteComponent.sprite.getHeight()));
 
 
         entity.add(spriteComponent);
