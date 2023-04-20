@@ -24,6 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.rocketracer.game.SharedData.GameConfig;
 import com.rocketracer.game.SharedData.LocalData;
 import com.rocketracer.game.controllers.GameLobbyController;
 
@@ -42,6 +43,7 @@ public class GameLobbyView implements Screen {
     private Viewport viewport;
     private Label.LabelStyle font;
     private ImageButton backButton;
+    private Label playerTitle;
 
     // Controller
     private GameLobbyController controller;
@@ -69,6 +71,7 @@ public class GameLobbyView implements Screen {
 
         gamePinLabel = new Label("Game PIN: " + pin, skin);
         startGameButton = new TextButton("Start Game", skin);
+        playerTitle = new Label("Players", skin);
 
         startGameButton.addListener(new ClickListener() {
             @Override
@@ -89,9 +92,8 @@ public class GameLobbyView implements Screen {
     public void show() {
         Gdx.input.setInputProcessor(stage);
         mainTable.setFillParent(true);
-        playerTable.setFillParent(true);
 
-        backButton.setPosition(0, 120);
+        backButton.setPosition(0, GameConfig.FRUSTUM_HEIGHT);
         backButton.setSize(30, 550);
         backButton.addListener(new ClickListener(){
             @Override
@@ -106,7 +108,10 @@ public class GameLobbyView implements Screen {
         mainTable.row();
         mainTable.add(startGameButton).expandX().padBottom(10);
         mainTable.row();
-        mainTable.add(playerTable);
+        mainTable.row();
+        mainTable.add(playerTitle);
+        mainTable.row();
+        mainTable.add(playerTable).expandX().padBottom(10);
         mainTable.setBackground(skin.getDrawable("button-over-c"));
 
         stage.addActor(mainTable);

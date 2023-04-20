@@ -7,7 +7,6 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.rocketracer.game.ECS.Components.CleanupComponent;
 import com.rocketracer.game.ECS.Components.CollisionComponent;
-import com.rocketracer.game.ECS.Components.FuelComponent;
 import com.rocketracer.game.ECS.Components.PositionComponent;
 
 public class CleanupSystem extends IteratingSystem {

@@ -7,7 +7,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,7 +14,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -42,21 +40,11 @@ public class GameView implements Screen {
     protected Skin skin;
     ImageButton backButton;
     BitmapFont font;
-    BitmapFont fontFuelLevel;
 
     private GameController gameController;
     private int score;
 
     private int fuelLevel;
-
-    ShapeRenderer shape;
-
-
-    // Navigation
-    /** For back button */
-    //private Screen prevScreen;
-
-    // Gameplay: will be moved to GameController
 
 
 
@@ -74,21 +62,17 @@ public class GameView implements Screen {
         Texture texture = new Texture(Gdx.files.internal("backArrow.png"));
         TextureRegionDrawable backArrowDrawable = new TextureRegionDrawable(new TextureRegion(texture));
         backButton = new ImageButton(backArrowDrawable);
-
-        shape = new ShapeRenderer();
-
         gameController = new GameController(batch, mpGame, docID);
         font = skin.getFont("font");
-        font.getData().setScale(0.20f);
-        fontFuelLevel = new BitmapFont();
-        fontFuelLevel.getData().setScale(0.20f);
+        font.getData().setScale(GameConfig.FRUSTUM_WIDTH/230);
+
     }
 
     @Override
     public void show() {
         //Stage should control input:
         Gdx.input.setInputProcessor(stage);
-        backButton.setPosition(0, GameConfig.FRUSTUM_HEIGHT+130);
+        backButton.setPosition(0, GameConfig.FRUSTUM_HEIGHT*4);
         backButton.setSize(30, 500);
         backButton.addListener(new ClickListener(){
             @Override
@@ -108,7 +92,9 @@ public class GameView implements Screen {
         Gdx.gl.glClearColor(0, 0, .16f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+
         gameController.getEngine().update(delta);
+
 
         ImmutableArray<Entity> scoreArray = gameController.getEngine().getEntitiesFor(Family.one(ScoreComponent.class).get());
         ScoreComponent scoreComponent = scoreArray.get(0).getComponent(ScoreComponent.class);
@@ -120,21 +106,20 @@ public class GameView implements Screen {
         fuelLevel = fuelComponent.fuelLevel;
 
         batch.begin();
-        font.draw(batch, Integer.toString(score), GameConfig.FRUSTUM_WIDTH-7, GameConfig.FRUSTUM_HEIGHT-5);
+        font.draw(batch, Integer.toString(score), GameConfig.FRUSTUM_WIDTH*4/5, GameConfig.FRUSTUM_HEIGHT*14/15);
         batch.end();
-        shape.setProjectionMatrix(camera.projection);
-        shape.begin(ShapeRenderer.ShapeType.Filled);
-        shape.setColor(Color.DARK_GRAY);
-        shape.rect(GameConfig.FRUSTUM_WIDTH-50, -190, 120, 25);
-        shape.end();
+
+        Texture fuelLevelTexture = new Texture(Gdx.files.internal("fuellevelTitle.png"));
 
 
         batch.begin();
-        fontFuelLevel.draw(batch, "Fuellevel: " + Integer.toString(fuelLevel), GameConfig.FRUSTUM_WIDTH-18, 9);
+        batch.draw(fuelLevelTexture,GameConfig.FRUSTUM_WIDTH*7/15, GameConfig.FRUSTUM_HEIGHT*2/15, GameConfig.FRUSTUM_WIDTH/2, GameConfig.FRUSTUM_HEIGHT/20);
+        font.draw(batch,  Integer.toString(fuelLevel), GameConfig.FRUSTUM_WIDTH*13/15, GameConfig.FRUSTUM_HEIGHT*4/25);
         batch.end();
 
         stage.act(delta);
         stage.draw();
+
     }
 
     @Override

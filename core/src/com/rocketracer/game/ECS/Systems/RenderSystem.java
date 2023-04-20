@@ -3,7 +3,7 @@ package com.rocketracer.game.ECS.Systems;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
-import com.badlogic.ashley.systems.SortedIteratingSystem;
+import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -13,13 +13,11 @@ import com.badlogic.gdx.utils.Array;
 import com.rocketracer.game.ECS.Components.PositionComponent;
 import com.rocketracer.game.ECS.Components.SpriteComponent;
 import com.rocketracer.game.SharedData.GameConfig;
-import com.rocketracer.game.SharedData.YComparator;
 
 import java.util.Comparator;
 
-import javax.swing.text.Position;
 
-public class RenderSystem extends SortedIteratingSystem {
+public class RenderSystem extends IteratingSystem {
 
 
 
@@ -61,7 +59,7 @@ public class RenderSystem extends SortedIteratingSystem {
      */
 	public RenderSystem(SpriteBatch batch) {
         // gets all entities with a sprite and position component
-        super(Family.all(SpriteComponent.class, PositionComponent.class).get(), new YComparator());
+        super(Family.all(SpriteComponent.class, PositionComponent.class).get());
 
         //creates out componentMappers
         pMapper = ComponentMapper.getFor(PositionComponent.class);
@@ -81,11 +79,6 @@ public class RenderSystem extends SortedIteratingSystem {
         super.update(deltaTime);
         ImmutableArray<Entity> entities = getEngine().getEntitiesFor(FAMILY);
         renderQueue.addAll(entities.toArray());
-
-        //System.out.println("Render system running, delta: " + deltaTime);
-
-        // sort the renderQueue based on y index
-        //renderQueue.sort(comparator);
         
         // update camera and sprite batch
         cam.update();
@@ -94,7 +87,6 @@ public class RenderSystem extends SortedIteratingSystem {
         batch.begin();
 
         // loop through each entity in our render queue
-        //System.out.println("Render queue size: " + renderQueue.size);
         for (Entity entity : renderQueue) {
             PositionComponent positionComponent = pMapper.get(entity);
             SpriteComponent spriteComponent = sMapper.get(entity);

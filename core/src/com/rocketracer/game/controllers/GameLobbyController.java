@@ -2,7 +2,6 @@ package com.rocketracer.game.controllers;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.rocketracer.game.GameEventListener;
 import com.rocketracer.game.SharedData.LocalData;
 import com.rocketracer.game.views.GameLobbyView;

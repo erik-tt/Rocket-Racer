@@ -1,12 +1,9 @@
 package com.rocketracer.game.controllers;
 
 import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.rocketracer.game.ECS.Components.ScoreComponent;
 import com.rocketracer.game.ECS.Entities.BackgroundEntity;
 
 import com.rocketracer.game.ECS.Entities.RocketEntity;
@@ -76,11 +73,7 @@ public class GameController implements GameEventListener, GameOverListener {
         engine.addSystem(fuelSystem);
         engine.addSystem(controlSystem);
         engine.addSystem(backgroundSystem);
-
         scoreSystem = new ScoreSystem();
-        engine.addSystem(renderSystem);
-        engine.addSystem(fuelSystem);
-        engine.addSystem(controlSystem);
         engine.addSystem(scoreSystem);
 
         try {

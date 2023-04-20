@@ -81,7 +81,7 @@ public class HighscoreView implements Screen, HighScoreListener {
 
         highscoreTable.add(highscoreLabel).expandX();
 
-        backButton.setPosition(0, GameConfig.FRUSTUM_HEIGHT+130);
+        backButton.setPosition(0, GameConfig.FRUSTUM_HEIGHT*2);
         backButton.setSize(30, 550);
         backButton.addListener(new ClickListener(){
             @Override

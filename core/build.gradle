@@ -1,8 +1,25 @@
 sourceCompatibility = 1.7
 dependencies {
     implementation 'com.google.firebase:firebase-firestore:24.1.0'
+    implementation 'junit:junit:4.12'
+    implementation "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+    testImplementation "com.badlogicgames.gdx:gdx:$gdxVersion"
+    testImplementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+    testImplementation "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+    testImplementation "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
 }
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+tasks.withType(Test) {
+    testLogging {
+        exceptionFormat "full"
+        events "started", "skipped", "passed", "failed"
+        showStandardStreams true
+    }
+}
 
 sourceSets.main.java.srcDirs = [ "src/" ]
 
