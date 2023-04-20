@@ -6,7 +6,6 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Vector3;
 import com.rocketracer.game.ECS.Components.BoundsCircleComponent;
 import com.rocketracer.game.ECS.Components.BoundsRectangleComponent;
 import com.rocketracer.game.ECS.Components.CollisionComponent;
@@ -14,7 +13,6 @@ import com.rocketracer.game.ECS.Components.FuelComponent;
 import com.rocketracer.game.ECS.Components.PositionComponent;
 import com.rocketracer.game.ECS.Components.SpecificTypeComponent;
 import com.rocketracer.game.ECS.Components.SpriteComponent;
-import com.rocketracer.game.ECS.Components.TypeComponent;
 import com.rocketracer.game.SharedData.GameConfig;
 
 

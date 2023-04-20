@@ -1,7 +1,6 @@
 package com.rocketracer.game.ECS.Components;
 
 import com.badlogic.ashley.core.Component;
-import com.rocketracer.game.ECS.Entities.BackgroundEntity;
 
 public class BackgroundComponent implements Component {
     public float y1,y2;

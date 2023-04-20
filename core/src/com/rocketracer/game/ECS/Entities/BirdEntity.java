@@ -40,7 +40,7 @@ public class BirdEntity implements IGameObject {
         this.obstacleTypeComponent = SpecificTypeComponent.BIRD;
         this.cleanupComponent = new CleanupComponent();
         this.collisionComponent = new CollisionComponent();
-        this.boundsCircleComponent = new BoundsCircleComponent(bird.getWidth()/6);
+        this.boundsCircleComponent = new BoundsCircleComponent(Math.round(spriteComponent.sprite.getWidth()/6));
 
         entity.add(spriteComponent);
         entity.add(positionComponent);
