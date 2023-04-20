@@ -52,8 +52,10 @@ public class StartView implements Screen {
 
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
         camera.update();
+
         textField = new TextField("", skin);
         textField.setAlignment(1);
+        textField.setName("playerNameTextField");
 
 
         stage = new Stage(viewport, batch);

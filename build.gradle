@@ -1,4 +1,5 @@
 buildscript {
+
     repositories {
         mavenLocal()
         mavenCentral()
@@ -55,6 +56,11 @@ project(":desktop") {
 project(":android") {
     apply plugin: "com.android.application"
 
+    def androidXTestVersion = '1.4.0'
+    def espressoVersion = '3.4.0'
+    def uiAutomatorVersion = '2.2.0'
+    def compose_version = '1.1.0' // Replace with the desired Compose version
+
     configurations { natives }
 
     dependencies {
@@ -67,6 +73,25 @@ project(":android") {
         implementation 'com.android.support:multidex:1.0.3'
 
         implementation "com.badlogicgames.ashley:ashley:1.7.0"
+
+        androidTestImplementation "androidx.test:runner:$androidXTestVersion"
+        androidTestImplementation "androidx.test:rules:$androidXTestVersion"
+        androidTestImplementation "androidx.test:core:$androidXTestVersion"
+        androidTestImplementation "androidx.test.ext:junit:1.1.3"
+        // Optional -- UI testing with Espresso
+        androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+        // Optional -- UI testing with UI Automator
+        androidTestImplementation "androidx.test.uiautomator:uiautomator:$uiAutomatorVersion"
+        // Optional -- UI testing with Compose
+        androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+
+        // Firebase testing dependencies
+        //androidTestImplementation 'com.google.firebase:firebase-emulators:1.2.0'
+        //androidTestImplementation 'com.google.firebase:firebase-testing:1.2.0'
+
+        // JUnit dependencies
+        testImplementation 'junit:junit:4.13.2'
+        androidTestImplementation 'junit:junit:4.13.2'
     }
 }
 
