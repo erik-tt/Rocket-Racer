@@ -20,8 +20,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.rocketracer.game.GameJoinListener;
-import com.rocketracer.game.ECS.Entities.SoundEntity;
-import com.rocketracer.game.ECS.Systems.AudioSystem;
+import com.rocketracer.game.audioSystem.SoundEntity;
+import com.rocketracer.game.audioSystem.AudioSystem;
 import com.rocketracer.game.SharedData.LocalData;
 import com.rocketracer.game.controllers.MainController;
 
