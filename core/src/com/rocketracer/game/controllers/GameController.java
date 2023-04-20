@@ -73,11 +73,7 @@ public class GameController implements GameEventListener, GameOverListener {
         engine.addSystem(fuelSystem);
         engine.addSystem(controlSystem);
         engine.addSystem(backgroundSystem);
-
         scoreSystem = new ScoreSystem();
-        engine.addSystem(renderSystem);
-        engine.addSystem(fuelSystem);
-        engine.addSystem(controlSystem);
         engine.addSystem(scoreSystem);
 
         try {

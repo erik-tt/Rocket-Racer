@@ -91,7 +91,6 @@ public class CollisionSystem extends EntitySystem {
                     listener.hitObstacle();
                 }
             }
-
         }
     }
 
