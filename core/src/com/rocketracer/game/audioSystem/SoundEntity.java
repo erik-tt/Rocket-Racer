@@ -1,4 +1,4 @@
-package com.rocketracer.game.ECS.Entities;
+package com.rocketracer.game.audioSystem;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
