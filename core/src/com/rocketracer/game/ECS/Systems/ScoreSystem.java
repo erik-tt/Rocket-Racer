@@ -34,13 +34,13 @@ import com.rocketracer.game.views.GameView;
             ScoreComponent score = sMapper.get(entity);
 
             //Used to change the difficulty so it progresses.
-            if (score.getScore() < 1000) {
+            if (score.getScore() < 2000) {
                 GameConfig.DIFFICULTY = 1;
             }
             if (score.getScore() > 2000 && score.getScore() < 3000) {
                 GameConfig.DIFFICULTY = 2;
             }
-            if (score.getScore() > 3000 && score.getScore() < 4000) {
+            if (score.getScore() > 3000 && score.getScore() < 5000) {
                 GameConfig.DIFFICULTY = 3;
             }
             if (score.getScore() > 5000) {
