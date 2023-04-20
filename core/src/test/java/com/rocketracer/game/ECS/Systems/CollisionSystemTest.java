@@ -3,14 +3,13 @@ package com.rocketracer.game.ECS.Systems;
 import static junit.framework.TestCase.assertEquals;
 
 import com.badlogic.ashley.core.Engine;
-import com.rocketracer.game.ECS.Components.BoundsCircleComponent;
 import com.rocketracer.game.ECS.Components.BoundsRectangleComponent;
 import com.rocketracer.game.ECS.Components.CollisionComponent;
 import com.rocketracer.game.ECS.Components.FuelComponent;
 import com.rocketracer.game.ECS.Components.PositionComponent;
 import com.rocketracer.game.ECS.Components.SpecificTypeComponent;
 import com.rocketracer.game.ECS.Components.TypeComponent;
-import com.rocketracer.game.ECS.Entities.TestEntity;
+import com.rocketracer.game.TestEntity;
 
 import org.junit.Before;
 import org.junit.Test;

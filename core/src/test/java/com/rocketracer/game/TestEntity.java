@@ -1,4 +1,4 @@
-package com.rocketracer.game.ECS.Entities;
+package com.rocketracer.game;
 
 
 import com.badlogic.ashley.core.Entity;
@@ -9,16 +9,17 @@ import com.rocketracer.game.ECS.Components.CleanupComponent;
 import com.rocketracer.game.ECS.Components.CollisionComponent;
 import com.rocketracer.game.ECS.Components.FuelComponent;
 import com.rocketracer.game.ECS.Components.PositionComponent;
+import com.rocketracer.game.ECS.Components.ScoreComponent;
 import com.rocketracer.game.ECS.Components.SpecificTypeComponent;
 import com.rocketracer.game.ECS.Components.TypeComponent;
 import com.rocketracer.game.ECS.Components.VelocityComponent;
-import com.rocketracer.game.ECS.Systems.BackgroundSystem;
+
 
 public class TestEntity {
     /***
      * A class only used for testing purposes since it does not use LibGDX, we do not have to
      * use the headless backend for testing business logic. By doing this we can more
-     * thoroughly test the systems that use entities.
+     * thoroughly test the systems that use entities and do not rely on libGDX.
      */
 
     private TypeComponent typeComponent;
@@ -31,6 +32,7 @@ public class TestEntity {
     private SpecificTypeComponent obstacleTypeComponent;
     private BoundsCircleComponent boundsCircleComponent;
     private BoundsRectangleComponent boundsRectangleComponent;
+    private ScoreComponent scoreComponent;
 
     private FuelComponent fuelComponent;
 
@@ -83,6 +85,10 @@ public class TestEntity {
         this.boundsRectangleComponent = boundsRectangleComponent;
         entity.add(boundsRectangleComponent);
     }
+    public void setScoreComponent(ScoreComponent scoreComponent) {
+        this.scoreComponent = scoreComponent;
+        entity.add(scoreComponent);
+    }
 
     //Getters
     public TypeComponent getTypeComponent() {
@@ -112,6 +118,7 @@ public class TestEntity {
         return obstacleTypeComponent;
     }
     public FuelComponent getFuelComponent() { return fuelComponent; }
+    public ScoreComponent getScoreComponent() { return scoreComponent; }
 
     public Entity getEntity() {
         return entity;

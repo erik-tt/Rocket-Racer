@@ -6,7 +6,7 @@ import static junit.framework.TestCase.assertEquals;
 
 import com.rocketracer.game.ECS.Components.BackgroundComponent;
 import com.rocketracer.game.ECS.Components.PositionComponent;
-import com.rocketracer.game.ECS.Entities.TestEntity;
+import com.rocketracer.game.TestEntity;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -3,21 +3,16 @@ package com.rocketracer.game.ECS.Systems;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.rocketracer.game.ECS.Components.CleanupComponent;
 import com.rocketracer.game.ECS.Components.CollisionComponent;
 import com.rocketracer.game.ECS.Components.PositionComponent;
-import com.rocketracer.game.ECS.Entities.TestEntity;
+import com.rocketracer.game.TestEntity;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
-
-import jdk.nashorn.internal.ir.annotations.Immutable;
 
 public class CleanupSystemTest {
 

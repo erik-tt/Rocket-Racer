@@ -13,6 +13,14 @@ dependencies {
 }
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
+tasks.withType(Test) {
+    testLogging {
+        exceptionFormat "full"
+        events "started", "skipped", "passed", "failed"
+        showStandardStreams true
+    }
+}
+
 sourceSets.main.java.srcDirs = [ "src/" ]
 
 eclipse.project.name = appName + "-core"

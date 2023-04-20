@@ -2,7 +2,7 @@ package com.rocketracer.game.ECS.Components;
 
 import static junit.framework.TestCase.assertEquals;
 
-import com.rocketracer.game.ECS.Entities.TestEntity;
+import com.rocketracer.game.TestEntity;
 
 import org.junit.Before;
 

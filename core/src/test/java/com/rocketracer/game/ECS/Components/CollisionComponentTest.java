@@ -3,7 +3,7 @@ package com.rocketracer.game.ECS.Components;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 
-import com.rocketracer.game.ECS.Entities.TestEntity;
+import com.rocketracer.game.TestEntity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,5 +22,7 @@ public class CollisionComponentTest {
         TestEntity testEntity = new TestEntity();
         collisionComponent.collidedEntity = testEntity.getEntity();
         assertEquals(testEntity.getEntity(), collisionComponent.collidedEntity);
+        collisionComponent.reset();
+        assertEquals(false, collisionComponent.hit);
     }
 }
