@@ -26,10 +26,6 @@ package com.rocketracer.game.SharedData {
     + printMPHighScoreList(): void
   }
   
-  interface HighScoreListener {
-    + onHighScoreFetched(highScores: Map<Integer, Map.Entry<String, Integer>>): void
-  }
-  
   class LocalData {
     + sharedInstance: LocalData
     - prefs: Preferences
@@ -47,22 +43,29 @@ package com.rocketracer.game.SharedData {
     + getFBIHandler(): FirebaseInterface
   }
   
-  class FirebaseInterface {
-    - FirebaseInterface()
-    + loadHighScoreList(): void
-    + addHighScore(name: String, score: int): void
-    + addNewPlayer(name: String, firebaseInterface: FirebaseInterface): void
-  }
-  
   class MainView {
     - playerName: String
     - MainView(playerTag: String)
     + updateHighScoreList(highScoreList: HighScoreList): void
   }
-  
+}
+interface FirebaseInterface {
+    + createGame(): Integer
+    + joinGame(gamePin: Integer, name: String): void
+    + loadHighScoreList(): void
+    + setGameScore(score: int): void
+    + updateHighscoreList(name: String, score: int): void
+    + writeData(map: HashMap<String, Object>, documentPath: String): void
+    + setListener(listener: GameJoinListener): void
+    + setGameListener(listener: GameEventListener): void
+    + removeGameListener(): void
+}
+interface HighScoreListener {
+    + onHighScoreFetched(mpHighScores: Map<Integer, Map.Entry<String, Integer>>): void
+  }
+
   HighScoreList -- LocalData
   LocalData --> FirebaseInterface
   LocalData -- MainView
   HighScoreList --> HighScoreListener
-}
 @enduml

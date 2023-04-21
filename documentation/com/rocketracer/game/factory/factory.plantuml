@@ -1,0 +1,81 @@
+@startuml
+
+package com.rocketracer.game.factory {
+    abstract class GameObjectFactory {
+        - x: float
+        - y: float
+        + GameObjectFactory(x: float, y: float)
+        + create(): IGameObject
+        # createGameObject(): IGameObject
+    }
+
+    class AsteroidFactory {
+        + AsteroidFactory(x: float, y: float)
+        # createGameObject(): IGameObject
+    }
+
+    class BirdFactory {
+        + BirdFactory(x: float, y: float)
+        # createGameObject(): IGameObject
+    }
+
+    class SatelliteFactory {
+        + SatelliteFactory(x: float, y: float)
+        # createGameObject(): IGameObject
+    }
+
+    class FuelcanFactory {
+        + FuelcanFactory(x: float, y: float)
+        # createGameObject(): IGameObject
+    }
+
+    class PlaneFactory {
+        + PlaneFactory(x: float, y: float)
+        # createGameObject(): IGameObject
+    }
+}
+
+package com.rocketracer.game.ECS.Entities {
+    interface IGameObject {
+        + build(): void
+    }
+
+    class AsteroidEntity {
+        + AsteroidEntity(x: float, y: float)
+        + build(): void
+    }
+
+    class BirdEntity {
+        + BirdEntity(x: float, y: float)
+        + build(): void
+    }
+
+    class SatelliteEntity {
+        + SatelliteEntity(x: float, y: float)
+        + build(): void
+    }
+
+    class FuelcanEntity {
+        + FuelcanEntity(x: float, y: float)
+        + build(): void
+    }
+
+    class PlaneEntity {
+        + PlaneEntity(x: float, y: float)
+        + build(): void
+    }
+}
+
+GameObjectFactory <|--down-- IGameObject
+AsteroidFactory -up-|> GameObjectFactory
+BirdFactory -up-|> GameObjectFactory
+SatelliteFactory -up-|> GameObjectFactory
+FuelcanFactory -up-|> GameObjectFactory
+PlaneFactory -up-|> GameObjectFactory
+AsteroidFactory <|--down-- AsteroidEntity
+BirdFactory <|--down-- BirdEntity
+SatelliteFactory <|--down-- SatelliteEntity
+FuelcanFactory <|--down-- FuelcanEntity
+PlaneFactory <|--down-- PlaneEntity
+
+@enduml
