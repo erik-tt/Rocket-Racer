@@ -1,23 +1,31 @@
 package com.rocketracer.game.views;
 
-import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.rocketracer.game.ECS.Entities.FuelcanEntity;
-import com.rocketracer.game.ECS.Entities.RocketEntity;
-import com.rocketracer.game.ECS.Systems.ControlSystem;
-import com.rocketracer.game.ECS.Systems.FuelSystem;
-import com.rocketracer.game.ECS.Systems.MovementSystem;
-import com.rocketracer.game.ECS.Systems.RenderSystem;
+import com.rocketracer.game.ECS.Components.FuelComponent;
+import com.rocketracer.game.ECS.Components.ScoreComponent;
+import com.rocketracer.game.SharedData.GameConfig;
+import com.rocketracer.game.SharedData.LocalData;
 import com.rocketracer.game.controllers.GameController;
 
 public class GameView implements Screen {
@@ -30,22 +38,18 @@ public class GameView implements Screen {
     private Camera camera;
     private TextureAtlas atlas;
     protected Skin skin;
+    ImageButton backButton;
+    BitmapFont font;
 
     private GameController gameController;
+    private int score;
 
-    // Navigation
-    /** For back button */
-    //private Screen prevScreen;
+    private int fuelLevel;
 
-    // Gameplay: will be moved to GameController
 
 
     // --- Constructor ---
-    /**
-     * Constructor.
-     * @param prevScreen The screen to return to when the back button is pressed.
-     */
-    public GameView(/*Screen prevScreen*/) {
+    public GameView(Boolean mpGame, String docID) {
         atlas = new TextureAtlas("CustomSkin.atlas");
         skin = new Skin(Gdx.files.internal("CustomSkin.json"), atlas);
         batch = new SpriteBatch();
@@ -55,8 +59,12 @@ public class GameView implements Screen {
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
         camera.update();
         stage = new Stage(viewport, batch);
-        gameController = new GameController(batch);
-        //this.prevScreen = prevScreen;
+        Texture texture = new Texture(Gdx.files.internal("backArrow.png"));
+        TextureRegionDrawable backArrowDrawable = new TextureRegionDrawable(new TextureRegion(texture));
+        backButton = new ImageButton(backArrowDrawable);
+        gameController = new GameController(batch, mpGame, docID);
+        font = skin.getFont("font");
+        font.getData().setScale(GameConfig.FRUSTUM_WIDTH/230);
 
     }
 
@@ -64,6 +72,18 @@ public class GameView implements Screen {
     public void show() {
         //Stage should control input:
         Gdx.input.setInputProcessor(stage);
+        backButton.setPosition(0, GameConfig.FRUSTUM_HEIGHT*4);
+        backButton.setSize(30, 500);
+        backButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                ((Game)Gdx.app.getApplicationListener())
+                        .setScreen(LocalData.sharedInstance.getMainView());
+            }
+        });
+
+        //Add table to stage
+        stage.addActor(backButton);
     }
 
     @Override
@@ -71,7 +91,35 @@ public class GameView implements Screen {
         //Clear the screen
         Gdx.gl.glClearColor(0, 0, .16f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+
         gameController.getEngine().update(delta);
+
+
+        ImmutableArray<Entity> scoreArray = gameController.getEngine().getEntitiesFor(Family.one(ScoreComponent.class).get());
+        ScoreComponent scoreComponent = scoreArray.get(0).getComponent(ScoreComponent.class);
+        score = scoreComponent.score;
+
+
+        ImmutableArray<Entity> fuelArray = gameController.getEngine().getEntitiesFor(Family.one(FuelComponent.class).get());
+        FuelComponent fuelComponent = fuelArray.get(0).getComponent(FuelComponent.class);
+        fuelLevel = fuelComponent.fuelLevel;
+
+        batch.begin();
+        font.draw(batch, Integer.toString(score), GameConfig.FRUSTUM_WIDTH*4/5, GameConfig.FRUSTUM_HEIGHT*14/15);
+        batch.end();
+
+        Texture fuelLevelTexture = new Texture(Gdx.files.internal("fuellevelTitle.png"));
+
+
+        batch.begin();
+        batch.draw(fuelLevelTexture,GameConfig.FRUSTUM_WIDTH*7/15, GameConfig.FRUSTUM_HEIGHT*2/15, GameConfig.FRUSTUM_WIDTH/2, GameConfig.FRUSTUM_HEIGHT/20);
+        font.draw(batch,  Integer.toString(fuelLevel), GameConfig.FRUSTUM_WIDTH*13/15, GameConfig.FRUSTUM_HEIGHT*4/25);
+        batch.end();
+
+        stage.act(delta);
+        stage.draw();
+
     }
 
     @Override

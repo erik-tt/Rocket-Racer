@@ -1,4 +1,6 @@
 package com.rocketracer.game.SharedData;
+import com.rocketracer.game.HighScoreListener;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,16 +15,18 @@ public class HighScoreList {
     /** Private storing of highscore. */
     // Single player high scores
     private Map<String, Integer> spHighScores = new HashMap<>();
+    private Map<Integer, Map.Entry<String, Integer>> mpHighScores = new HashMap<>();
+
+    private HighScoreListener mpHSListener;
 
     // --- Construct - Private (Singleton) ---
     private HighScoreList() {
         // Fetch all highscores from LocalData
-        // Single player
         reloadHighScores();
     }
 
     // --- Methods ---
-    private void reloadHighScores() {
+    public void reloadHighScores() {
         // Fetch all highscores from LocalData
         // Single player
         // Clear map
@@ -35,8 +39,10 @@ public class HighScoreList {
                 System.out.println("Error: HighScoreList.reloadHighScores() - " + e.getMessage());
             }
         }
+
+        LocalData.sharedInstance.getFBIHandler().loadHighScoreList();
     }
-    public void printHighScoreList() {
+    public void printSPHighScoreList() {
         System.out.println("HighScoreList:");
         for (Map.Entry<String, Integer> entry : spHighScores.entrySet()) {
             System.out.println(entry.getKey() + " : " + entry.getValue());
@@ -51,7 +57,7 @@ public class HighScoreList {
     public Map<String, Integer> getSPHighScores() { return new HashMap<>(spHighScores); }
 
     // Set
-    public void addScore(String name, Integer score) {
+    public void addSPScore(String name, Integer score) {
         // Check if score exists and is higher than current score
         if (spHighScores.containsKey(name)) {
             if (spHighScores.get(name) < score) {
@@ -61,6 +67,28 @@ public class HighScoreList {
         } else {
             spHighScores.put(name, score);
             LocalData.sharedInstance.setHighScore(score, name);
+        }
+    }
+
+
+    // -- Multiplayer --
+    public void setMPHighScores(Map<Integer, Map.Entry<String, Integer>> highScores) {
+        this.mpHighScores = highScores;
+    }
+    public void listenMPHighScores(HighScoreListener highScoreListener) {
+        this.mpHSListener = highScoreListener;
+        reloadHighScores();
+    }
+    public void sendToListener() {
+        if (this.mpHSListener != null)
+            this.mpHSListener.onHighScoreFetched(this.mpHighScores);
+        this.mpHSListener = null;
+    }
+
+    public void printMPHighScoreList() {
+        System.out.println("High-score List:");
+        for (Map.Entry<Integer, Map.Entry<String, Integer>> entry : mpHighScores.entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue());
         }
     }
 }
