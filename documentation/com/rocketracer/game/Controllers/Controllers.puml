@@ -1,0 +1,48 @@
+@startuml
+package com.rocketracer.game.controllers {
+    class GameController {
+        - engine: Engine
+        - renderSystem: RenderSystem
+        - controlSystem: ControlSystem
+        - movementSystem: MovementSystem
+        - player: RocketEntity
+        - fuelSystem: FuelSystem
+        - obstacleSpawnSystem: ObstacleSpawnSystem
+        - cleanupSystem: CleanupSystem
+        - collisionSystem: CollisionSystem
+        - backgroundSystem: BackgroundSystem
+        - scoreSystem: ScoreSystem
+        - background: BackgroundEntity
+        - docID: String
+        - isMP: Boolean
+        + GameController(batch: SpriteBatch, isMP: Boolean, docID: String)
+        + getEngine(): Engine
+        + getDocID(): String
+        + newSnapshotData(data: Map<String, Object>): void
+        + onGameOver(score: Integer): void
+    }
+        class MainController {
+            +addButton(name: String, skin: Skin, mainTable: Table): TextButton
+            +showJoinGameDialog(skin: Skin, stage: Stage): void
+            +showDialog(skin: Skin, stage: Stage, title: String, content: String): void
+        }
+        class GameLobbyController {
+            -lobby: GameLobbyView
+            -playersList: List<String>
+            -docID: String
+            -gamePin: Integer
+            +GameLobbyController(lobby: GameLobbyView, docID: String, pin: Integer)
+            -initGameListener()
+            +getPlayersList(): List<String>
+            +addPlayer(playerName: String)
+            +startGame()
+            +getDocID(): String
+            +newSnapshotData(data: Map<String, Object>)
+        }
+}
+
+
+
+
+
+@enduml
