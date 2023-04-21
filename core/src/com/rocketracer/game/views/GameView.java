@@ -72,7 +72,7 @@ public class GameView implements Screen {
     public void show() {
         //Stage should control input:
         Gdx.input.setInputProcessor(stage);
-        backButton.setPosition(0, GameConfig.FRUSTUM_HEIGHT*4);
+        backButton.setPosition(5, GameConfig.FRUSTUM_HEIGHT*4/2);
         backButton.setSize(30, 500);
         backButton.addListener(new ClickListener(){
             @Override
@@ -91,6 +91,7 @@ public class GameView implements Screen {
         //Clear the screen
         Gdx.gl.glClearColor(0, 0, .16f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
 
 
         gameController.getEngine().update(delta);
@@ -117,8 +118,10 @@ public class GameView implements Screen {
         font.draw(batch,  Integer.toString(fuelLevel), GameConfig.FRUSTUM_WIDTH*13/15, GameConfig.FRUSTUM_HEIGHT*4/25);
         batch.end();
 
+
         stage.act(delta);
         stage.draw();
+
 
     }
 
