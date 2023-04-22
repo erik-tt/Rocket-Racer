@@ -1,0 +1,104 @@
+@startuml
+
+package "com.rocketracer.game.ECS.Systems" {
+    class BackgroundSystem {
+        -bMapper: ComponentMapper<BackgroundComponent>
+        -pMapper: ComponentMapper<PositionComponent>
+        +BackgroundSystem()
+        +processEntity(Entity, float): void
+    }
+    
+    class CleanupSystem {
+        -cleanupMapper: ComponentMapper<CleanupComponent>
+        -positionMapper: ComponentMapper<PositionComponent>
+        -collisionMapper: ComponentMapper<CollisionComponent>
+        -engine: Engine
+        +CleanupSystem(Engine)
+        +processEntity(Entity, float): void
+    }
+    
+    class CollisionSystem {
+        -PLAYER_FAMILY: Family
+        -OBSTACLE_FAMILY: Family
+        -listener: CollisionListener
+        +CollisionSystem(CollisionListener)
+        +update(float): void
+        -checkCollision(Entity, Entity): boolean
+        -setBounds(Entity): void
+    }
+    
+    class ControlSystem {
+        -positionMapper: ComponentMapper<PositionComponent>
+        -spriteMapper: ComponentMapper<SpriteComponent>
+        -typeMapper: ComponentMapper<TypeComponent>
+        -camera: OrthographicCamera
+        +ControlSystem(OrthographicCamera)
+        +processEntity(Entity, float): void
+    }
+    
+    class FuelSystem {
+        -fMapper: ComponentMapper<FuelComponent>
+        -sMapper: ComponentMapper<ScoreComponent>
+        -gameOverListener: GameOverListener
+        +FuelSystem(GameOverListener)
+        +processEntity(Entity, float): void
+    }
+    
+    class MovementSystem {
+        -vMapper: ComponentMapper<VelocityComponent>
+        -tMapper: ComponentMapper<SpecificTypeComponent>
+        -pMapper: ComponentMapper<PositionComponent>
+        -sMapper: ComponentMapper<SpriteComponent>
+        +MovementSystem()
+        +processEntity(Entity, float): void
+    }
+
+    class ObstacleSpawnSystem {
+        -objectFactory: GameObjectFactory
+        -engine: Engine
+        -counter: int
+        -fuelSpawnRate: int
+        -obstacleSpawnRate: int
+        +ObstacleSpawnSystem(Engine)
+        +updateInterval(): void
+    }
+
+    class RenderSystem {
+        -meterDimensions: Vector2
+        -pixelDimensions: Vector2
+        -batch: SpriteBatch
+        -renderQueue: Array<Entity>
+        -comparator: Comparator<Entity>
+        -cam: OrthographicCamera
+        -pMapper: ComponentMapper<PositionComponent>
+        -sMapper: ComponentMapper<SpriteComponent>
+        +getScreenSizeInMeters(): Vector2
+        +getScreenSizeInPixels(): Vector2
+        +PixelsToMeters(float): float
+        +RenderSystem(SpriteBatch)
+        +update(float): void
+        +processEntity(Entity, float): void
+        +getCamera(): OrthographicCamera
+    }
+
+    class ScoreSystem {
+        -sMapper: ComponentMapper<ScoreComponent>
+        +ScoreSystem()
+        +processEntity(Entity, float): void
+    }
+
+    interface CollisionListener {
+        +hitObstacle(): void
+    }
+}
+package com.rocketracer.game.ECS.Components {}
+interface GameOverListener {}
+abstract GameObjectFactory {}
+
+CollisionSystem --> CollisionListener
+ControlSystem --> RenderSystem: uses
+FuelSystem --> GameOverListener
+ObstacleSpawnSystem --> GameObjectFactory
+com.rocketracer.game.ECS.Systems --> com.rocketracer.game.ECS.Components
+
+@enduml
