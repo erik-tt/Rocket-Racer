@@ -1,10 +1,12 @@
+@startuml
 
-interface IGameObject {
-    + build()
-    + getEntity() : Entity
-}
+package com.rocketracer.game.ECS.Entity {
+    interface IGameObject {
+        + build()
+        + getEntity() : Entity
+    }
 
-class AsteroidEntity {
+    class AsteroidEntity {
     - entity : Entity
     - spriteComponent : SpriteComponent
     - positionComponent : PositionComponent
@@ -108,3 +110,14 @@ class SatelliteEntity {
   + getEntity(): Entity
   + build()
 }
+}
+
+
+AsteroidEntity -up-|> IGameObject
+BackgroundEntity -left-|> IGameObject
+BirdEntity -up-|> IGameObject
+FuelcanEntity -up-|> IGameObject
+PlaneEntity -right-|> IGameObject
+SatelliteEntity -up-|> IGameObject
+
+@enduml
