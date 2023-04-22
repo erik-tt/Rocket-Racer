@@ -163,15 +163,15 @@ class StartView {
         package com.rocketracer.game.controllers{}
         
 
-      com.rocketracer.game.views -> com.badlogic.Screen: uses
-        com.rocketracer.game.views -> com.rocketracer.game.controllers
+      com.rocketracer.game.views -up-> com.badlogic.Screen: uses
+        com.rocketracer.game.views -up-> com.rocketracer.game.controllers
 
-        StartView --> MainView: navigates to
+        StartView -right-> MainView: navigates to
         MainView --> GameLobbyView: navigates to
         
         GameLobbyView --> GameView: navigates to (Multiplayer)
-        GameView --> GameOverView: navigates to
-        MainView --> HighscoreView: navigates to
+        GameView -right-> GameOverView: navigates to
+        MainView -right-> HighscoreView: navigates to
         MainView --> GameView: navigates to (Singleplayer)
         MainView --> HowToView: navigates to
         GameOverView --> GameView: navigates to (Singleplayer)
