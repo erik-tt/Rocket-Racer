@@ -9,8 +9,10 @@ public class CollisionComponent implements Component, Pool.Poolable {
     //The component that the rocket has collided with
     public Entity collidedEntity;
 
+    //Says if the component has collided
     public boolean hit;
 
+    // Constructor
     @Override
     public void reset() {
         hit = false;

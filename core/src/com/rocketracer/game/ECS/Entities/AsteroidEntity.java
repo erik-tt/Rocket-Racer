@@ -13,9 +13,9 @@ import com.rocketracer.game.ECS.Components.TypeComponent;
 import com.rocketracer.game.ECS.Components.VelocityComponent;
 
 
-
 public class AsteroidEntity implements IGameObject {
 
+    // Attributes
     private Entity entity;
     private SpriteComponent spriteComponent;
     private PositionComponent positionComponent;
@@ -27,18 +27,24 @@ public class AsteroidEntity implements IGameObject {
     private BoundsCircleComponent boundsCircleComponent;
     private Texture asteroid = new Texture(Gdx.files.internal("asteroid.png"));
 
+    // Constructor
     public AsteroidEntity(float x, float y){
         this.entity = new Entity();
+
+        //Initiate entity with components
         this.spriteComponent = new SpriteComponent(asteroid);
         this.positionComponent = new PositionComponent(x,y);
         this.velocityComponent = new VelocityComponent();
         this.cleanupComponent = new CleanupComponent();
-        this.typeComponent = TypeComponent.OBSTACLE;
-        this.obstacleTypeComponent = SpecificTypeComponent.ASTEROID;
         this.collisionComponent = new CollisionComponent();
         this.boundsCircleComponent = new BoundsCircleComponent(Math.round(spriteComponent.sprite.getWidth()/4));
 
+        //Define types
+        this.typeComponent = TypeComponent.OBSTACLE;
+        this.obstacleTypeComponent = SpecificTypeComponent.ASTEROID;
 
+
+        //Add components to entity
         entity.add(spriteComponent);
         entity.add(positionComponent);
         entity.add(velocityComponent);
@@ -47,9 +53,9 @@ public class AsteroidEntity implements IGameObject {
         entity.add(obstacleTypeComponent);
         entity.add(collisionComponent);
         entity.add(boundsCircleComponent);
-
     }
 
+    // Methods
     public Entity getEntity(){ return entity;}
 
     @Override

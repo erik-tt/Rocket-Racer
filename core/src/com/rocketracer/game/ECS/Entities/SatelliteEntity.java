@@ -15,6 +15,7 @@ import com.rocketracer.game.ECS.Components.VelocityComponent;
 
 public class SatelliteEntity implements IGameObject {
 
+    // Attributes
     private Entity entity;
     private SpriteComponent spriteComponent;
     private PositionComponent positionComponent;
@@ -26,17 +27,23 @@ public class SatelliteEntity implements IGameObject {
     private BoundsCircleComponent boundsCircleComponent;
     private Texture satellite = new Texture(Gdx.files.internal("satellite.png"));
 
+    // Constructor
     public SatelliteEntity(float x, float y){
+
+        //Initiate entity with components
         this.entity = new Entity();
         this.spriteComponent = new SpriteComponent(satellite);
         this.positionComponent = new PositionComponent(x,y);
         this.velocityComponent = new VelocityComponent();
         this.cleanupComponent = new CleanupComponent();
-        this.typeComponent = TypeComponent.OBSTACLE;
-        this.obstacleTypeComponent = SpecificTypeComponent.SATELLITE;
         this.collisionComponent = new CollisionComponent();
         this.boundsCircleComponent = new BoundsCircleComponent(Math.round(spriteComponent.sprite.getWidth()/5));
 
+        //Define types
+        this.typeComponent = TypeComponent.OBSTACLE;
+        this.obstacleTypeComponent = SpecificTypeComponent.SATELLITE;
+
+        //Add components to entity
         entity.add(spriteComponent);
         entity.add(positionComponent);
         entity.add(velocityComponent);
@@ -47,8 +54,8 @@ public class SatelliteEntity implements IGameObject {
         entity.add(boundsCircleComponent);
     }
 
+    //Methods
     public Entity getEntity(){ return entity;}
-
     @Override
     public void build() {
         System.out.println("Build Satellite");

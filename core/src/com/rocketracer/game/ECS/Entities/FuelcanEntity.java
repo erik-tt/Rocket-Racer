@@ -13,7 +13,7 @@ import com.rocketracer.game.ECS.Components.TypeComponent;
 import com.rocketracer.game.ECS.Components.VelocityComponent;
 
 public class FuelcanEntity implements IGameObject {
-    // --- Attributes ---
+    // Attributes
     private Entity entity;
     private SpriteComponent spriteComponent;
     private PositionComponent positionComponent;
@@ -25,19 +25,24 @@ public class FuelcanEntity implements IGameObject {
     private BoundsRectangleComponent boundsRectangleComponent;
     private Texture fuelcan = new Texture(Gdx.files.internal("fuelcan2.png"));
 
-    // --- Constructor ---
+
+    // Constructor
     public FuelcanEntity(float x, float y) {
+
+        //Initiate entity with components
         this.entity = new Entity();
         this.spriteComponent = new SpriteComponent(fuelcan);
         this.positionComponent = new PositionComponent(x, y);
         this.cleanupComponent = new CleanupComponent();
         this.velocityComponent = new VelocityComponent();
-        this.typeComponent = TypeComponent.POWERUP;
-        this.obstacleTypeComponent = SpecificTypeComponent.FUELCAN;
         this.collisionComponent = new CollisionComponent();
         this.boundsRectangleComponent = new BoundsRectangleComponent(Math.round(spriteComponent.sprite.getWidth()), Math.round(spriteComponent.sprite.getHeight()));
 
+        //Define types
+        this.typeComponent = TypeComponent.POWERUP;
+        this.obstacleTypeComponent = SpecificTypeComponent.FUELCAN;
 
+        //Add components to entity
         entity.add(spriteComponent);
         entity.add(positionComponent);
         entity.add(cleanupComponent);
@@ -48,7 +53,7 @@ public class FuelcanEntity implements IGameObject {
         entity.add(boundsRectangleComponent);
     }
 
-    // --- Methods ---
+    // Methods
     public Entity getEntity() {
         return entity;
     }

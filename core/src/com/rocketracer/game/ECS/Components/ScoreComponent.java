@@ -4,17 +4,17 @@ import com.badlogic.ashley.core.Component;
 
 public class ScoreComponent implements Component{
 
-        // --- Attributes ---
+        // Attributes
         public int score;
         public boolean gameOver;
 
-        // --- Constructor ---
+        // Constructor
         public ScoreComponent(int score) {
-
                 this.score = score;
                 this.gameOver = false;
         }
 
+        // Methods
         public int getScore() {
                 return score;
         }

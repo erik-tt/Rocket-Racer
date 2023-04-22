@@ -13,19 +13,17 @@ import java.util.List;
 import java.util.Map;
 
 public class GameLobbyController implements GameEventListener {
-    // -- Attributes --
+    // Attributes
     private GameLobbyView lobby;
-
-    // misc
     private List<String> playersList;
+
 
     // Game data
     final private String docID;
     private Integer gamePin;
 
-    // -- Construct --
-    public GameLobbyController(GameLobbyView lobby,
-                               String docID, Integer pin) {
+    // Constructor
+    public GameLobbyController(GameLobbyView lobby, String docID, Integer pin) {
         System.out.println("Init GameLobbyController");
         this.lobby = lobby;
         this.playersList = new ArrayList<>();
@@ -34,17 +32,18 @@ public class GameLobbyController implements GameEventListener {
         initGameListener();
     }
 
+    // Methods
     private void initGameListener() {
-        LocalData.sharedInstance.getFBIHandler()
-                .setGameListener(this);
+        LocalData.sharedInstance.getFBIHandler().setGameListener(this);
     }
 
-    // -- Methods --
     public List<String> getPlayersList() { return this.playersList; }
+
     public void addPlayer(String playerName) {
         playersList.add(playerName);
         lobby.reloadTable();
     }
+
     public void startGame() {
         if (this.docID == null) return;
         HashMap<String, Object> gameState = new HashMap<>();
