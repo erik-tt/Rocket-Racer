@@ -7,7 +7,7 @@ import com.rocketracer.game.ECS.Components.*;
 import com.rocketracer.game.SharedData.GameConfig;
 
 public class RocketEntity {
-    // --- Attributes ---
+    // Attributes
     private Entity entity;
     private SpriteComponent spriteComponent;
     private PositionComponent positionComponent;
@@ -18,33 +18,33 @@ public class RocketEntity {
     private BoundsRectangleComponent boundsRectangleComponent;
     private TypeComponent typeComponent;
 
-    // --- Constructor ---
+    // Constructor
     public RocketEntity() {
+
+        //Initiate entity with components
         this.entity = new Entity();
         this.spriteComponent = new SpriteComponent(rocket);
         this.positionComponent = new PositionComponent(12, GameConfig.FRUSTUM_HEIGHT/6);
         this.fuelComponent = new FuelComponent(100);
-        this.typeComponent = TypeComponent.ROCKET;
         this.collisionComponent = new CollisionComponent();
         this.boundsRectangleComponent = new BoundsRectangleComponent(Math.round(spriteComponent.sprite.getWidth()/7), Math.round(spriteComponent.texture.getHeight()*2/3));
-
         this.scoreComponent = new ScoreComponent(0);
 
+        //Define type
+        this.typeComponent = TypeComponent.ROCKET;
 
+        //Add components to entity
         entity.add(spriteComponent);
         entity.add(positionComponent);
         entity.add(fuelComponent);
         entity.add(typeComponent);
-
-
         entity.add(collisionComponent);
         entity.add(boundsRectangleComponent);
-
         entity.add(scoreComponent);
 
     }
 
-    // --- Methods ---
+    // Method
     public Entity getEntity() {
         return entity;
     }

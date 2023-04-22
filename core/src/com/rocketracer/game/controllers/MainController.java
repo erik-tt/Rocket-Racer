@@ -14,16 +14,9 @@ import com.rocketracer.game.SharedData.LocalData;
 
 public class MainController {
 
+    // Methods
 
-    // -- Methods --
-
-    /**
-     * Add button to table.
-     * @param name
-     * @param skin
-     * @param mainTable
-     * @return the button instance
-     */
+    //Add a text-button to a table with a skin
     public TextButton addButton(String name, Skin skin, Table mainTable){
         TextButton button = new TextButton(name, skin);
         mainTable.add(button).fillX().padBottom(10);
@@ -32,11 +25,7 @@ public class MainController {
         return button;
     }
 
-    /**
-     * Shows a join game dialog that prompts the user for a pin.
-     * @param skin
-     * @param stage
-     */
+    // Shows a join game dialog that prompts the user for a pin.
     public void showJoinGameDialog(Skin skin, Stage stage) {
         final Dialog joinGameDialog = new Dialog("", skin);
         final TextField pinTextField = new TextField("", skin);
@@ -45,6 +34,7 @@ public class MainController {
         TextButton cancelButton = new TextButton("Cancel", skin);
         TextButton joinButton = new TextButton("Join", skin);
 
+        //Join game dialog is canceled
         cancelButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -53,6 +43,7 @@ public class MainController {
             }
         });
 
+        //Joins a multiplayer game based on game-pin
         joinButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -67,6 +58,8 @@ public class MainController {
                 Gdx.input.setOnscreenKeyboardVisible(false);
             }
         });
+
+        //Sets ui
         joinGameDialog.getContentTable().add(title).pad(10);
         joinGameDialog.getContentTable().row();
         joinGameDialog.getContentTable().add(pinTextField).width(100).pad(10);
@@ -79,11 +72,13 @@ public class MainController {
                              stage.getHeight() / 2 - joinGameDialog.getHeight() / 2);
     }
 
+
     public void showDialog(Skin skin, Stage stage, String title, String content) {
         final Dialog dialog = new Dialog(title, skin);
         TextButton okButton = new TextButton("Done", skin);
         Label message = new Label(content, skin);
 
+        //Hides dialog when okButton is clicked
         okButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -100,5 +95,4 @@ public class MainController {
                         stage.getHeight() / 2 - dialog.getHeight() / 2);
     }
 
-    
 }

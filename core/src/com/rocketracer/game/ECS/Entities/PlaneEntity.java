@@ -13,6 +13,8 @@ import com.rocketracer.game.ECS.Components.TypeComponent;
 import com.rocketracer.game.ECS.Components.VelocityComponent;
 
 public class PlaneEntity implements IGameObject {
+
+    //Attributes
     private Entity entity;
     private SpriteComponent spriteComponent;
     private PositionComponent positionComponent;
@@ -24,20 +26,24 @@ public class PlaneEntity implements IGameObject {
     private BoundsRectangleComponent boundsRectangleComponent;
     private Texture plane = new Texture(Gdx.files.internal("plane.png"));
 
+    // Constructor
     public PlaneEntity(float x, float y){
+
+        //Initiate entity with components
         this.entity = new Entity();
         this.spriteComponent = new SpriteComponent(plane);
         this.positionComponent = new PositionComponent(x,y);
         this.velocityComponent = new VelocityComponent();
         this.cleanupComponent = new CleanupComponent();
-
-        //Define types:
-        this.typeComponent = TypeComponent.OBSTACLE;
-        this.obstacleTypeComponent = SpecificTypeComponent.PLANE;
         this.collisionComponent = new CollisionComponent();
         spriteComponent.sprite.setSize(Math.round(spriteComponent.sprite.getWidth()*0.8),Math.round(spriteComponent.sprite.getHeight()*0.8) );
         this.boundsRectangleComponent = new BoundsRectangleComponent(Math.round(spriteComponent.sprite.getWidth()*2/3), Math.round(spriteComponent.sprite.getHeight()*2/3));
 
+        //Define types:
+        this.typeComponent = TypeComponent.OBSTACLE;
+        this.obstacleTypeComponent = SpecificTypeComponent.PLANE;
+
+        //Add components to entity
         entity.add(spriteComponent);
         entity.add(positionComponent);
         entity.add(velocityComponent);

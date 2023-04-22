@@ -7,7 +7,11 @@ import com.rocketracer.game.SharedData.GameConfig;
 
 public class BoundsRectangleComponent implements Component {
 
+
+    //Creates a new rectangle
     public Rectangle bounds = new Rectangle();
+
+    // Constructor
     public BoundsRectangleComponent(int width, int height ){
         bounds.width = width/ GameConfig.PPM;
         bounds.height = height/ GameConfig.PPM;

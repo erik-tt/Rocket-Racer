@@ -9,6 +9,5 @@ public interface IGameObject {
 
     //Method for creating an entity.
     void build();
-
     Entity getEntity();
 }

@@ -27,19 +27,18 @@ import java.util.Map;
 
 
 public class GameController implements GameEventListener, GameOverListener {
+
+    // Attributes
+
     private Engine engine;
     private RenderSystem renderSystem;
-
     private ControlSystem controlSystem;
-
     private MovementSystem movementSystem;
-
     private RocketEntity player = new RocketEntity();
     private FuelSystem fuelSystem;
     private ObstacleSpawnSystem obstacleSpawnSystem;
     private CleanupSystem cleanupSystem;
     private CollisionSystem collisionSystem;
-
     private BackgroundSystem backgroundSystem;
     private ScoreSystem scoreSystem;
     private BackgroundEntity background = new BackgroundEntity();
@@ -50,6 +49,7 @@ public class GameController implements GameEventListener, GameOverListener {
     private Boolean isMP;
 
 
+    // Constructor
     public GameController(SpriteBatch batch, Boolean isMP, String docID) {
         //Create the game engine:
         engine = new Engine();
@@ -104,6 +104,8 @@ public class GameController implements GameEventListener, GameOverListener {
         }
     }
 
+    //Methods
+
     public Engine getEngine(){
         return engine;
     }
@@ -118,7 +120,7 @@ public class GameController implements GameEventListener, GameOverListener {
 
     }
 
-    // -- GameOverListener impl --
+    // GameOverListener impl
     @Override
     public void onGameOver(Integer score) {
         if (isMP) {

@@ -11,13 +11,19 @@ import com.rocketracer.game.ECS.Components.VelocityComponent;
 
 import static com.badlogic.gdx.math.MathUtils.random;
 
+/**
+ * Deals with the movement of obstacles and power up in the game.
+ */
+
 public class MovementSystem extends IteratingSystem {
 
+    //Attributes
     private ComponentMapper<VelocityComponent> vMapper;
     private ComponentMapper<SpecificTypeComponent> tMapper;
     private ComponentMapper<PositionComponent> pMapper;
     private ComponentMapper<SpriteComponent> sMapper;
 
+    //Constructor
     public MovementSystem() {
         super(Family.all(VelocityComponent.class, SpecificTypeComponent.class, PositionComponent.class, SpriteComponent.class).get());
 
@@ -27,15 +33,13 @@ public class MovementSystem extends IteratingSystem {
         sMapper = ComponentMapper.getFor(SpriteComponent.class);
     }
 
+    //Method
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         SpecificTypeComponent type = tMapper.get(entity);
         VelocityComponent velocity = vMapper.get(entity);
         PositionComponent position = pMapper.get(entity);
         SpriteComponent sprite = sMapper.get(entity);
-
-        //TODO
-        //Create a more complex movement system based on type and gameplay difficulty
 
         //Just a random number from 1-10 for the obstacle speed in y direction.
         if (!velocity.isSpeedSet()) {
@@ -81,5 +85,4 @@ public class MovementSystem extends IteratingSystem {
         //Negative to move downwards
         position.y -= velocity.y * deltaTime;
     }
-
 }

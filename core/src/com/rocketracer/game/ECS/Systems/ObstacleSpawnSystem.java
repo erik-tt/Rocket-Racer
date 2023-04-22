@@ -12,29 +12,38 @@ import com.rocketracer.game.factory.GameObjectFactory;
 import com.rocketracer.game.factory.PlaneFactory;
 import com.rocketracer.game.factory.SatelliteFactory;
 
+/**
+ * Deals with how often the obstacles and power up appears
+ */
 public class ObstacleSpawnSystem extends IntervalSystem {
 
+    //Attributes
     private GameObjectFactory objectFactory;
     private Engine engine;
-
     private int counter = 0;
     private int fuelSpawnRate = 23;
     private int obstacleSpawnRate = 1;
 
-
+    //Constructor
     public ObstacleSpawnSystem(Engine engine) {
         super(GameConfig.OBSTACLE_SPAWN_TIME);
         this.engine = engine;
     }
 
+    //Method
     @Override
     protected void updateInterval() {
 
         float min = 0;
         float max = GameConfig.FRUSTUM_WIDTH ;
+
+        //Sets x-coordinate
         float obstacleX = MathUtils.random(min,max);
+
+        //Sets y-coordinate to screen-width
         float obstacleY = GameConfig.FRUSTUM_HEIGHT;
 
+        //Creates entities and speeds based on the set difficulty
         switch (GameConfig.DIFFICULTY) {
 
             case 1:
@@ -69,7 +78,7 @@ public class ObstacleSpawnSystem extends IntervalSystem {
                 break;
         }
 
-        //Spawn fuelcan
+        //Spawn fuel can
         if (counter % fuelSpawnRate == 0) {
             objectFactory = new FuelcanFactory(obstacleX, obstacleY);
             Entity fuelcan = objectFactory.create().getEntity();

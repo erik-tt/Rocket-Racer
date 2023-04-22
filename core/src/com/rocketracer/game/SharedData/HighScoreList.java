@@ -11,7 +11,8 @@ public class HighScoreList {
      */
     public static final HighScoreList sharedInstance = new HighScoreList();
 
-    // --- Attributes ---
+    //Attributes
+
     /** Private storing of highscore. */
     // Single player high scores
     private Map<String, Integer> spHighScores = new HashMap<>();
@@ -19,15 +20,15 @@ public class HighScoreList {
 
     private HighScoreListener mpHSListener;
 
-    // --- Construct - Private (Singleton) ---
+    // Constructor - Private (Singleton)
     private HighScoreList() {
-        // Fetch all highscores from LocalData
+        // Fetch all high scores from LocalData
         reloadHighScores();
     }
 
-    // --- Methods ---
+    //Methods
     public void reloadHighScores() {
-        // Fetch all highscores from LocalData
+        // Fetch all high scores from LocalData
         // Single player
         // Clear map
         spHighScores.clear();
@@ -49,7 +50,7 @@ public class HighScoreList {
         }
     }
 
-    // Get
+
     /**
      * Fetches the stored 'single player' high scores.
      * @return copy of highscore map.
@@ -71,7 +72,7 @@ public class HighScoreList {
     }
 
 
-    // -- Multiplayer --
+    // Multiplayer
     public void setMPHighScores(Map<Integer, Map.Entry<String, Integer>> highScores) {
         this.mpHighScores = highScores;
     }
