@@ -93,7 +93,7 @@ public class GameLobbyView implements Screen {
         Gdx.input.setInputProcessor(stage);
         mainTable.setFillParent(true);
 
-        backButton.setPosition(0, GameConfig.FRUSTUM_HEIGHT);
+        backButton.setPosition(15, GameConfig.FRUSTUM_HEIGHT+70);
         backButton.setSize(30, 550);
         backButton.addListener(new ClickListener(){
             @Override

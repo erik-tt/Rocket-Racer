@@ -38,8 +38,9 @@ public class MainController {
      * @param stage
      */
     public void showJoinGameDialog(Skin skin, Stage stage) {
-        final Dialog joinGameDialog = new Dialog("Join Game", skin);
+        final Dialog joinGameDialog = new Dialog("", skin);
         final TextField pinTextField = new TextField("", skin);
+        final Label title = new Label("Join Game",skin);
 
         TextButton cancelButton = new TextButton("Cancel", skin);
         TextButton joinButton = new TextButton("Join", skin);
@@ -66,10 +67,11 @@ public class MainController {
                 Gdx.input.setOnscreenKeyboardVisible(false);
             }
         });
-
-        joinGameDialog.getContentTable().add(pinTextField).width(200).pad(10);
-        joinGameDialog.getButtonTable().add(cancelButton).pad(10);
-        joinGameDialog.getButtonTable().add(joinButton).pad(10);
+        joinGameDialog.getContentTable().add(title).pad(10);
+        joinGameDialog.getContentTable().row();
+        joinGameDialog.getContentTable().add(pinTextField).width(100).pad(10);
+        joinGameDialog.getButtonTable().add(cancelButton).pad(8);
+        joinGameDialog.getButtonTable().add(joinButton).width(cancelButton.getWidth()).pad(8);
         joinGameDialog.setBackground(skin.getDrawable("button-over-c"));
         joinGameDialog.setHeight(joinGameDialog.getHeight()*1.3f);
         joinGameDialog.show(stage)
