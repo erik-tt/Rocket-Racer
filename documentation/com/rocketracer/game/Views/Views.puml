@@ -160,21 +160,23 @@ class StartView {
 }
         }
 
-        package com.rocketracer.game.controllers{}
-        
+        package com.badlogic.gdx {
+            interface Screen
+        }
 
-      com.rocketracer.game.views -up-> com.badlogic.Screen: uses
-        com.rocketracer.game.views -up-> com.rocketracer.game.controllers
+        com.rocketracer.game.views -up-> Screen: <<implements>>
 
-        StartView -right-> MainView: navigates to
-        MainView --> GameLobbyView: navigates to
+        StartView -up-> MainView: navigates to
+        MainView <-left-> GameLobbyView: navigates to
         
-        GameLobbyView --> GameView: navigates to (Multiplayer)
-        GameView -right-> GameOverView: navigates to
+        GameLobbyView -right-> GameView: navigates to (Multiplayer)
         MainView -right-> HighscoreView: navigates to
-        MainView --> GameView: navigates to (Singleplayer)
-        MainView --> HowToView: navigates to
-        GameOverView --> GameView: navigates to (Singleplayer)
+        HighscoreView --> MainView: navigates to
+
+        GameView <--> MainView: navigates to
+
+        MainView <-left-> HowToView: navigates to
+        GameOverView <-left-> GameView: navigates to
         GameOverView --> MainView: navigates to
 
 

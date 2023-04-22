@@ -31,8 +31,8 @@ interface HighScoreListener {
 }
 }
 
-FirebaseInterface --> GameJoinListener
-FirebaseInterface --> GameEventListener
-FirebaseInterface --> HighScoreListener
-FirebaseInterface --> GameOverListener
+FirebaseInterface -down-> GameJoinListener
+FirebaseInterface -left-> GameEventListener
+FirebaseInterface -down-> HighScoreListener
+FirebaseInterface -right-> GameOverListener
 @enduml
