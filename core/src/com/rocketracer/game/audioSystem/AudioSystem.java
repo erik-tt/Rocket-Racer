@@ -1,4 +1,4 @@
-package com.rocketracer.game.ECS.Systems;
+package com.rocketracer.game.audioSystem;
 
 
 import com.badlogic.gdx.Gdx;
@@ -6,7 +6,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.rocketracer.game.ECS.Entities.SoundEntity;
+import com.rocketracer.game.audioSystem.SoundEntity;
 
 public class AudioSystem {
     ImageButton soundButton;
