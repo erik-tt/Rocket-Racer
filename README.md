@@ -23,7 +23,7 @@ found at the [android developer site](https://developer.android.com/studio/run).
 It is recommended to use a newer phone or emulator as the game scales poor on screens smaller than 5" and a resolution lower than full hd 1080x1920.
 The application has been tested on android emulators using API 30 and newer.
 
-Some tests have been created, which can be run using ./gradlew test.
+Some tests have been created, which can be run using `./gradlew` test.
 Android studio can also display coverage by right clicking the test folder and pressing run test in tdt4240-g21 with coverage.
 
 
