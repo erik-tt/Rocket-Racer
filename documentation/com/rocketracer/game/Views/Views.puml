@@ -158,23 +158,24 @@ class StartView {
     + hide()
     + dispose()
 }
-
-                   GameOverView --|> Screen
-                   GameOverView ..> GameEventListener
-
-
-
         }
 
+        package com.rocketracer.game.controllers{}
+        
 
+      com.rocketracer.game.views -> com.badlogic.Screen: uses
+        com.rocketracer.game.views -> com.rocketracer.game.controllers
 
-        com.rocketracer.game.views --> com.badlogic.gdx
-        com.rocketracer.game.SharedData --> com.rocketracer.game
-      com.rocketracer.game.views -> com.badlogic.gdx: uses
-        com.rocketracer.game.views -> com.rocketracer.game.SharedData: uses
-        com.rocketracer.game.views -> com.rocketracer.game.controllers: uses
-        GameLobbyView -> GameLobbyController
-        com.rocketracer.game.views --> com.badlogic.gdx
-         om.rocketracer.game.SharedData --> com.rocketracer.game
+        StartView --> MainView: navigates to
+        MainView --> GameLobbyView: navigates to
+        
+        GameLobbyView --> GameView: navigates to (Multiplayer)
+        GameView --> GameOverView: navigates to
+        MainView --> HighscoreView: navigates to
+        MainView --> GameView: navigates to (Singleplayer)
+        MainView --> HowToView: navigates to
+        GameOverView --> GameView: navigates to (Singleplayer)
+        GameOverView --> MainView: navigates to
+
 
 @enduml
