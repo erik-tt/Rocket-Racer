@@ -41,8 +41,8 @@ package com.rocketracer.game.controllers {
         }
 }
 
-
-
+GameController -[hidden]down- MainController
+GameController -[hidden]right- GameLobbyController
 
 
 @enduml
