@@ -95,10 +95,15 @@ package com.rocketracer.game.ECS.Components {}
 interface GameOverListener {}
 abstract GameObjectFactory {}
 
+BackgroundSystem -[hidden]down-> MovementSystem
+ScoreSystem -[hidden]down-> CleanupSystem
+FuelSystem -[hidden]down-> ScoreSystem
+ObstacleSpawnSystem -[hidden]down-> BackgroundSystem
+
 CollisionSystem -down-> CollisionListener
 ControlSystem -down-> RenderSystem: uses
 FuelSystem -up-> GameOverListener
 ObstacleSpawnSystem -up-> GameObjectFactory
-com.rocketracer.game.ECS.Systems -up-> com.rocketracer.game.ECS.Components
+com.rocketracer.game.ECS.Systems --> com.rocketracer.game.ECS.Components
 
 @enduml
