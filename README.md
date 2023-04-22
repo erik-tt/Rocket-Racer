@@ -37,7 +37,7 @@ to get the highest possible score and enter the high score list.
 ## Structure
 The code is structured using three modules: desktop, core and android. There are also other packages like
 gradle which contain the configuration files and assets which contain images and other similar resources.
-There can be found detailed class diagrams in the [documentation directory](https://gitlab.stud.idi.ntnu.no/sindroye/tdt4240-g21/-/tree/29-write-readme-docs/documentation/com/rocketracer/game)
+There can be found detailed class diagrams in the [documentation directory](https://gitlab.stud.idi.ntnu.no/sindroye/tdt4240-g21/-/tree/29-write-readme-docs/documentation/com/rocketracer/game).
 
 
 ### Core
