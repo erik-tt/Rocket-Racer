@@ -37,6 +37,8 @@ to get the highest possible score and enter the high score list.
 ## Structure
 The code is structured using three modules: desktop, core and android. There are also other packages like
 gradle which contain the configuration files and assets which contain images and other similar resources.
+There can be found detailed class diagrams in the [documentation directory](https://gitlab.stud.idi.ntnu.no/sindroye/tdt4240-g21/-/tree/29-write-readme-docs/documentation/com/rocketracer/game)
+
 
 ### Core
 Core is where the business logic lies together with the controllers and views. Its structure is 
@@ -48,6 +50,7 @@ by the objects (or entities) and the System package defines the code that work o
 contain certain components. There is also code for the factory pattern in code, located in the factory-package.
 The SharedData package contains classes that are used throughout the system, including some that use the
 singleton pattern.
+
 
 ### Android
 The android module is used to run the application on android and the important classes are the AndroidLauncher
