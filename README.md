@@ -65,3 +65,17 @@ remote in the cloud.
 ### Desktop
 The desktop module is used to run the application on desktop and the important class is the DesktopLauncher.
 
+## Resources
+We have used some resources during our development process as we were all new to LibGDX.
+The sources we have found most inspiration are listed below.
+
+A game development blog using Ashley ECS:
+
+John Day. (2017). "Full LibGDX Game Tutorial - Entities using Ashley(ECS)". Web: [https://www.gamedevelopment.blog/full-libgdx-game-tutorial-entities-ashley/](https://www.gamedevelopment.blog/full-libgdx-game-tutorial-entities-ashley/)
+/Accessed 22.04.23
+
+A public github repo using Ashley:
+
+Daniel Platon (2017). "Obstacle Course". Web: [https://github.com/dplaton/obstacle-course](https://github.com/dplaton/obstacle-course)/Accessed 22.04.23
+
+
