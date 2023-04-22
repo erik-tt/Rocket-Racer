@@ -2,9 +2,13 @@
 
 skinparam classAttributeIconSize 0
 
-interface Component
 
-class BackgroundComponent {
+
+package com.rocketracer.game.ECS.Components {
+    package com.badlogic.ashley.core {
+        interface Component
+    }
+    class BackgroundComponent {
     - y1: float
     - y2: float
     - speed: int
@@ -76,17 +80,18 @@ class VelocityComponent {
     + setSpeed(x: float, y: float): void
     + isSpeedSet(): boolean
 }
+}
 
-Component <|-- BackgroundComponent
-Component <|-- BoundsCircleComponent
-Component <|-- BoundsRectangleComponent
-Component <|-- CollisionComponent
-Component <|-- FuelComponent
-Component <|-- PositionComponent
-Component <|-- ScoreComponent
-Component <|-- SpriteComponent
-Component <|-- VelocityComponent
-Component <|-- SpecificTypeComponent
-Component <|-- TypeComponent
+Component <|-down- BackgroundComponent: <<implements>>
+Component <|-down- BoundsCircleComponent: <<implements>>
+Component <|-down- BoundsRectangleComponent: <<implements>>
+Component <|-down- CollisionComponent: <<implements>>
+Component <|-up- FuelComponent: <<implements>>
+Component <|-up- PositionComponent: <<implements>>
+Component <|-up- ScoreComponent: <<implements>>
+Component <|-up- SpriteComponent: <<implements>>
+Component <|-right- VelocityComponent: <<implements>>
+Component <|-left- SpecificTypeComponent: <<implements>>
+Component <|-left- TypeComponent: <<implements>>
 
 @enduml
