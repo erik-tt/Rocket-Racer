@@ -3,6 +3,7 @@ This is project is part of the course TDT4240 Software Architecture at NTNU. Thi
 created during the requirements and architecture phase. 
 
 ## How to run and build
+
 To build the application use the command`./gradlew build` for mac or linux or `.\gradlew build` for windows power shell in the command line. 
 Using the android studio editor, Make Project will also build the project. 
 
@@ -21,6 +22,9 @@ found at the [android developer site](https://developer.android.com/studio/run).
 
 It is recommended to use a newer phone or emulator as the game scales poor on screens smaller than 5" and a resolution lower than full hd 1080x1920.
 The application has been tested on android emulators using API 30 and newer.
+
+Some tests have been created, which can be run using ./gradlew test.
+Android studio can also display coverage by right clicking the test folder and pressing run test in tdt4240-g21 with coverage.
 
 
 
