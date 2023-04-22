@@ -5,15 +5,24 @@ created during the requirements and architecture phase.
 ## How to run and build
 To build the application use the command`./gradlew build` for mac or linux or `.\gradlew build` for windows power shell in the command line. 
 Using the android studio editor, Make Project will also build the project. 
+
 The project can be run using an emulated android device or a physical device.
 In android studio an emulated device can be created with the device manager and it runs with the android module.
-When the android emulator is configured select android in the run configurations and run the application. It is recommended to use a newer phone or emulator as the game scales poor on screens smaller than 5" and a resolution lower than 720x1280. 
+When the android emulator is configured select android in the run configurations and run the application.
+
+There has been provided an APK file which is located in the root repository. This can also be used to run
+the application.
 
 The application can be run using the desktop module, but is not recommended as it scales poorly. It can
 however be ok to test small changes fast in a development environment.
 
 If you are having trouble building or running the application a more detailed guide can be 
 found at the [android developer site](https://developer.android.com/studio/run).
+
+It is recommended to use a newer phone or emulator as the game scales poor on screens smaller than 5" and a resolution lower than full hd 1080x1920.
+The application has been tested on android emulators using API 30 and newer.
+
+
 
 ## About the application
 The application is a game where the player controls a rocket and the goal is to stay on course towards
