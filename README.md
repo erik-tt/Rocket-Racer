@@ -46,7 +46,7 @@ Plant UML code and png files are provided.
 
 To provide an overview of the structure we have provided the main overview of the application used when describing the logical view.
 
-<img width="500" src = "/documentation/com/rocketracer/game/LogicalView.png"> 
+<img width="1000" src = "/documentation/com/rocketracer/game/LogicalView.png"> 
 
 
 ### Core
