@@ -44,6 +44,9 @@ gradle which contain the configuration files and assets which contain images and
 There can be found detailed class diagrams in the [documentation directory](https://gitlab.stud.idi.ntnu.no/sindroye/tdt4240-g21/-/tree/29-write-readme-docs/documentation/com/rocketracer/game).
 Plant UML code and png files are provided.
 
+To provide an overview of the structure we have provided the main overview of the application used when describing the logical view.
+![Logical view](https://gitlab.stud.idi.ntnu.no/sindroye/tdt4240-g21/-/blob/29-write-readme-docs/documentation/com/rocketracer/game/LogicalView.png)
+
 
 ### Core
 Core is where the business logic lies together with the controllers and views. Its structure is 
