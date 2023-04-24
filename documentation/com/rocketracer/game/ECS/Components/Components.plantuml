@@ -1,0 +1,97 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+
+
+package com.rocketracer.game.ECS.Components {
+    package com.badlogic.ashley.core {
+        interface Component
+    }
+    class BackgroundComponent {
+    - y1: float
+    - y2: float
+    - speed: int
+    + BackgroundComponent(y1: float, y2: float, speed: int)
+}
+
+class BoundsCircleComponent {
+    - bounds: Circle
+    + BoundsCircleComponent(radius: int)
+}
+
+class BoundsRectangleComponent {
+    - bounds: Rectangle
+    + BoundsRectangleComponent(width: int, height: int)
+}
+
+class CollisionComponent {
+    - collidedEntity: Entity
+    - hit: boolean
+    + reset()
+}
+
+class FuelComponent {
+    - fuelLevel: int
+    - maxFuelLevel: int
+    + FuelComponent(fuelLevel: int)
+}
+
+class PositionComponent {
+    - x: float
+    - y: float
+    + PositionComponent(x: float, y: float)
+    + updateX(x: float): void
+    + printPosition(): void
+}
+
+class ScoreComponent {
+    - score: int
+    - gameOver: boolean
+    + ScoreComponent(score: int)
+    + getScore(): int
+}
+
+enum SpecificTypeComponent {
+    BIRD
+    PLANE
+    ASTEROID
+    SATELLITE
+    FUELCAN
+}
+
+class SpriteComponent {
+    - sprite: Sprite
+    - texture: Texture
+    + SpriteComponent(texture: Texture)
+}
+
+enum TypeComponent {
+    OBSTACLE
+    POWERUP
+    ROCKET
+}
+
+class VelocityComponent {
+    - x: float
+    - y: float
+    - speedSet: boolean
+    + VelocityComponent()
+    + setSpeed(x: float, y: float): void
+    + isSpeedSet(): boolean
+}
+}
+
+Component <|-down- BackgroundComponent: <<implements>>
+Component <|-down- BoundsCircleComponent: <<implements>>
+Component <|-down- BoundsRectangleComponent: <<implements>>
+Component <|-down- CollisionComponent: <<implements>>
+Component <|-up- FuelComponent: <<implements>>
+Component <|-up- PositionComponent: <<implements>>
+Component <|-up- ScoreComponent: <<implements>>
+Component <|-up- SpriteComponent: <<implements>>
+Component <|-right- VelocityComponent: <<implements>>
+Component <|-left- SpecificTypeComponent: <<implements>>
+Component <|-left- TypeComponent: <<implements>>
+
+@enduml

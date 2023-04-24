@@ -1,0 +1,123 @@
+@startuml
+
+package com.rocketracer.game.ECS.Entity {
+    interface IGameObject {
+        + build()
+        + getEntity() : Entity
+    }
+
+    class AsteroidEntity {
+    - entity : Entity
+    - spriteComponent : SpriteComponent
+    - positionComponent : PositionComponent
+    - velocityComponent : VelocityComponent
+    - cleanupComponent : CleanupComponent
+    - typeComponent : TypeComponent
+    - obstacleTypeComponent : SpecificTypeComponent
+    - collisionComponent : CollisionComponent
+    - boundsCircleComponent : BoundsCircleComponent
+    - asteroid : Texture
+    + AsteroidEntity(x: float, y: float)
+    + getEntity() : Entity
+    + build()
+}
+
+class BackgroundEntity {
+    - entity : Entity
+    - spriteComponent : SpriteComponent
+    - positionComponent : PositionComponent
+    - velocityComponent : VelocityComponent
+    - backgroundComponent : BackgroundComponent
+    - background : Texture
+    + BackgroundEntity()
+    + getEntity() : Entity
+    + build()
+}
+
+class BirdEntity {
+    - entity : Entity
+    - spriteComponent : SpriteComponent
+    - positionComponent : PositionComponent
+    - velocityComponent : VelocityComponent
+    - cleanupComponent : CleanupComponent
+    - obstacleTypeComponent : SpecificTypeComponent
+    - collisionComponent : CollisionComponent
+    - boundsCircleComponent : BoundsCircleComponent
+    - bird : Texture
+    + BirdEntity(x: float, y: float)
+    + getEntity() : Entity
+    + build()
+}
+
+class FuelcanEntity {
+    - entity : Entity
+    - spriteComponent : SpriteComponent
+    - positionComponent : PositionComponent
+    - cleanupComponent : CleanupComponent
+    - velocityComponent : VelocityComponent
+    - typeComponent : TypeComponent
+    - obstacleTypeComponent : SpecificTypeComponent
+    - collisionComponent : CollisionComponent
+    - boundsRectangleComponent : BoundsRectangleComponent
+    - fuelcan : Texture
+    + FuelcanEntity(x: float, y: float)
+    + getEntity() : Entity
+    + build()
+}
+
+class PlaneEntity {
+    - entity : Entity
+    - spriteComponent : SpriteComponent
+    - positionComponent : PositionComponent
+    - velocityComponent : VelocityComponent
+    - cleanupComponent : CleanupComponent
+    - typeComponent : TypeComponent
+    - obstacleTypeComponent : SpecificTypeComponent
+    - collisionComponent : CollisionComponent
+    - boundsRectangleComponent : BoundsRectangleComponent
+    - plane : Texture
+    + PlaneEntity(x: float, y: float)
+    + getEntity() : Entity
+    + build()
+}
+
+class RocketEntity {
+  - entity: Entity
+  - spriteComponent: SpriteComponent
+  - positionComponent: PositionComponent
+  - fuelComponent: FuelComponent
+  - scoreComponent: ScoreComponent
+  - rocket: Texture
+  - collisionComponent: CollisionComponent
+  - boundsRectangleComponent: BoundsRectangleComponent
+  - typeComponent: TypeComponent
+  + RocketEntity()
+  + getEntity(): Entity
+}
+
+class SatelliteEntity {
+  - entity: Entity
+  - spriteComponent: SpriteComponent
+  - positionComponent: PositionComponent
+  - velocityComponent: VelocityComponent
+  - cleanupComponent: CleanupComponent
+  - typeComponent: TypeComponent
+  - obstacleTypeComponent: SpecificTypeComponent
+  - collisionComponent: CollisionComponent
+  - boundsCircleComponent: BoundsCircleComponent
+  - satellite: Texture
+  + SatelliteEntity(x: float, y: float)
+  + getEntity(): Entity
+  + build()
+}
+}
+
+
+AsteroidEntity -up-|> IGameObject
+BackgroundEntity -left-|> IGameObject
+BirdEntity -up-|> IGameObject
+FuelcanEntity -up-|> IGameObject
+PlaneEntity -right-|> IGameObject
+SatelliteEntity -up-|> IGameObject
+
+@enduml

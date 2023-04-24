@@ -1,0 +1,183 @@
+@startuml
+        package com.rocketracer.game.views {
+            class GameLobbyView {
+                - batch: SpriteBatch
+                - stage: Stage
+                - atlas: TextureAtlas
+                - skin: Skin
+                - gamePinLabel: Label
+                - startGameButton: TextButton
+                - playerTable: Table
+                - mainTable: Table
+                - camera: Camera
+                - viewport: Viewport
+                - font: Label.LabelStyle
+                - backButton: ImageButton
+                - playerTitle: Label
+                - controller: GameLobbyController
+                + GameLobbyView(docID: String, pin: Integer)
+                + show()
+                + render(delta: float)
+                + resize(width: int, height: int)
+                + pause()
+                + resume()
+                + hide()
+                + dispose()
+                + reloadTable()
+            }
+                    class GameOverView {
+                        - batch: SpriteBatch
+                        - stage: Stage
+                        - viewport: Viewport
+                        - camera: Camera
+                        - atlas: TextureAtlas
+                        - skin: Skin
+                        - gameOverTable: Table
+                        - scoreTable: Table
+                        - score: Integer
+                        - font: Label.LabelStyle
+                        - docID: String
+                        - mpScores: Map<String, Long>
+                        + GameOverView(score: Integer, docID: String)
+                        + show(): void
+                        + render(delta: float): void
+                        + resize(width: int, height: int): void
+                        + pause(): void
+                        + resume(): void
+                        + hide(): void
+                        + dispose(): void
+                        + getDocID(): String
+                        + newSnapshotData(data: Map<String, Object>): void
+                    }
+                    class GameView {
+                        - batch: SpriteBatch
+                        - stage: Stage
+                        - viewport: Viewport
+                        - camera: Camera
+                        - atlas: TextureAtlas
+                        - skin: Skin
+                        - backButton: ImageButton
+                        - font: BitmapFont
+                        - gameController: GameController
+                        - score: int
+                        - fuelLevel: int
+
+                        + GameView(mpGame: Boolean, docID: String)
+                        + show(): void
+                        + render(delta: float): void
+                        + resize(width: int, height: int): void
+                        + pause(): void
+                        + resume(): void
+                        + hide(): void
+                        + dispose(): void
+                    }
+                    class HighscoreView {
+                        - batch: SpriteBatch
+                        # stage: Stage
+                        - viewport: Viewport
+                        - camera: Camera
+                        - atlas: TextureAtlas
+                        # skin: Skin
+                        - font: Label.LabelStyle
+                        - highscoreTable: Table
+                        - backButton: ImageButton
+                        - mpHighScores: Map<Integer, Map.Entry<String, Integer>>
+
+                        + HighscoreView()
+                        + show()
+                        + render(delta: float)
+                        + resize(width: int, height: int)
+                        + pause()
+                        + resume()
+                        + hide()
+                        + dispose()
+                        + onHighScoreFetched(mpHighScores: Map<Integer, Map.Entry<String, Integer>>)
+}
+class HowToView {
+    - batch: SpriteBatch
+    - stage: Stage
+    - viewport: Viewport
+    - camera: Camera
+    - atlas: TextureAtlas
+    - skin: Skin
+    - image: Image
+    - backButton: ImageButton
+
+    + HowToView()
+    + show(): void
+    + render(delta: float): void
+    + resize(width: int, height: int): void
+    + pause(): void
+    + resume(): void
+    + hide(): void
+    + dispose(): void
+}
+class MainView {
+  -batch: SpriteBatch
+  -stage: Stage
+  -viewport: Viewport
+  -camera: Camera
+  -atlas: TextureAtlas
+  -skin: Skin
+  -mainTable: Table
+  -mainController: MainController
+  -soundEntity: SoundEntity
+  -image: Image
+  -textField: TextField
+  -playerTag: String
+  -audioSystem: AudioSystem
+  -hasInit: boolean
+  +MainView(playerTag: String)
+  +show(): void
+  +render(delta: float): void
+  +resize(width: int, height: int): void
+  +pause(): void
+  +resume(): void
+  +hide(): void
+  +dispose(): void
+  +onGameLoaded(docID: String, pin: Integer): void
+  +onGameError(message: String): void
+}
+class StartView {
+    - batch: SpriteBatch
+    - stage: Stage
+    - viewport: Viewport
+    - camera: Camera
+    - atlas: TextureAtlas
+    - skin: Skin
+    - startTable: Table
+    - font: Label.LabelStyle
+    - textField: TextField
+    - image: Image
+    + StartView()
+    + show()
+    + render(delta: float)
+    + resize(width: int, height: int)
+    + pause()
+    + resume()
+    + hide()
+    + dispose()
+}
+        }
+
+        package com.badlogic.gdx {
+            interface Screen
+        }
+
+        com.rocketracer.game.views -up-> Screen: <<implements>>
+
+        StartView -up-> MainView: navigates to
+        MainView <-left-> GameLobbyView: navigates to
+        
+        GameLobbyView -right-> GameView: navigates to (Multiplayer)
+        MainView -right-> HighscoreView: navigates to
+        HighscoreView --> MainView: navigates to
+
+        GameView <--> MainView: navigates to
+
+        MainView <-left-> HowToView: navigates to
+        GameOverView <-left-> GameView: navigates to
+        GameOverView --> MainView: navigates to
+
+
+@enduml

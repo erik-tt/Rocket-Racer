@@ -1,0 +1,71 @@
+@startuml
+package com.rocketracer.game.SharedData {
+  class GameConfig {
+    - PPM: float = 32.0f
+    - FRUSTUM_WIDTH: float = Gdx.graphics.getWidth()/PPM
+    - FRUSTUM_HEIGHT: float = Gdx.graphics.getHeight()/PPM
+    - PIXELS_TO_METRES: float = 1.0f / PPM
+    - OBSTACLE_SPAWN_TIME: float = 0.7f
+    + DIFFICULTY: int = 1
+    - GameConfig()
+  }
+  
+  class HighScoreList {
+    + sharedInstance: HighScoreList
+    - spHighScores: Map<String, Integer>
+    - mpHighScores: Map<Integer, Map.Entry<String, Integer>>
+    - mpHSListener: HighScoreListener
+    - HighScoreList()
+    + reloadHighScores(): void
+    + printSPHighScoreList(): void
+    + getSPHighScores(): Map<String, Integer>
+    + addSPScore(name: String, score: Integer): void
+    + setMPHighScores(highScores: Map<Integer, Map.Entry<String, Integer>>): void
+    + listenMPHighScores(highScoreListener: HighScoreListener): void
+    + sendToListener(): void
+    + printMPHighScoreList(): void
+  }
+  
+  class LocalData {
+    + sharedInstance: LocalData
+    - prefs: Preferences
+    - FBIHandler: FirebaseInterface
+    + playerName: String = "Player"
+    - mainView: MainView
+    - LocalData()
+    + init(): int
+    + getHighScore(name: String): int
+    + getSPHighScores(): Map<String, ?>
+    + setHighScore(score: int, name: String): void
+    + setMainView(mainView: MainView): void
+    + getMainView(): MainView
+    + setFBIHandler(FBIHandler: FirebaseInterface): void
+    + getFBIHandler(): FirebaseInterface
+  }
+  
+  class MainView {
+    - playerName: String
+    - MainView(playerTag: String)
+    + updateHighScoreList(highScoreList: HighScoreList): void
+  }
+}
+interface FirebaseInterface {
+    + createGame(): Integer
+    + joinGame(gamePin: Integer, name: String): void
+    + loadHighScoreList(): void
+    + setGameScore(score: int): void
+    + updateHighscoreList(name: String, score: int): void
+    + writeData(map: HashMap<String, Object>, documentPath: String): void
+    + setListener(listener: GameJoinListener): void
+    + setGameListener(listener: GameEventListener): void
+    + removeGameListener(): void
+}
+interface HighScoreListener {
+    + onHighScoreFetched(mpHighScores: Map<Integer, Map.Entry<String, Integer>>): void
+  }
+
+  HighScoreList -- LocalData
+  LocalData --> FirebaseInterface
+  LocalData -- MainView
+  HighScoreList --> HighScoreListener
+@enduml
