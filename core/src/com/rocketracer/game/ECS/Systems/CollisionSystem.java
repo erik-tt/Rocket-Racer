@@ -57,6 +57,10 @@ public class CollisionSystem extends EntitySystem {
                 setBounds(playerEntity);
                 setBounds(obstacleEntity);
 
+                if (collisionComponent.hit) {
+                    continue;
+                }
+
                 //Checks if collision has happened
                 if (checkCollision(playerEntity, obstacleEntity)) {
                     collisionComponent.hit = true;
