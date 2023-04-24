@@ -51,9 +51,8 @@ public class HighscoreView implements Screen, HighScoreListener {
         atlas = new TextureAtlas("CustomSkin.atlas");
         skin = new Skin(Gdx.files.internal("CustomSkin.json"), atlas);
 
-        Texture texture = new Texture(Gdx.files.internal("backArrow.png"));
-        TextureRegionDrawable backArrowDrawable = new TextureRegionDrawable(new TextureRegion(texture));
-        backButton = new ImageButton(backArrowDrawable);
+
+
 
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
@@ -77,17 +76,22 @@ public class HighscoreView implements Screen, HighScoreListener {
 
         //Set table to fill stage
         highscoreTable.setFillParent(true);
+
+
         Label highscoreLabel = new Label("MP HIGHSCORES", font);
 
         highscoreTable.add(highscoreLabel).expandX();
+        Texture texture = new Texture(Gdx.files.internal("backArrow.png"));
+        TextureRegionDrawable backArrowDrawable = new TextureRegionDrawable(new TextureRegion(texture));
+        backButton = new ImageButton(backArrowDrawable);
+        backButton.setSize(30,30);
+        backButton.setPosition(0, 400);
 
-        backButton.setPosition(0, GameConfig.FRUSTUM_HEIGHT*2);
-        backButton.setSize(30, 550);
-        backButton.addListener(new ClickListener(){
-            @Override
+        backButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 ((Game)Gdx.app.getApplicationListener())
                         .setScreen(LocalData.sharedInstance.getMainView());
+
             }
         });
 

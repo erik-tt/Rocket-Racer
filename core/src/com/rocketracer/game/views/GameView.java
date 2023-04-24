@@ -55,7 +55,7 @@ public class GameView implements Screen {
         batch = new SpriteBatch();
 
         camera = new OrthographicCamera();
-        viewport = new FitViewport(1080/5, 2340/5, camera);
+        viewport = new FitViewport(GameConfig.FRUSTUM_WIDTH, GameConfig.FRUSTUM_HEIGHT, camera);
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
         camera.update();
         stage = new Stage(viewport, batch);
@@ -64,7 +64,7 @@ public class GameView implements Screen {
         backButton = new ImageButton(backArrowDrawable);
         gameController = new GameController(batch, mpGame, docID);
         font = skin.getFont("font");
-        font.getData().setScale(GameConfig.FRUSTUM_WIDTH/230);
+        font.getData().setScale(0.2f);
 
     }
 
@@ -72,13 +72,13 @@ public class GameView implements Screen {
     public void show() {
         //Stage should control input:
         Gdx.input.setInputProcessor(stage);
-        backButton.setPosition(5, GameConfig.FRUSTUM_HEIGHT*4/2);
-        backButton.setSize(30, 500);
-        backButton.addListener(new ClickListener(){
-            @Override
+        backButton.setPosition(GameConfig.FRUSTUM_WIDTH/20, GameConfig.FRUSTUM_HEIGHT*9/10);
+        backButton.setSize(GameConfig.FRUSTUM_WIDTH/7, GameConfig.FRUSTUM_WIDTH/7);
+        backButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 ((Game)Gdx.app.getApplicationListener())
                         .setScreen(LocalData.sharedInstance.getMainView());
+
             }
         });
 
@@ -96,6 +96,8 @@ public class GameView implements Screen {
 
         gameController.getEngine().update(delta);
 
+        stage.act(delta);
+        stage.draw();
 
         ImmutableArray<Entity> scoreArray = gameController.getEngine().getEntitiesFor(Family.one(ScoreComponent.class).get());
         ScoreComponent scoreComponent = scoreArray.get(0).getComponent(ScoreComponent.class);
@@ -107,7 +109,7 @@ public class GameView implements Screen {
         fuelLevel = fuelComponent.fuelLevel;
 
         batch.begin();
-        font.draw(batch, Integer.toString(score), GameConfig.FRUSTUM_WIDTH*4/5, GameConfig.FRUSTUM_HEIGHT*14/15);
+        font.draw(batch, Integer.toString(score), GameConfig.FRUSTUM_WIDTH*3/4, GameConfig.FRUSTUM_HEIGHT*14/15);
         batch.end();
 
         Texture fuelLevelTexture = new Texture(Gdx.files.internal("fuellevelTitle.png"));
@@ -118,9 +120,6 @@ public class GameView implements Screen {
         font.draw(batch,  Integer.toString(fuelLevel), GameConfig.FRUSTUM_WIDTH*13/15, GameConfig.FRUSTUM_HEIGHT*4/25);
         batch.end();
 
-
-        stage.act(delta);
-        stage.draw();
 
 
     }
