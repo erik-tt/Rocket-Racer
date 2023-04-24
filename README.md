@@ -44,10 +44,6 @@ gradle which contain the configuration files and assets which contain images and
 There can be found detailed class diagrams in the [documentation directory](/documentation/com/rocketracer/game).
 Plant UML code and png files are provided.
 
-To provide an overview of the structure we have provided the main overview of the application used when describing the logical view.
-
-<img width="1000" src = "/documentation/com/rocketracer/game/LogicalView.png"> 
-
 
 ### Core
 Core is where the business logic lies together with the controllers and views. Its structure is 
@@ -68,6 +64,11 @@ remote in the cloud.
 
 ### Desktop
 The desktop module is used to run the application on desktop and the important class is the DesktopLauncher.
+
+
+To provide an overview of the structure we have provided the main overview of the application used when describing the logical view.
+
+<img width="1000" src = "/documentation/com/rocketracer/game/LogicalView.png"> 
 
 ## Resources
 We have used some resources during our development process as we were all new to LibGDX.
