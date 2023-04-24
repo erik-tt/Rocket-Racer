@@ -12,7 +12,8 @@ In android studio an emulated device can be created with the device manager and 
 When the android emulator is configured select android in the run configurations and run the application.
 
 There has been provided an APK file which is located in the root repository. This can also be used to run
-the application.
+the application. It is called android-debug.apk and can be dragged onto a running emulator or physical device to install it.
+The game is called rocket-racer and has the LibGDX symbol.
 
 The application can be run using the desktop module, but is not recommended as it scales poorly. It can
 however be ok to test small changes fast in a development environment.
