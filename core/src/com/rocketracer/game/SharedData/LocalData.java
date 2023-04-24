@@ -12,7 +12,8 @@ public class LocalData {
      */
     public static final LocalData sharedInstance = new LocalData();
 
-    // --- Attributes ---
+    // Attributes
+
     /** Private storing of highscore. */
     // Single player high scores
     private Preferences prefs;
@@ -26,12 +27,12 @@ public class LocalData {
     // View refs
     private MainView mainView;
 
-    // --- Construct - Private (Singleton) ---
+    // Construct - Private (Singleton)
     private LocalData() {
         
     }
 
-    // --- Methods ---
+    //Methods
     private int init() {
         if (prefs != null) return 0;
         try {
@@ -43,7 +44,7 @@ public class LocalData {
         }
         return 0;
     }
-    // Get
+
     // Get high score by name
     public int getHighScore(String name) {
         if (init() == -1) return -1;
@@ -62,7 +63,6 @@ public class LocalData {
         return prefs.get();
     }
 
-    // Set
     /**
      * Sets the high score for a given name if the score is higher than the current high score.
      * @param score

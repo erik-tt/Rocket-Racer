@@ -3,17 +3,19 @@ package com.rocketracer.game.ECS.Components;
 import com.badlogic.ashley.core.Component;
 
 public class VelocityComponent implements Component {
-    // --- Attributes ---
+    // Attributes
     public float x;
     public float y;
     public boolean speedSet = false;
 
-
-    // --- Constructors ---
+    //  Constructor
     public VelocityComponent() {
 
     }
 
+    //Methods
+
+    //Sets speed
     public void setSpeed(float x, float y) {
         this.x = x;
         this.y = y;

@@ -4,13 +4,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class SpriteComponent implements Component {
-    // --- Attributes ---
+    // Attributes
     public Sprite sprite;
     public Texture texture;
 
-    // TODO: Support animations etc?
-
-    // --- Constructor ---
+    // Constructor
     public SpriteComponent(Texture texture) {
         this.texture = texture;
         this.sprite = new Sprite(texture);

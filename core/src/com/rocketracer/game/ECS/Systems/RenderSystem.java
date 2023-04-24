@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -16,25 +15,14 @@ import com.rocketracer.game.SharedData.GameConfig;
 
 import java.util.Comparator;
 
-
+/**
+ * Deals with rendering the entities in the game.
+ */
 public class RenderSystem extends IteratingSystem {
-
-
 
     // static method to get screen width in metres
     private static Vector2 meterDimensions = new Vector2();
     private static Vector2 pixelDimensions = new Vector2();
-    public static Vector2 getScreenSizeInMeters(){
-        meterDimensions.set(Gdx.graphics.getWidth()*GameConfig.PIXELS_TO_METRES,
-                            Gdx.graphics.getHeight()*GameConfig.PIXELS_TO_METRES);
-        return meterDimensions;
-    }
-
-    // static method to get screen size in pixels
-    public static Vector2 getScreenSizeInPixesl(){
-        pixelDimensions.set(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        return pixelDimensions;
-    }
 
     // convenience method to convert pixels to meters
     public static float PixelsToMeters(float pixelValue){
@@ -53,10 +41,7 @@ public class RenderSystem extends IteratingSystem {
             SpriteComponent.class,
             PositionComponent.class).get();
 
-    /**
-     * Constructor
-     * @param batch the spritebatch to use for rendering
-     */
+    //Constructor
 	public RenderSystem(SpriteBatch batch) {
         // gets all entities with a sprite and position component
         super(Family.all(SpriteComponent.class, PositionComponent.class).get());
@@ -107,12 +92,12 @@ public class RenderSystem extends IteratingSystem {
         renderQueue.clear();
     }
 
+    //Methods
     @Override
     public void processEntity(Entity entity, float deltaTime) {
         renderQueue.add(entity);
     }
 
-    // convenience method to get camera
     public OrthographicCamera getCamera() {
         return cam;
     }

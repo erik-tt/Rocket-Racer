@@ -14,6 +14,8 @@ import com.rocketracer.game.ECS.Components.VelocityComponent;
 
 
 public class BirdEntity implements IGameObject {
+
+    //Attributes
     private final TypeComponent typeComponent;
     private Entity entity;
     private SpriteComponent spriteComponent;
@@ -21,13 +23,12 @@ public class BirdEntity implements IGameObject {
     private VelocityComponent velocityComponent;
     private CleanupComponent cleanupComponent;
     private SpecificTypeComponent obstacleTypeComponent;
-
     private CollisionComponent collisionComponent;
     private BoundsCircleComponent boundsCircleComponent;
-
     private Texture bird = new Texture(Gdx.files.internal("flyingBird.png"));
 
 
+    //Constructor
     public BirdEntity(float x, float y){
 
         //Initiate entity with components
@@ -36,12 +37,16 @@ public class BirdEntity implements IGameObject {
         spriteComponent.sprite.setSize(200,200);
         this.positionComponent = new PositionComponent(x,y);
         this.velocityComponent = new VelocityComponent();
-        this.typeComponent = TypeComponent.OBSTACLE;
-        this.obstacleTypeComponent = SpecificTypeComponent.BIRD;
         this.cleanupComponent = new CleanupComponent();
         this.collisionComponent = new CollisionComponent();
         this.boundsCircleComponent = new BoundsCircleComponent(Math.round(spriteComponent.sprite.getWidth()/6));
 
+        //Define types
+        this.typeComponent = TypeComponent.OBSTACLE;
+        this.obstacleTypeComponent = SpecificTypeComponent.BIRD;
+
+
+        //Add components to entity
         entity.add(spriteComponent);
         entity.add(positionComponent);
         entity.add(velocityComponent);
@@ -50,10 +55,9 @@ public class BirdEntity implements IGameObject {
         entity.add(obstacleTypeComponent);
         entity.add(collisionComponent);
         entity.add(boundsCircleComponent);
-
-
     }
 
+    // Methods
     public Entity getEntity(){ return entity;}
 
     @Override
