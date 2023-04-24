@@ -1,0 +1,56 @@
+@startuml
+
+package com.rocketracer.game.audioSystem {
+    class AudioSystem {
+        -soundButton: ImageButton
+        -music: Music
+        +AudioSystem(soundEntity: SoundEntity)
+        +getSoundButton(): ImageButton
+    }
+
+    class SoundEntity {
+        -sound: TextureRegionDrawable
+        -mute: TextureRegionDrawable
+        -soundEnabled: boolean
+        +SoundEntity()
+        +getSound(): TextureRegionDrawable
+        +getMute(): TextureRegionDrawable
+        +setSoundEnabled(soundEnabled: boolean): void
+        +getSoundEnabled(): boolean
+    }
+}
+package com.badlogic.gdx.audio {
+    class Music {
+        +play(): void
+        +stop(): void
+        +isPlaying(): boolean
+        +setLooping(isLooping: boolean): void
+    }    
+}
+
+
+package com.badlogic.gdx {
+    class ImageButton
+
+    class TextureRegionDrawable {
+        +TextureRegionDrawable(region: TextureRegion)
+    }
+
+    class TextureRegion {
+        +TextureRegion(texture: Texture)
+    }
+
+    class Texture {
+        +Texture(file: FileHandle)
+    }
+}
+
+AudioSystem --> SoundEntity
+AudioSystem ..> ImageButton
+AudioSystem .left.> Music
+
+SoundEntity ..> TextureRegionDrawable
+SoundEntity ..> TextureRegion
+SoundEntity ..> Texture
+
+@enduml

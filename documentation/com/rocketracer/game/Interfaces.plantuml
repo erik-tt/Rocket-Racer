@@ -1,0 +1,38 @@
+@startuml
+package com.rocketracer.game {
+    interface FirebaseInterface {
+    + createGame(): Integer
+    + joinGame(gamePin: Integer, name: String): void
+    + loadHighScoreList(): void
+    + setGameScore(score: int): void
+    + updateHighscoreList(name: String, score: int): void
+    + writeData(map: HashMap<String, Object>, documentPath: String): void
+    + setListener(listener: GameJoinListener): void
+    + setGameListener(listener: GameEventListener): void
+    + removeGameListener(): void
+}
+
+interface GameJoinListener {
+    + onGameJoin(gamePin: Integer, playerName: String): void
+    + onJoinFailed(message: String): void
+}
+
+interface GameOverListener {
+    + onGameOver(score: Integer): void
+}
+
+interface GameEventListener {
+    + getDocID(): String
+    + newSnapshotData(data: Map<String, Object>): void
+}
+
+interface HighScoreListener {
+    + onHighScoreFetched(mpHighScores: Map<Integer, Map.Entry<String, Integer>>): void
+}
+}
+
+FirebaseInterface -down-> GameJoinListener
+FirebaseInterface -left-> GameEventListener
+FirebaseInterface -down-> HighScoreListener
+FirebaseInterface -right-> GameOverListener
+@enduml
